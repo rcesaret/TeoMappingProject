@@ -13,6 +13,9 @@ project_materials/
 # Knowledge Base folder
 knowledge_base/
 
+# Cloud downloaded raster tiles [NEEDS ATTENTION]
+data/external/ms_raster_tiles
+
 # Drafts folders
 docs/drafts
 report/drafts
