@@ -1,6 +1,8 @@
 
 ##################### CUSTOM #####################
 
+.qgz
+
 # Unused Microsoft Access Databases (.accdb & .mdb)
 # data/unused-databases
 
@@ -25,11 +27,13 @@ phases/03_DigitizeGIS/drafts
 phases/04_Georef/drafts
 phases/05_GeoDB/drafts
 
+large_files_for_dropbox_download/
+
 #################### WINDSURF ####################
 
 # Windsurf Rules
 .windsurfrules
-
+.vscode/
 
 ######################## R #######################
 
