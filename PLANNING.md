@@ -1,6 +1,8 @@
 # Digital TMP – PLANNING.md
 
-> **NOTE:** This file provides strategic, narrative context for collaborators and AI assistants. Machine‑enforceable conventions now live in `global_rules.md` (generic) and `.windsurfrules` (TMP‑specific). If procedure or behaviour guidance in this file ever conflicts with those rule files, **the rule files prevail**.
+AI assistants **MUST** reference this file at the start of each coding or documentation session to stay aligned with the overall architecture, deliverables, and reproducibility vision.
+
+This file provides strategic, narrative context for collaborators and AI assistants. Machine‑enforceable conventions now live in `global_rules.md` (generic) and `.windsurfrules` (TMP‑specific). If procedure or behaviour guidance in this file ever conflicts with those rule files, **the rule files prevail**.
 
 ---
 
@@ -18,7 +20,6 @@ The effort proceeds through five sequential, modular phases:
 | **4  Georeferencing**          | Align digitised layers with global CRSs via high‑precision control points and custom affine/NTv2 transforms | Aligned GIS layers, transformation logs            |
 | **5  Geospatial Integration**  | Fuse tabular and spatial assets into a unified PostGIS database and publish derivatives                     | Unified geodatabase; archive‑ready exports         |
 
-AI assistants should reference this file at the start of each coding or documentation session to stay aligned with the overall architecture, deliverables, and reproducibility vision.
 
 ---
 
