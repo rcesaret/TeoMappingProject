@@ -12,6 +12,9 @@ notes/
 # Other materials folder
 project_materials/
 
+# MCP testing framework
+mcp_test_sandbox/
+
 # Knowledge Base folder
 knowledge_base/
 
