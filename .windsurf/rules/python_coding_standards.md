@@ -41,11 +41,12 @@ Description: These rules apply to all Python files (`.py`) and Jupyter Notebook 
 - **Algorithmic Efficiency**: Be mindful of algorithmic complexity. Prefer solutions with better **Big-O efficiency** where performance is critical.
 - **Logging**: Implement consistent logging to aid debugging/monitoring. Follow a defined logging format (e.g., JSON logging).
 
-## 4. Conda Environment Management
+## 4. Environment Management
 
 - **Package Management**: This project uses Conda for Python environment and package management.
-- **Environment Name**: The primary Conda environment for this project is `TMP_geo_db`.
+- **Default Conda environment** Prefer the existing `TMP_geo_db`. Only create a new environment when package conflicts cannot be resolved; document the rationale in the PR.
+- **Environment creation**: `conda env create -f environment.yml`; Poetry and standalone `pip` workflows are not permitted.
 - **Specification File**: The environment is defined by `environment.yml` in the project root. This file is the source of truth for replicating the environment.
-- **Updates to Environment**: After installing or updating packages in the `TMP_geo_db` environment, `environment.yml` MUST be regenerated using `conda env export -n TMP_geo_db --no-builds > environment.yml` and committed to version control.
+- **Updates to Environment**: Any environment change *must* update all `environment*.yml` / `conda-lock.yml` files, pass CI, and be committed to version control.
 
 ---
