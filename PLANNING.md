@@ -1,327 +1,414 @@
-# Digital TMP – PLANNING.md
+# Digital TMP – `PLANNING.md`
 
 AI assistants **MUST** reference this file at the start of each coding or documentation session to stay aligned with the overall architecture, deliverables, and reproducibility vision.
 
-This file provides strategic, narrative context for collaborators and AI assistants. Machine‑enforceable conventions now live in `global_rules.md` (generic) and `.windsurfrules` (TMP‑specific). If procedure or behaviour guidance in this file ever conflicts with those rule files, **the rule files prevail**.
+This file provides strategic, narrative context for collaborators and AI assistants. Machine-enforceable conventions now live in `global_rules.md` (generic) and `.windsurf/rules/` (TMP-specific). If procedure or behaviour guidance in this file ever conflicts with those rule files, **the rule files prevail**.
 
 ---
 
-## 1  Project Summary
+## 1. Project Summary
 
-This project modernizes and unifies the legacy datasets of the **Teotihuacan Mapping Project (TMP)**, one of the most comprehensive archaeological surveys in the Americas. The initiative converts fragmented analog and digital records—including field notes, MS Access databases, and hand‑digitized maps—into a fully reproducible PostgreSQL/PostGIS infrastructure for scholarly research, heritage management, and public dissemination.
+This project modernizes and unifies the legacy datasets of the **Teotihuacan Mapping Project (TMP)**, one of the most comprehensive archaeological surveys in the Americas. The initiative converts fragmented analog and digital records—including field notes, MS Access databases, and hand-digitized maps—into a fully reproducible PostgreSQL/PostGIS infrastructure for scholarly research, heritage management, and public dissemination.
 
-The effort proceeds through five sequential, modular phases:
+The effort proceeds through eight sequential, modular phases that systematically transform legacy archaeological databases into a modern, integrated geospatial data infrastructure.
 
-| Phase                          | Core Objective                                                                                              | Principal Outputs                                  |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| **1  Database Analysis**       | Audit four legacy TMP databases (DF8, DF9, DF10, REANS2) and migrate them into PostgreSQL                   | Migrated DBs, schema‑audit report                  |
-| **2  Database Transformation** | Produce cleaned, denormalised wide‑format datasets (`TMP_DF12`, `TMP_REANS_DF4`) with complete metadata     | Two analytical tables + YAML/Markdown dictionaries |
-| **3  GIS Digitization**        | Digitise archaeological, architectural, and environmental features from 1:2,000 raster base maps            | Validated vector layers + metadata                 |
-| **4  Georeferencing**          | Align digitised layers with global CRSs via high‑precision control points and custom affine/NTv2 transforms | Aligned GIS layers, transformation logs            |
-| **5  Geospatial Integration**  | Fuse tabular and spatial assets into a unified PostGIS database and publish derivatives                     | Unified geodatabase; archive‑ready exports         |
+| Phase | Core Objective | Principal Outputs |
+|---|---|---|
+| **1 Database Analysis** | Systematic evaluation and profiling of legacy MS Access databases to inform optimal schema design | PostgreSQL migration, ERDs, schema profiling reports, denormalization white paper |
+| **2 Database Transformation** | Comprehensive ETL and feature engineering to produce analysis-ready tabular datasets | TMP_DF12, TMP_REANs_DF4, transformation logs, validation reports |
+| **3 GIS Digitization** | Manual digitization of archaeological, environmental, and modern features from historical raster maps | Digitized vector layers, provisional attribute schemas, digitization metadata |
+| **4 Georeferencing** | High-precision georeferencing using custom NTv2 transformations and spatial accuracy validation | Spatially-aligned datasets, transformation grids, accuracy assessments |
+| **5 Geospatial Integration** | Integration of tabular and spatial data with advanced feature engineering and architectural classification | Fully integrated geospatial datasets, derived spatial attributes, classification schemes |
+| **6 tDAR Outputs** | Preparation and packaging of archival-ready datasets with comprehensive metadata for long-term preservation | tDAR-compliant packages, controlled vocabularies, documentation, tutorials |
+| **7 PostGIS Database** | Design and deployment of production-grade spatial database with optimized schemas and performance tuning | PostGIS database, Docker containers, SQL dumps, API endpoints |
+| **8 Tutorials & Dashboards** | Development of user-facing applications and comprehensive tutorials for diverse analytical workflows | WebGIS dashboard, REST API, Python/R/QGIS tutorials |
 
+### 1.1 Guiding Principles
+
+The Digital TMP project is built upon core methodological principles that ensure its long-term viability, scientific rigor, and broader impact. All development and transformations must adhere to these foundational tenets:
+
+* **Reproducibility**: All transformations are documented in version-controlled code notebooks and tracked using version control (Git). Reproducible computational environments (e.g., Docker containers) ensure exact replication of the database environment across various platforms.
+* **Provenance Tracking**: Maintain complete lineage documentation from original field records to final outputs, ensuring every step of data transformation is traceable.
+* **Quality Assurance**: Implement multi-stage validation using both automated frameworks (e.g., Great Expectations) and expert human review to ensure data accuracy and integrity at every phase.
+* **Scalability**: Design the system to handle the complexity of the full TMP dataset and accommodate future expansion, allowing for additional dataset integration (e.g., TMP excavations, LiDAR, GPR, drone photogrammetry).
+* **Interoperability**: Ensure outputs conform to open standards for GIS and tabular data (e.g., Shapefile, GeoJSON, CSV, SQL) and prioritize compatibility with future technological environments. This approach supports diverse stakeholder needs and facilitates integration with other research contexts.
+* **Accessibility**: Provide multiple methods for data access, balancing preservation requirements with contemporary access patterns (e.g., downloadable datasets, PostGIS database, web applications).
 
 ---
 
-## 2  Project Architecture
+## 2. Project Architecture
 
 The project is decomposed into three nested units:
 
-* **Phases** – macro‑level milestones (see table above)
+* **Phases** – macro-level milestones (see table above)
 * **Workflows** – cohesive processes within a phase
 * **Tasks** – atomic work items tracked in `TASKS.md`
 
-### 2.1  Phase Overview Table
+### 2.1 Phase Overview Table
 
-| Phase                             | Description                                                | Key Outputs                                        |
-| --------------------------------- | ---------------------------------------------------------- | -------------------------------------------------- |
-| Phase 1 – Database Analysis       | Analyse legacy TMP databases; produce redesign proposal    | PostgreSQL DBs + schema audit report               |
-| Phase 2 – Database Transformation | ETL into cleaned, denormalised datasets ready for analysis | `TMP_DF12`, `TMP_REANS_DF4` + metadata             |
-| Phase 3 – GIS Digitization        | Manual digitisation of archaeological features             | Vector GIS layers (GeoJSON, Shapefile, GeoPackage) |
-| Phase 4 – Georeferencing          | Apply control‑point‑driven CRS transformations             | Aligned GIS layers, transformation logs            |
-| Phase 5 – Geospatial Integration  | Merge tabular + spatial data in PostGIS                    | Unified geodatabase, public exports                |
+| Phase | Description | Key Outputs |
+|---|---|---|
+| Phase 1 – Database Analysis | Systematic evaluation and profiling of legacy MS Access databases to inform optimal schema design and transformation strategies | PostgreSQL migration, ERDs, schema profiling reports, denormalization white paper |
+| Phase 2 – Database Transformation | Comprehensive ETL and feature engineering to produce analysis-ready tabular datasets with standardized vocabularies | TMP_DF12, TMP_REANs_DF4, transformation logs, validation reports |
+| Phase 3 – GIS Digitization | Manual digitization of archaeological, environmental, and modern features from historical raster maps | Digitized vector layers, provisional attribute schemas, digitization metadata |
+| Phase 4 – Georeferencing | High-precision georeferencing using custom NTv2 transformations and spatial accuracy validation | Spatially-aligned datasets, transformation grids, accuracy assessments |
+| Phase 5 – Geospatial Integration | Integration of tabular and spatial data with advanced feature engineering and architectural classification | Fully integrated geospatial datasets, derived spatial attributes, classification schemes |
+| Phase 6 – tDAR Outputs | Preparation and packaging of archival-ready datasets with comprehensive metadata for long-term preservation | tDAR-compliant packages, controlled vocabularies, documentation, tutorials |
+| Phase 7 – PostGIS Database | Design and deployment of production-grade spatial database with optimized schemas and performance tuning | PostGIS database, Docker containers, SQL dumps, API endpoints |
+| Phase 8 – Tutorials & Dashboards | Development of user-facing applications and comprehensive tutorials for diverse analytical workflows | WebGIS dashboard, REST API, Python/R/QGIS tutorials |
 
-### 2.2  Modular Phase Breakdown
+### 2.2 Modular Phase Breakdown
 
 <details>
-<summary>Phase 1 – Database Analysis</summary>
+<summary>Phase 1 – Database Analysis</summary>
 
-* **Workflow 1.1** — Set up PostgreSQL versions of DF8, DF9, DF10, REANS2
-* **Workflow 1.2** — Evaluate and compare schemas; draft redesign proposal
-* **Output:** Schema audit report + redesign recommendations
+* **Workflow 1.1** — Legacy Database Instantiation & Validation: Set up PostgreSQL versions of DF8, DF9, DF10, REANS2
+* **Workflow 1.2** — Schema Analysis, Profiling, and Denormalization Evaluation: Evaluate and compare schemas; draft redesign proposal
+* **Output:** Reproducible PostgreSQL versions, automated ERDs, quantitative schema profiling reports, denormalization white paper
 
 </details>
 
 <details>
-<summary>Phase 2 – Database Transformation</summary>
+<summary>Phase 2 – Database Transformation</summary>
 
-* **Workflow 2.1** — ETL and integration into wide‑format dataframes
-* **Workflow 2.2** — Variable‑level cleaning, recoding, and feature engineering
-* **Workflow 2.3** — Build metadata (data dictionaries, QA reports)
-* **Output:** `TMP_DF12`, `TMP_REANS_DF4` + YAML/Markdown metadata
-
-</details>
-
-<details>
-<summary>Phase 3 – GIS Digitization</summary>
-
-* **Workflow 3.1** — Construct high‑resolution raster mosaics
-* **Workflow 3.2** — Digitise archaeological and environmental features
-* **Workflow 3.3** — Apply classification tags, validate topologies
-* **Workflow 3.4** — Generate GIS layer metadata
-* **Output:** Validated vector GIS files with ISO 19115 metadata
+* **Workflow 2.1** — Legacy Dataset Integration (DF8, DF9, DF10 → DF11; REAN DF2 → REAN DF3): ETL and integration into wide‑format dataframes
+* **Workflow 2.2** — Variable Redesign and Analytical Transformation (DF11 → DF12; REAN DF3 → REAN DF4): Variable‑level cleaning, recoding, and feature engineering
+* **Workflow 2.3** — Controlled Vocabulary Consolidation: Build metadata (data dictionaries, QA reports)
+* **Workflow 2.4** — Automated Metadata Validation & Data Quality Framework: Implement validation and quality assurance
+* **Output:** TMP_DF12, TMP_REANs_DF4, controlled vocabulary glossaries, variable transformation logs, automated validation reports
 
 </details>
 
 <details>
-<summary>Phase 4 – Georeferencing</summary>
+<summary>Phase 3 – GIS Digitization</summary>
 
-* **Workflow 4.1** — GCP calibration and transformation‑model selection
-* **Workflow 4.2** — Apply custom CRS transformations using PROJ + GDAL
-* **Output:** Aligned GIS layers (UTM 14N/WGS 84), transformation logs
+* **Workflow 3.1** — Raster Assembly for Digitization Context: Construct high‑resolution raster mosaics
+* **Workflow 3.2** — Manual Digitization of Vector Layers from the TMP Topo/Survey Map: Digitise archaeological and environmental features
+* **Workflow 3.3** — Manual Digitization of Vector Layers from the TMP Architectural Reconstructions Map: Apply classification tags, validate topologies
+* **Workflow 3.4** — Pre-Georeferencing Metadata & Quality Assurance: Generate GIS layer metadata
+* **Output:** Digitized vector layers, provisional attribute schemas, digitization metadata
 
 </details>
 
 <details>
-<summary>Phase 5 – Geospatial Integration</summary>
+<summary>Phase 4 – Georeferencing</summary>
 
-* **Workflow 5.1** — Load datasets into PostGIS
-* **Workflow 5.2** — Perform spatial joins and crosswalk generation
-* **Workflow 5.3** — Engineer spatial features; publish/export outputs
-* **Output:** Unified PostGIS geodatabase; public archive‑ready files
+* **Workflow 4.1** — Raster Pre-Processing and Ground Control Points (GCPs): GCP calibration and transformation‑model selection
+* **Workflow 4.2** — Raster Basemap Georeferencing Method Calibration and Optimization: Apply custom CRS transformations using PROJ + GDAL
+* **Workflow 4.3** — Generation of Custom NTv2 Grid Shift Transformation Pipeline: Develop high-accuracy NTv2 grid shift files
+* **Workflow 4.4** — Vector Data Georeferencing Using NTv2 Transformations: Apply transformations to vector datasets
+* **Workflow 4.5** — Accuracy Assessment and Validation: Implement spatial accuracy validation procedures
+* **Workflow 4.6** — Export of Georeferenced Datasets in Final CRSs: Prepare datasets for distribution
+* **Output:** Spatially-aligned datasets, transformation grids, accuracy assessments, custom CRS definitions
+
+</details>
+
+<details>
+<summary>Phase 5 – Geospatial Integration</summary>
+
+* **Workflow 5.1** — GIS Integration: Load datasets into PostGIS
+* **Workflow 5.2** — Architectural Feature Classification: Perform spatial joins and crosswalk generation
+* **Workflow 5.3** — Geospatial Feature Engineering: Engineer spatial features; publish/export outputs
+* **Workflow 5.4** — Spatial QA and Export: Final validation and export preparation
+* **Output:** Fully integrated geospatial datasets, derived spatial attributes, architectural classifications
+
+</details>
+
+<details>
+<summary>Phase 6 – tDAR Outputs</summary>
+
+* **Workflow 6.1** — Data Preparation & Transformation: Convert datasets into archival-safe, tDAR-compliant formats
+* **Workflow 6.2** — Metadata and Ontology Preparation: Create comprehensive metadata and controlled vocabularies
+* **Workflow 6.3** — Documentation & Tutorial Development: Develop user-centered tutorials and guides
+* **Workflow 6.4** — Packaging & Distribution: Finalize preparation for distribution through tDAR and supplementary repositories
+* **Output:** tDAR-compliant packages, controlled vocabularies, comprehensive documentation, user tutorials
+
+</details>
+
+<details>
+<summary>Phase 7 – PostGIS Database</summary>
+
+* **Workflow 7.1** — PostGIS Database Design & Setup: Conceptualize and construct PostGIS database schema
+* **Workflow 7.2** — PostGIS Database Construction & Validation: Implement schema and ingest spatial/non-spatial datasets
+* **Workflow 7.3** — PostGIS Database Packaging & Distribution: Package and distribute for diverse user needs
+* **Output:** PostGIS database, Docker containers, SQL dumps, API endpoints, static dataset exports
+
+</details>
+
+<details>
+<summary>Phase 8 – Tutorials & Dashboards</summary>
+
+* **Workflow 8.1** — Interactive WebGIS Dashboard App: Develop public-facing WebGIS dashboard
+* **Workflow 8.2** — Python PostGIS Database Tutorial: Create Python-based tutorial in Jupyter Notebook format
+* **Workflow 8.3** — R PostGIS Database Tutorial: Produce RMarkdown tutorial for R users
+* **Workflow 8.4** — QGIS PostGIS Database Tutorial: Develop comprehensive QGIS tutorial
+* **Output:** WebGIS dashboard, REST API, comprehensive tutorials (Python/R/QGIS)
 
 </details>
 
 ---
 
-## 3  Repository Structure
+## 3. Repository Structure
 
 The repository follows a modular structure aligned with project phases and workflows. Key folders include:
 
 ```
-<repo‑root>/
-├── .windsurfrules
-├── PLANNING.md
-├── TASKS.md
-├── .gitignore
-├───data
-│   ├───external
-│   ├───interim
-│   ├───processed
-│   └───raw
-├───docs
-│   └───drafts
-├───infrastructure
-│   ├───db
-│   │   └───legacy_db_sql_scripts
-│   └───docker
-├───knowledge_base
-├───notes
-├───outputs
-├───phases
-│   ├───01_LegacyDB
-│   │   ├───drafts
-│   │   ├───notebooks
-│   │   ├───outputs
-│   │   └───src
-│   ├───02_TransformDB
-│   │   ├───drafts
-│   │   ├───notebooks
-│   │   ├───outputs
-│   │   └───src
-│   ├───03_DigitizeGIS
-│   │   ├───drafts
-│   │   ├───notebooks
-│   │   ├───outputs
-│   │   └───src
-│   ├───04_Georef
-│   │   ├───drafts
-│   │   ├───notebooks
-│   │   ├───outputs
-│   │   └───src
-│   └───05_GeoDB
-│       ├───drafts
-│       ├───notebooks
-│       ├───outputs
-│       └───src
-├───project_materials
-├───report
-│   ├───appendices
-│   ├───drafts
-│   └───figures
-└───tests
+\<repo-root\>/
+├── .windsurf/rules/             \# Windsurf project-specific rule files
+├── PLANNING.md                  \# Project overview, strategic context, and high-level architecture
+├── TASKS.md                     \# Atomic work items and task tracking
+├── .gitignore                   \# Files to ignore from Git version control
+├── data/                        \# Project data (raw, interim, processed, external)
+│   ├── external/
+│   ├── interim/
+│   ├── processed/
+│   └── raw/
+├── docs/                        \# Human-readable project documentation
+│   └── drafts/
+├── infrastructure/              \# Database scripts, Docker configurations
+│   ├── db/
+│   │   └── legacy\_db\_sql\_scripts/
+│   └── docker/
+├── knowledge\_base/              \# Knowledge files approved for the AI
+├── notes/
+├── outputs/                     \# Final deliverables, figures, and publication materials
+├── phases/                      \# Structured by project phase
+│   ├── 01\_LegacyDB/
+│   │   ├── drafts/
+│   │   ├── notebooks/
+│   │   ├── outputs/
+│   │   └── src/
+│   ├── 02\_TransformDB/
+│   │   ├── drafts/
+│   │   ├── notebooks/
+│   │   ├── outputs/
+│   │   └── src/
+│   ├── 03\_DigitizeGIS/
+│   │   ├── drafts/
+│   │   ├── notebooks/
+│   │   ├── outputs/
+│   │   └── src/
+│   ├── 04\_Georef/
+│   │   ├── drafts/
+│   │   ├── notebooks/
+│   │   ├── outputs/
+│   │   └── src/
+│   ├── 05\_GeoDB/
+│   │   ├── drafts/
+│   │   ├── notebooks/
+│   │   ├── outputs/
+│   │   └── src/
+│   ├── 06\_tDAR/
+│   │   ├── drafts/
+│   │   ├── notebooks/
+│   │   ├── outputs/
+│   │   └── src/
+│   ├── 07\_PostGIS/
+│   │   ├── drafts/
+│   │   ├── notebooks/
+│   │   ├── outputs/
+│   │   └── src/
+│   └── 08\_Dashboards/
+│       ├── drafts/
+│       ├── notebooks/
+│       ├── outputs/
+│       └── src/
+├── project\_materials/           \# Project materials not for the AI
+├── report/                      \# Project reports
+│   ├── appendices/
+│   ├── drafts/
+│   └── figures/
+└── tests/                       \# Unit and integration tests by phase
 ```
 
+### 3.1 Root Directory Files and Folders
 
+  - `.env`, `.env.example` – project-specific credentials (Git-ignored)
+  - `requirements.txt` – primary Python dependency list (pip-style)
+  - `.gitignore` – specifies files and folders to be ignored by Git
+  - `.windsurf/rules/` – directory for Windsurf IDE project-specific rule files
 
-### 📁 Root
-- `.env`, `.env.example` – project-specific credentials
-- `requirements.txt` – primary dependency list (pip-style)
-- `.gitignore` – ignores unused databases, drafts, local metadata, system junk
-- `.windsurfrules` – Windsurf IDE config
+### 3.2 Phase-Specific Directories (`phases/`)
 
-### 📁 `phases/`
-Structured by project phase:
-- `01_LegacyDB/`, `02_TransformDB/`, `03_DigitizeGIS/`, `04_Georef/`, `05_GeoDB/`
+Structured by project phase (e.g., `01_LegacyDB/`, `02_TransformDB/` etc.):
+
   - Each phase includes:
-    - `src/` – Python scripts
-    - `notebooks/` – QA or prototyping
-    - `outputs/` – final artifacts
-    - `drafts/` – working documents
-    - `README.md` + `metadata.json` – workflow description and schema
+      - `src/` – Python scripts for core logic
+      - `notebooks/` – Jupyter notebooks for QA or prototyping
+      - `outputs/` – final artifacts and deliverables
+      - `drafts/` – working documents and temporary files
+      - `README.md` + `metadata.json` – workflow description and schema (conceptual, to be defined later)
 
-### 📁 `data/`
-- `raw/`, `interim/`, `processed/` – DVC-friendly data lifecycle
-- `external/` – Dropbox-downloaded datasets (raster tiles etc.)
-  - Ignored from Git via `.gitignore`
+### 3.3 Data Directories (`data/`)
 
-### 📁 `infrastructure/`
-- `db/legacy_db_sql_scripts/` – Legacy database SQL exports
-- `docker/` – Reserved for late-stage containerization
-- `cloud_downloads.md` – Cloud import scripting guidance
+  - `raw/`, `interim/`, `processed/` – represent a DVC-friendly data lifecycle
+  - `external/` – stores Dropbox-downloaded datasets (e.g., raster tiles)
+      - Ignored from Git via `.gitignore`
 
-### 📁 `docs/` and `project_materials/`
-- `architecture.md`, `overview.md`, `methods.md`, `data_sources.md`, `outputs_summary.md`, `references.md` – human-readable project docs
-- `CRS_Catalogue.csv` - All sanctioned spatial reference systems—including two custom *Millon Space* CRSs—are defined here. Extend via PR only.
-- `tDAR/` – archival formatting and metadata standards
-- `TMP_Project_DS_Portfolio_OptimizStrategy/` – strategy documents and summaries
+### 3.4 Infrastructure Directories (`infrastructure/`)
 
-### 📁 `tests/`
-- Unit and integration tests by phase, mirroring `phases/`
+  - `db/legacy_db_sql_scripts/` – stores SQL exports of legacy databases
+  - `docker/` – reserved for late-stage containerization, primarily in Phase 7
+  - `cloud_downloads.md` – provides guidance for cloud import scripting (conceptual)
 
-### ⚠️ Files Without Version Control (See `.gitignore`)
-- All `drafts/` folders
-- `data/external/ms_raster_tiles`
-- System/editor-specific folders (`.idea/`, `.vscode/`)
-- `project_materials/` contains project materials not for the AI
-- `knowledge_base/` contains knowledge files approved for the AI
-- Local notebooks, cache folders
+### 3.5 Documentation and Project Materials (`docs/`, `project_materials/`)
 
-### Notes on Large Files
+  - `architecture.md`, `overview.md`, `methods.md`, `data_sources.md`, `outputs_summary.md`, `references.md` – core human-readable project documentation.
+  - `CRS_Catalogue.csv` - Defines all sanctioned spatial reference systems, including custom *Millon Space* CRSs. Extend via Pull Request (PR) only (conceptual for `PLANNING.md`).
+  - `tDAR/` – contains archival formatting and metadata standards (conceptual, to be defined later).
+  - `TMP_Project_DS_Portfolio_OptimizStrategy/` – stores strategy documents and summaries (conceptual).
 
-- **Git LFS** manages large rasters and project imagery.
-- **DVC** (optional) can track heavy data evolution beyond Git‑LFS capacity.
+### 3.6 Testing Directory (`tests/`)
 
----
+  - Contains unit and integration tests, structured by phase, mirroring the `phases/` directory.
 
-## 4  Tech Stack, Tools, and Dependencies
+### 3.7 Files Without Version Control (via `.gitignore`)
 
-### 🐍 Core Programming Stack
-- **Language**: Python 3.11+
-- **Notebooks**: Jupyter (used for QA and geospatial EDA in Phases 2–5)
-- **Environments**: 
-  - Use `conda` for dependency management, only using `pip` secondarily when a package is not available on `conda`
-  - Use `.env` for storing credentials (being sure to add placeholders to `.env.example` as well)
-- **Databases:** PostgreSQL 17 with PostGIS
-- **GIS Desktop:** QGIS 3.40+
-  
-  
-### 4.1  Core Programming Stack
+  - All `drafts/` folders
+  - `data/external/ms_raster_tiles` (example large dataset)
+  - System/editor-specific folders (`.idea/`, `.vscode/`)
+  - `project_materials/` contains project materials not intended for AI processing (conceptual)
+  - `knowledge_base/` contains knowledge files approved for the AI
+  - Local notebooks, cache folders
 
-- **Language:** Python 3.11+
-  (Version policy & upgrade path are enforced in `.windsurfrules` §2.)
-- **Notebooks:** Jupyter (used for QA & EDA in Phases 2–5)
-- **Database:** PostgreSQL 15+ with PostGIS
-- **GIS Desktop:** QGIS 3.40+
+### 3.8 Notes on Large Files
 
-### 4.2  Key Python Libraries
+  - **Git LFS** will manage large rasters and project imagery.
+  - **DVC** (optional) can track heavy data evolution beyond Git-LFS capacity.
 
-- Data / ETL — `pandas`, `numpy`, `sqlalchemy`, `pydantic`, `great_expectations`
-- Geospatial — `gdal`, `ogr`, `rasterio`, `fiona`, `geopandas`, `shapely`, `pyproj`, `whitebox`
-- Georeferencing — `ntv2`, `affine`, `pyproj‑transformer`
-- Testing — `pytest`, `pytest‑cov`, `pandas.testing`, `geopandas.testing`, and `geopandas.testing`, and `great_expectations` (where applicable)
+-----
 
-### 4.3  Metadata & Documentation
+## 4\. Technology Stack, Tools, and Dependencies
 
-- **Markdown** for design notes; **YAML** side‑cars for dataset metadata.
-- **tDAR exports:** metadata mapped to tDAR schema.
+### 4.1 Core Programming Stack
 
-### 4.4  Continuous Integration and Quality Gates
+  - **Language**: Python 3.11+
+  - **Notebooks**: Jupyter (used for QA and geospatial EDA in Phases 2–8)
+  - **Environments**:
+      - Use `conda` for dependency management, only using `pip` secondarily when a package is not available on `conda` (conceptual).
+      - Use `.env` for storing credentials (being sure to add placeholders to `.env.example` as well) (conceptual).
+  - **Databases:** PostgreSQL 17 with PostGIS 3.4
+  - **GIS Desktop:** QGIS 3.40.5
 
-All automated enforcement (coverage floor, cyclomatic complexity, pre‑commit hooks, schema‑diff, etc.) is defined in `.windsurfrules` §§7–9. CI runs on GitHub Actions.
+### 4.2 Key Python Libraries
 
----
+  - **Data / ETL**: `pandas`, `numpy`, `sqlalchemy`, `pydantic`, `great_expectations`
+  - **Geospatial**: `gdal`, `ogr`, `rasterio`, `fiona`, `geopandas`, `shapely`, `pyproj`, `whitebox` (conceptual additions based on project scope)
+  - **Georeferencing**: `ntv2`, `affine`, `pyproj-transformer` (conceptual additions based on project scope)
+  - **Web Services**: `fastapi`, `leaflet.js` (for dashboards)
+  - **Testing**: `pytest`, `pytest-cov`, `pandas.testing`, `geopandas.testing`, and `great_expectations` (where applicable) (conceptual additions based on project scope)
 
-## 4.6  Operational Standards
+### 4.3 Technology Stack Rationale
 
-### 🐳 Dockerization & Deployment
-- Dockerization will occur **only at the end of the project**.
-- No Docker/k8s work should begin unless explicitly requested and scheduled by the user.
-- Final deployment will ship PostgreSQL + PostGIS and a read‑only API in separate containers for portability.
+This project leverages a comprehensive technology stack combining industry-standard geospatial tools, modern data science frameworks, and cloud-native deployment strategies. Software selection prioritizes reproducibility, scalability, and long-term maintainability while ensuring compatibility with both research and archival infrastructure requirements.
 
-### 🌍 GIS Metadata and File Standards
-- All digitized geospatial outputs must include metadata compliant with **ISO 19115**.
-- Vector files must be validated with topologies and CRS metadata embedded.
-- Produce and use `.geojson`, `.shp`, and `.gpkg` formats for maximum compatibility.
-- Store and maintain GCPs, transformation matrices, and raster alignment logs alongside spatial products.
+  - **Database Infrastructure**: PostgreSQL with PostGIS provides enterprise-grade spatial capabilities, ACID compliance, and excellent performance for complex analytical queries. Version 17 offers enhanced spatial indexing and improved JSON handling for metadata management.
+  - **Geospatial Processing**: GDAL/OGR serves as the foundational library for spatial data I/O and transformations, ensuring compatibility across diverse formats. QGIS provides essential manual digitization capabilities and visualization tools for quality assurance.
+  - **Programming Environments**: Python ecosystem (GeoPandas, Shapely, Folium) offers comprehensive geospatial analysis capabilities, while R (sf, tidyverse) provides specialized statistical and visualization tools for archaeological analysis. Both environments support reproducible research through Jupyter Notebooks and RMarkdown.
+  - **Deployment & Distribution**: Docker containerization ensures reproducible deployment environments, while FastAPI provides lightweight, high-performance API services. Leaflet.js enables cross-platform web mapping without external dependencies.
+  - **Data Quality & Validation**: Great Expectations and dbt (optional) provide automated data validation frameworks, while custom SQL constraints enforce spatial and relational integrity throughout the pipeline.
+  - **Archival Compatibility**: Tools selection prioritizes long-term preservation requirements, with exports to standard formats (Shapefile, GeoJSON, CSV) ensuring compatibility with future technological environments.
 
-### ⬇️ External Data Downloads
-- Large datasets stored externally will be downloaded via **Python scripts** using **Dropbox direct links**.
-- All download scripts must:
-  - Validate checksum (e.g., SHA-256) after download
-  - Write a `.download.log` file with timestamp, source, file name
-  - Default target directory: `data/external/`
+### 4.4 Metadata & Documentation
 
-### 📦 tDAR-Compatible Output Requirements
-When preparing export-ready files for tDAR (The Digital Archaeological Record):
-- All metadata must adhere to tDAR’s structured templates for:
-  - **Datasets** (CSV, XLSX, MDB)
-  - **GIS Files** (SHP, PRJ, DBF, XML)
-  - **Documents** (PDF, DOCX)
-  - **Ontologies** (.owl format or tab-indented list syntax)
-- Required metadata includes:
-  - Title, year, creators, institutions, roles
-  - Spatial and temporal coverage
-  - Site terms, cultural periods, material types
-  - Investigation type, archive source, and licensing/copyright info
-- Use structured YAML or Markdown `metadata.yaml` for each output set to support tDAR ingest scripts.
+  - **Markdown** for design notes; **YAML** side-cars for dataset metadata (conceptual).
+  - **tDAR exports:** metadata mapped to tDAR schema (conceptual).
+  - **LaTeX/Markdown with Pandoc** for comprehensive documentation generation.
 
----
+### 4.5 Continuous Integration and Quality Gates
 
-## 5  Authorial Writing Style Guide
+All automated enforcement (coverage floor, cyclomatic complexity, pre-commit hooks, schema-diff, etc.) is defined in `.windsurf/rules/` (conceptual, referring to sections 7-9 in `Doc06`). CI runs on GitHub Actions.
+
+-----
+
+## 5\. Data Sources Overview
+
+The Digital TMP project integrates multiple generations of archaeological datasets spanning over five decades of data collection, analysis, and reanalysis. These datasets represent one of the most comprehensive urban-scale archaeological surveys ever conducted, encompassing over 5,000 surface collection units across approximately 37.5 square kilometers of the ancient city of Teotihuacan. The project prioritizes data quality, rigorous metadata, and reproducibility in its integration efforts.
+
+### 5.1 Primary Dataset Index
+
+| Dataset | Source | Format | Size | Time Span | Use Case |
+|---|---|---|---|---|---|
+| **TMP\_DF8** | ASU Teo Lab | SQL dump (.sql) | \~15 MB | 1975-1977 | First stable electronic representation, 5,050 cases, 291 variables |
+| **TMP\_DF9** | ASU Teo Lab (Ian Robertson & Angela Huster) | SQL dump (.sql) | \~18 MB | 1990s | Relational database version with GIS integration capabilities |
+| **TMP\_DF10** | ASU Teo Lab (Anne Sherfield) | SQL dump (.sql) | \~20 MB | 2022-present | Most recent database with structural improvements and issue documentation |
+| **TMP\_REAN\_DF2** | ASU Teo Lab (Ian Robertson & Angela Huster) | SQL dump (.sql) | \~12 MB | 1973-1983 | Ceramic reanalysis with enhanced typological detail |
+
+### 5.2 Spatial Data Sources
+
+| Dataset | Source | Format | Size | Coverage | Use Case |
+|---|---|---|---|---|---|
+| **TMP Survey Maps** | René Millon (1962) | Scanned TIFF | \~2 GB | 37.5 km² | 1:2,000 scale photogrammetric base maps |
+| **Architectural Overlays** | Various researchers | Scanned TIFF | \~800 MB | Urban core | Red-ink architectural interpretation drawings |
+| **Collection Unit Polygons (MF2)** | Ian Robertson | Shapefile | \~50 MB | Survey area | Digitized collection tract boundaries in "Millon Space" |
+| **Architectural Polygons** | Anne Sherfield | Shapefile | \~30 MB | Urban core | Digitized architectural features with classification |
+| **Modern Satellite Imagery** | Various providers | GeoTIFF | \~1 GB | Regional | Reference data for georeferencing validation |
+
+### 5.3 Ground Control Points & Reference Data
+
+| Dataset | Source | Format | Size | Purpose | Use Case |
+|---|---|---|---|---|---|
+| **High-Density GCP Dataset** | Manual collection | Shapefile/CSV | \~5 MB | Georeferencing | Control points for "Millon Space" to global CRS transformation |
+| **Satellite Images & Aerial Photography** | Various agencies | TIFF/JPEG | \~500 MB | Reference | Modern reference for GCP validation and accuracy assessment |
+| **Topographic Maps** | INEGI | PDF/TIFF | \~200 MB | Regional context | Mexican national topographic coverage for validation |
+
+### 5.4 Known Data Quality Issues (High-level Summary)
+
+Despite decades of effort, the TMP digital archive presents complex legacy challenges including data fragmentation, quality, technological obsolescence, and incomplete documentation. This includes:
+
+  * **Legacy Database Issues**: Encoding inconsistencies, missing REANs records, "Total Counts Problem", and transcription errors.
+  * **Spatial Data Challenges**: Original "Millon Space" coordinate system, varied digitization precision, topology issues, and scale limitations of base maps.
+  * **Temporal Inconsistencies**: Data collection and analysis span multiple decades with evolving methodologies and ceramic reclassifications.
+
+-----
+
+## 6\. Authorial Writing Style Guide
 
 > **Reference location for AI:** all sample writings are indexed under `knowledge_base/user_style/`. Always consult them before generating or rewriting narrative text.
 
-### 6.1  Stylistic Fundamentals
+### 6.1 Stylistic Fundamentals
 
-| Dimension                 | Guideline                                                                                                                         |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **Tone**                  | Formal, analytic, and objective; avoid conversational idioms.                                                                     |
-| **Sentence construction** | Prefer long, multi‑clause sentences that layer evidence and qualification (average 25–35 words), but ensure syntactic clarity.    |
-| **Hedging & precision**   | Use qualifiers such as *suggests, indicates, likely, appears* to convey uncertainty.                                              |
-| **Citations**             | Parenthetical Chicago Author‑Date style: (Author Year: page). Multiple sources separated by semicolons.                           |
-| **Terminology**           | Employ discipline‑specific vocabulary from archaeology, historiography, economic history, and data science. Verify term accuracy. |
-| **Transitions**           | Use explicit linking phrases to signal logical progression (*“Building upon this premise …”*, *“By contrast …”*).                 |
-| **Figures & tables**      | Refer to them in‑text as “Figure X” or “Table Y”; store assets under `outputs/figures/`.                                          |
+| Dimension | Guideline |
+|---|---|
+| **Tone** | Formal, analytic, and objective; avoid conversational idioms. |
+| **Sentence construction** | Prefer long, multi-clause sentences that layer evidence and qualification (average 25–35 words), but ensure syntactic clarity. |
+| **Hedging & precision** | Use qualifiers such as *suggests, indicates, likely, appears* to convey uncertainty. |
+| **Citations** | Parenthetical Chicago Author-Date style: (Author Year: page). Multiple sources separated by semicolons. |
+| **Terminology** | Employ discipline-specific vocabulary from archaeology, historiography, economic history, and data science. Verify term accuracy. |
+| **Transitions** | Use explicit linking phrases to signal logical progression (*"Building upon this premise …"*, *"By contrast …"*). |
+| **Figures & tables** | Refer to them in-text as "Figure X" or "Table Y"; store assets under `outputs/figures/`. |
 
-### 6.2  Structural Conventions
+### 6.2 Structural Conventions
 
-1. **Canonical section order** — *Introduction → Methodology → Analysis → Discussion → Conclusion*.
-2. **Bullet‑to‑prose transformation** — Convert lists into cohesive paragraphs while preserving logical hierarchy.
-3. **Numbered sign‑posting** — For complex arguments, use ordinal adverbs (*First, Second, Third*) to guide the reader.
-4. **Passive voice** — Acceptable where processes are foregrounded over actors; otherwise favour active constructions.
-5. **Citation density** — Substantive claims require at least one citation; theory‑heavy passages may group citations at paragraph end.
+1.  **Canonical section order** — *Introduction → Methodology → Analysis → Discussion → Conclusion*.
+2.  **Bullet-to-prose transformation** — Convert lists into cohesive paragraphs while preserving logical hierarchy.
+3.  **Numbered sign-posting** — For complex arguments, use ordinal adverbs (*First, Second, Third*) to guide the reader.
+4.  **Passive voice** — Acceptable where processes are foregrounded over actors; otherwise favour active constructions.
+5.  **Citation density** — Substantive claims require at least one citation; theory-heavy passages may group citations at paragraph end.
 
-### 6.3  AI Writing Workflow
+### 6.3 AI Writing Workflow
 
-1. **Scope confirmation** — Ask the user for desired length and depth if ambiguous.
-2. **Source mapping** — Break input into logical units; cross‑reference sample corpus for stylistic anchors.
-3. **Draft generation** — Apply the rules in §6.1–6.2; mirror paragraph cadence and citation frequency of samples.
-4. **Self‑audit checklist** — Verify tone, sentence length, citation style, hedging language, and logical flow.
-5. **User iteration** — Present draft, incorporate feedback, repeat audit.
+1.  **Scope confirmation** — Ask the user for desired length and depth if ambiguous.
+2.  **Source mapping** — Break input into logical units; cross-reference sample corpus for stylistic anchors.
+3.  **Draft generation** — Apply the rules in §6.1–6.2; mirror paragraph cadence and citation frequency of samples.
+4.  **Self-audit checklist** — Verify tone, sentence length, citation style, hedging language, and logical flow.
+5.  **User iteration** — Present draft, incorporate feedback, repeat audit.
 
-*Failure to obtain clarification should trigger sensible defaults derived from this guide.*
+*Failure to obtain clarification should trigger sensible defaults derived from this guide*.
 
----
+-----
 
-## 6  Further Reading
+## 7\. Further Reading
 
-- `global_rules.md` — Cross‑project conventions & human best practices.
-- `.windsurfrules` — TMP‑specific enforcement logic.
-- `overview.md` — Project context, goals, background, project outline, architecture overview, general summaries.
-- `architecture.md` — Detailed system design and data‑flow diagrams.
-- `methods.md` — Analytical methods, modelling choices, and statistical procedures.
+  - `global_rules.md` — Cross-project conventions & human best practices.
+  - `.windsurf/rules/` — TMP-specific enforcement logic (directory for modular rules).
+  - `overview.md` — Project context, goals, background, project outline, architecture overview, general summaries.
+  - `architecture.md` — Detailed system design and data-flow diagrams.
+  - `methods.md` — Analytical methods, modelling choices, and statistical procedures.
+  - `data_sources.md` — Comprehensive documentation of all legacy TMP datasets, their provenance, content, and integration pathways.
+  - `outputs_summary.md` — Comprehensive showcase of all final outputs, deliverables, and research products.
 
----
+-----
 
 *End of PLANNING.md*
+
