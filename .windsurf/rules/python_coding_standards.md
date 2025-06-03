@@ -1,0 +1,44 @@
+# Digital TMP Python Coding Standards
+
+## Activation
+
+Glob Pattern: `**/*.py`, `**/*.ipynb`
+Description: These rules apply to all Python files (`.py`) and Jupyter Notebook files (`.ipynb`) throughout the Digital TMP project.
+
+---
+
+## 1. Core Python Standards
+
+- **Primary Language**: Use Python 3.11+ for all new code unless a specific task explicitly requires a different language.
+- **Code Style**: All Python code MUST strictly adhere to `PEP 8` style guidelines.
+- **Formatting**: Format all Python files with Black. Max line length: 88 characters.
+- **Type Hinting**: All function definitions MUST include type hints for parameters and return types. Use `typing` module features (e.g., `Optional`, `Union`) where appropriate.
+- **Docstrings**: Write comprehensive Google-style docstrings for every function, class, and module.
+- **Imports**: Use clear and consistent import statements. Prefer relative imports within packages.
+- **Variable Naming**: Use `snake_case` for all variable, function, and method names.
+- **Class Naming**: Use `PascalCase` for all class names.
+- **Constants**: Use `UPPER_SNAKE_CASE` for global constants.
+
+## 2. Recommended Python Libraries & Frameworks
+
+- **Data Manipulation**: Prefer `Pandas` and `GeoPandas` for tabular and geospatial data manipulation/analysis.
+- **Database Interaction**: Use `SQLAlchemy` as the ORM for PostgreSQL databases.
+- **API Development**: Use `FastAPI` for building RESTful APIs.
+- **Data Validation**: Use `Pydantic` for data validation (data models, API request/response schemas).
+- **Geospatial Processing**: Leverage `Shapely` for geometric operations.
+- **Validation Frameworks**: Integrate `Great Expectations` for automated data quality validation in ETL pipelines. Consider `dbt` for data transformation workflows.
+- **Database Connectivity**: Use `psycopg2` for direct PostgreSQL database connections when ORM not applicable.
+
+## 3. Python-Specific Best Practices
+
+- **File Length**: Never create a Python file >500 lines of code. If nearing limit, refactor by splitting into smaller modules/helper files.
+- **Environment Variables**: Always store API keys, DB credentials, secrets as environment variables, not hardcoded.
+    - Never commit `.env` files to version control. Use `.env.example` with dummy values.
+    - Document all env vars in project's `README.md`.
+- **Data Flow**: Ensure clear data flow within functions/modules. Avoid global state where possible.
+- **Defensive Coding**: Implement defensive coding patterns (explicit type checking, input validation). Include assertions for assumptions/error catching.
+- **Magic Numbers/Strings**: Avoid "magic numbers/strings" by replacing hardcoded values with named constants.
+- **Algorithmic Efficiency**: Be mindful of algorithmic complexity. Prefer solutions with better **Big-O efficiency** where performance is critical.
+- **Logging**: Implement consistent logging to aid debugging/monitoring. Follow a defined logging format (e.g., JSON logging).
+
+---
