@@ -406,43 +406,7 @@ Despite decades of effort, the TMP digital archive presents complex legacy chall
 
 -----
 
-## 6\. Authorial Writing Style Guide
-
-> **Reference location for AI:** all sample writings are indexed under `knowledge_base/user_style/`. Always consult them before generating or rewriting narrative text.
-
-### 6.1 Stylistic Fundamentals
-
-| Dimension | Guideline |
-|---|---|
-| **Tone** | Formal, analytic, and objective; avoid conversational idioms. |
-| **Sentence construction** | Prefer long, multi-clause sentences that layer evidence and qualification (average 25–35 words), but ensure syntactic clarity. |
-| **Hedging & precision** | Use qualifiers such as *suggests, indicates, likely, appears* to convey uncertainty. |
-| **Citations** | Parenthetical Chicago Author-Date style: (Author Year: page). Multiple sources separated by semicolons. |
-| **Terminology** | Employ discipline-specific vocabulary from archaeology, historiography, economic history, and data science. Verify term accuracy. |
-| **Transitions** | Use explicit linking phrases to signal logical progression (*"Building upon this premise …"*, *"By contrast …"*). |
-| **Figures & tables** | Refer to them in-text as "Figure X" or "Table Y"; store assets under `outputs/figures/`. |
-
-### 6.2 Structural Conventions
-
-1.  **Canonical section order** — *Introduction → Methodology → Analysis → Discussion → Conclusion*.
-2.  **Bullet-to-prose transformation** — Convert lists into cohesive paragraphs while preserving logical hierarchy.
-3.  **Numbered sign-posting** — For complex arguments, use ordinal adverbs (*First, Second, Third*) to guide the reader.
-4.  **Passive voice** — Acceptable where processes are foregrounded over actors; otherwise favour active constructions.
-5.  **Citation density** — Substantive claims require at least one citation; theory-heavy passages may group citations at paragraph end.
-
-### 6.3 AI Writing Workflow
-
-1.  **Scope confirmation** — Ask the user for desired length and depth if ambiguous.
-2.  **Source mapping** — Break input into logical units; cross-reference sample corpus for stylistic anchors.
-3.  **Draft generation** — Apply the rules in §6.1–6.2; mirror paragraph cadence and citation frequency of samples.
-4.  **Self-audit checklist** — Verify tone, sentence length, citation style, hedging language, and logical flow.
-5.  **User iteration** — Present draft, incorporate feedback, repeat audit.
-
-*Failure to obtain clarification should trigger sensible defaults derived from this guide*.
-
------
-
-## 7\. Further Reading
+## 6\. Further Reading
 
   - `global_rules.md` — Cross-project conventions & human best practices.
   - `.windsurf/rules/` — TMP-specific enforcement logic (directory for modular rules).
