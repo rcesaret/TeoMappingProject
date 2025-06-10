@@ -34,8 +34,13 @@ PROJECT_SETUP_CHECKLIST.md
 TMP_TO_DO_LIST.md
 link.txt
 
-.ini
-phases\01_LegacyDB\src\config.ini
+# ===================================================================
+# Configuration Files
+# ===================================================================
+# Ignore local configuration files that may contain sensitive data
+# like database passwords or API keys.
+config.ini
+phases/01_LegacyDB/src/config.ini
 
 # ===================================================================
 # IDEs & Editors
