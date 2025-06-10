@@ -34,6 +34,9 @@ PROJECT_SETUP_CHECKLIST.md
 TMP_TO_DO_LIST.md
 link.txt
 
+.ini
+phases\01_LegacyDB\src\config.ini
+
 # ===================================================================
 # IDEs & Editors
 # Covers VSCode, JetBrains (PyCharm, etc.), and RStudio
