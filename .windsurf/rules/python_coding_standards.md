@@ -46,9 +46,9 @@ Description: These rules apply to all Python files (`.py`) and Jupyter Notebook 
 ## 4. Environment Management
 
 - **Package Management**: This project uses Conda for Python environment and package management.
-- **Default Conda environment** Prefer the existing `TMP_geo_db`. Only create a new environment when package conflicts cannot be resolved; document the rationale in the PR.
-- **Environment creation**: `conda env create -f environment.yml`; Poetry and standalone `pip` workflows are not permitted.
-- **Specification File**: The environment is defined by `environment.yml` in the project root. This file is the source of truth for replicating the environment.
+- **Default Conda environment** Prefer the existing `digital_tmp_base`. Only create a new environment when package conflicts cannot be resolved; document the rationale in the PR.
+- **Environment creation**: `conda env create -f digital_tmp_*_env.yml`; Poetry and standalone `pip` workflows are not permitted.
+- **Specification File**: The environment is defined by `digital_tmp_base_env.yml` in the project root. This file is the source of truth for replicating the environment.
 - **Updates to Environment**: Any environment change *must* update all `environment*.yml` / `conda-lock.yml` files, pass CI, and be committed to version control.
 
 ---
