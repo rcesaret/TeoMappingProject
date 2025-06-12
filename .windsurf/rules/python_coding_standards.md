@@ -5,11 +5,6 @@ globs: *.py, *.ipynb
 
 # Digital TMP Python Coding Standards
 
-## Activation
-
-Glob Pattern: `**/*.py`, `**/*.ipynb`
-Description: These rules apply to all Python files (`.py`) and Jupyter Notebook files (`.ipynb`) throughout the Digital TMP project.
-
 ---
 
 ## 1. Core Python Standards
@@ -50,5 +45,10 @@ Description: These rules apply to all Python files (`.py`) and Jupyter Notebook 
 - **Environment creation**: `conda env create -f digital_tmp_*_env.yml`; Poetry and standalone `pip` workflows are not permitted.
 - **Specification File**: The environment is defined by `digital_tmp_base_env.yml` in the project root. This file is the source of truth for replicating the environment.
 - **Updates to Environment**: Any environment change *must* update all `environment*.yml` / `conda-lock.yml` files, pass CI, and be committed to version control.
+
+## 5. Automated Enforcement
+- **Pre-commit Hooks**: After generating or modifying any Python code, you MUST run the pre-commit hooks to ensure all formatting and linting standards are met.
+- **Command**: `pre-commit run --all-files`
+- **Validation**: The command must pass without errors before the task is considered complete.
 
 ---
