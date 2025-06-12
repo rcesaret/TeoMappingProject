@@ -35,6 +35,7 @@ OUTPUT_REPORTS_DIR = "outputs/reports"
 
 
 # --- Setup Functions ---
+
 def setup_logging(log_dir: Path) -> None:
     """Configures logging to both console and a file."""
     log_dir.mkdir(exist_ok=True)
@@ -64,6 +65,7 @@ def parse_arguments() -> argparse.Namespace:
 
 
 # --- Core Logic ---
+
 def load_all_metrics(input_dir: Path) -> Dict[str, Dict[str, Any]]:
     """
      Discovers and loads all metric files from the input directory.
@@ -103,7 +105,7 @@ def load_all_metrics(input_dir: Path) -> Dict[str, Dict[str, Any]]:
                     metric_name = suffix
                     db_name = stem.rsplit(f"_{suffix}", 1)[0]
                     break
-            
+
             if not db_name:
                 logging.warning(f"Could not determine database name for '{file_path.name}'. Skipping.")
                 continue
@@ -115,7 +117,7 @@ def load_all_metrics(input_dir: Path) -> Dict[str, Dict[str, Any]]:
                     all_data[db_name][metric_name] = json.load(f)
         except Exception as e:
             logging.exception(f"Failed to load or parse file '{file_path.name}': {e}")
-    
+
     return dict(all_data)
 
 
@@ -129,11 +131,11 @@ def calculate_summary_metrics(db_name: str, db_data: Dict[str, Any]) -> Dict[str
 
     Returns:
         A flat dictionary of aggregated metrics.
-    
+
     This preserves the original summary logic.
     """
     summary = {"Database": db_name}
-    
+
     # Helper to safely get data and log if missing
     def get_metric_data(key, default=None):
         data = db_data.get(key)
@@ -222,7 +224,7 @@ def generate_markdown_report(summary_df: pd.DataFrame, perf_summary_df: pd.DataF
         report_parts.append("This table shows how many times slower each database is compared to the fastest benchmark database for each query category. A value of 1.0 means it is as fast as the benchmark.")
         pivot_efficiency = perf_summary_df.pivot_table(index='database', columns='category', values='schema_efficiency_factor', aggfunc='mean').round(2)
         report_parts.append(pivot_efficiency.to_markdown())
-        
+
         report_parts.append("\n### Detailed Latency Breakdown (ms)")
         pivot_latency = perf_summary_df.pivot_table(index=['category', 'query_id'], columns='database', values='latency_ms').round(2)
         report_parts.append(pivot_latency.to_markdown())
@@ -241,6 +243,7 @@ def generate_markdown_report(summary_df: pd.DataFrame, perf_summary_df: pd.DataF
 
 
 # --- Main Orchestrator ---
+
 def main() -> None:
     """Main function to orchestrate the comparison and aggregation process."""
     args = parse_arguments()

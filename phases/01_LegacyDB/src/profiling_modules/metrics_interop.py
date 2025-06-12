@@ -29,7 +29,7 @@ def calculate_interoperability_metrics(engine: Engine, schema_name: str) -> Dict
         "lif": None,
         "nf": None
     }
-    
+
     # --- JDI Calculation ---
     fk_query = text("""
         SELECT COUNT(*)

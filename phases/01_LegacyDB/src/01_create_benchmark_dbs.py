@@ -50,6 +50,8 @@ BENCHMARK_DB_TO_SQL_MAP = {
 
 
 # --- Logging Setup ---
+
+
 def setup_logging(log_path: Path) -> None:
     """Configures logging to both console and a file."""
     logging.basicConfig(
@@ -63,6 +65,7 @@ def setup_logging(log_path: Path) -> None:
 
 
 # --- Argument Parsing ---
+
 def parse_arguments() -> argparse.Namespace:
     """Parses command-line arguments."""
     parser = argparse.ArgumentParser(
@@ -78,6 +81,8 @@ def parse_arguments() -> argparse.Namespace:
 
 
 # --- Database Operations ---
+
+
 def create_database(db_config: Dict, db_name: str) -> bool:
     """Creates a new PostgreSQL database if it doesn't already exist."""
     logging.info(f"Attempting to create database: '{db_name}'...")
@@ -113,7 +118,7 @@ def extract_transform_data(engine: Engine, query_path: Path) -> pd.DataFrame | N
     if not query_path.is_file():
         logging.critical(f"SQL query file not found at: {query_path}")
         return None
-    
+
     logging.info(f"Reading query from '{query_path.name}'...")
     with open(query_path, 'r', encoding='utf-8') as f:
         query = f.read()
@@ -156,7 +161,7 @@ def main() -> None:
     """Main function to orchestrate the benchmark database creation."""
     args = parse_arguments()
     config_path = Path(args.config)
-    
+
     log_file_path = Path(__file__).parent / LOG_FILE_NAME
     setup_logging(log_file_path)
 
@@ -178,7 +183,7 @@ def main() -> None:
     except (configparser.NoSectionError, configparser.NoOptionError) as e:
         logging.critical(f"Config file is missing a required section or option: {e}")
         sys.exit(1)
-        
+
     logging.info("Starting benchmark database creation process...")
 
     # 1. Create the empty benchmark databases first
@@ -194,7 +199,7 @@ def main() -> None:
     for db_name, sql_filename in BENCHMARK_DB_TO_SQL_MAP.items():
         logging.info(f"--- Processing benchmark database: {db_name} ---")
         query_path = sql_dir / sql_filename
-        
+
         # Extract and Transform using the specified SQL query
         df = extract_transform_data(source_engine, query_path)
         if df is None:
@@ -205,7 +210,7 @@ def main() -> None:
         target_engine = get_sqlalchemy_engine(db_config_root, db_name)
         if not write_to_database(df, target_engine):
             logging.error(f"Halting: failed to load data into {db_name}.")
-            
+
     logging.info("--- Benchmark database creation process complete. ---")
 
 

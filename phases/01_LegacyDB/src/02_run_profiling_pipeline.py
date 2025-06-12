@@ -47,6 +47,7 @@ OUTPUT_METRICS_DIR = "outputs/metrics"
 
 
 # --- Setup Functions ---
+
 def setup_logging(log_dir: Path) -> None:
     """Configures logging to both console and a file."""
     log_dir.mkdir(exist_ok=True)
@@ -113,18 +114,19 @@ def save_results(
         else:
             logging.error(f"Unsupported data type for saving: {type(data)}")
             return
-            
+
         logging.info(f"Successfully saved '{metric_name}' results to {output_path.name}")
     except Exception as e:
         logging.error(f"Failed to save results for metric '{metric_name}': {e}")
 
 
 # --- Main Orchestrator ---
+
 def main() -> None:
     """Main function to orchestrate the entire profiling pipeline."""
     args = parse_arguments()
     config_path = Path(args.config)
-    
+
     # Assume log directory is relative to script location
     log_dir = Path(__file__).parent
     setup_logging(log_dir)
@@ -144,7 +146,7 @@ def main() -> None:
         legacy_dbs = [db.strip() for db in config.get("databases", "legacy_dbs").split(',')]
         benchmark_dbs = [db.strip() for db in config.get("databases", "benchmark_dbs").split(',')]
         all_dbs_to_profile = legacy_dbs + benchmark_dbs
-        
+
         # Define paths relative to the project structure
         project_root = Path(__file__).parent.parent
         output_dir = project_root / OUTPUT_METRICS_DIR
@@ -163,13 +165,13 @@ def main() -> None:
         if not engine:
             logging.error(f"Skipping database '{db_name}' due to connection failure.")
             continue
-            
+
         # Determine schema name (legacy dbs have matching schema, benchmarks use public)
         schema_name = db_name if db_name in legacy_dbs else 'public'
         logging.info(f"Target schema for '{db_name}' is '{schema_name}'.")
 
         # --- Execute Profiling Modules ---
-        
+
         try:
             logging.info("--> Running: Basic DB Metrics")
             basic_metrics = metrics_basic.get_basic_db_metrics(engine)
@@ -219,7 +221,7 @@ def main() -> None:
         try:
             logging.info("--> Running: Performance Benchmarks")
             perf_benchmarks = metrics_performance.run_performance_benchmarks(
-                engine, 
+                engine,
                 db_name,
                 schema_name,
                 sql_queries_dir / "canonical_queries"  # Point to queries directory
@@ -227,7 +229,7 @@ def main() -> None:
             save_results(perf_benchmarks, db_name, "performance_benchmarks", output_dir)
         except Exception as e:
             logging.error(f"CRITICAL ERROR in Performance Benchmarks for '{db_name}': {e}", exc_info=True)
-            
+
         logging.info(f"--- Finished processing {db_name} ---")
 
     logging.info("="*80)

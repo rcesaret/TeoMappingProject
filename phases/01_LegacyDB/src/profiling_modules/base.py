@@ -33,6 +33,7 @@ def get_table_names(engine: Engine, schema_name: str) -> List[str]:
         logging.error(f"Failed to get table names for schema '{schema_name}': {e}")
         return []
 
+
 def get_view_names(engine: Engine, schema_name: str) -> List[str]:
     """
     Retrieves a list of all view names in a given schema.

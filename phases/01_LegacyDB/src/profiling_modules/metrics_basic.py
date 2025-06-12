@@ -30,7 +30,7 @@ def get_basic_db_metrics(engine: Engine) -> Dict[str, Any]:
             db_size_query = text("SELECT pg_catalog.pg_database_size(current_database()) / (1024 * 1024);")
             db_size_result = connection.execute(db_size_query)
             metrics["database_size_mb"] = round(db_size_result.scalar_one(), 2)
-            
+
             logging.info(f"Successfully retrieved basic metrics for DB '{metrics['database_name']}'.")
 
     except Exception as e:
@@ -57,7 +57,7 @@ def get_schema_object_counts(engine: Engine, schema_name: str) -> Dict[str, Any]
         "function_count": 0,
         "sequence_count": 0,
     }
-    
+
     queries = {
         "function_count": text("SELECT COUNT(*) FROM information_schema.routines WHERE routine_schema = :schema;"),
         "sequence_count": text("SELECT COUNT(*) FROM information_schema.sequences WHERE sequence_schema = :schema;")

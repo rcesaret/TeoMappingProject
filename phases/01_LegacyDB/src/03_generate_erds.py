@@ -66,7 +66,10 @@ TMP_DF9_SUBSYSTEMS = {
 
 
 # --- Setup Functions ---
+
+
 def setup_logging(log_dir: Path) -> None:
+
     """Configures logging to both console and a file."""
     log_dir.mkdir(exist_ok=True)
     log_path = log_dir / LOG_FILE_NAME
@@ -79,6 +82,7 @@ def setup_logging(log_dir: Path) -> None:
         ]
     )
 
+
 def parse_arguments() -> argparse.Namespace:
     """Parses command-line arguments."""
     parser = argparse.ArgumentParser(
@@ -89,6 +93,7 @@ def parse_arguments() -> argparse.Namespace:
         help="Path to the configuration file (default: config.ini)"
     )
     return parser.parse_args()
+
 
 def get_sqlalchemy_engine(db_config: Dict[str, Any], db_name: str) -> Engine | None:
     """Creates a SQLAlchemy engine, returning None on failure."""
@@ -102,12 +107,14 @@ def get_sqlalchemy_engine(db_config: Dict[str, Any], db_name: str) -> Engine | N
         logging.error(f"Failed to create SQLAlchemy engine for '{db_name}': {e}")
         return None
 
+
 def get_schema_for_db(db_name: str, legacy_dbs: List[str]) -> str:
     """Determines the correct schema name for a given database name."""
     return db_name if db_name in legacy_dbs else 'public'
 
 
 # --- Core Graphing Logic ---
+
 def generate_and_save_erd(
     metadata: MetaData,
     output_path: Path,
@@ -145,6 +152,7 @@ def generate_and_save_erd(
 
 
 # --- Main Orchestrator ---
+
 def main() -> None:
     """Main function to orchestrate ERD generation for all databases."""
     args = parse_arguments()
@@ -167,11 +175,11 @@ def main() -> None:
         legacy_dbs = [db.strip() for db in config.get("databases", "legacy_dbs").split(',')]
         benchmark_dbs = [db.strip() for db in config.get("databases", "benchmark_dbs").split(',')]
         all_dbs_to_profile = legacy_dbs + benchmark_dbs
-        
+
         project_root = Path(__file__).parent.parent
         output_dir = project_root / OUTPUT_ERDS_DIR
         output_dir.mkdir(parents=True, exist_ok=True)
-        
+
     except (configparser.NoSectionError, configparser.NoOptionError) as e:
         logging.critical(f"Config file is missing a required section or option: {e}")
         sys.exit(1)
@@ -209,13 +217,13 @@ def main() -> None:
         if db_name == 'tmp_df9':
             logging.info(f"Generating focused ERDs for '{db_name}'...")
             for subsystem_name, table_list in TMP_DF9_SUBSYSTEMS.items():
-                
+
                 # Filter the reflected tables to only those in our subsystem list
                 tables_to_include = [
                     table for name, table in metadata.tables.items()
                     if name.split('.')[-1] in table_list
                 ]
-                
+
                 if not tables_to_include:
                     logging.warning(f"No tables found for subsystem '{subsystem_name}'. Skipping.")
                     continue
