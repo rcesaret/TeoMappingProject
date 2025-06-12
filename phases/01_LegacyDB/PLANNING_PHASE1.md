@@ -290,6 +290,8 @@ The `digital_tmp_base` conda environment must be active in the terminal where th
 
 The `src/config.ini` file needs to be opened and verified. The `[postgresql]` credentials (`host`, `port`, `user`, `password`) must be correct for the local PostgreSQL instance. Additionally, the `[paths]` section must be correct, especially the `sql_dump_dir` and the `sql_queries_dir`. The `benchmark_dbs` key in `config.ini` must also reflect the benchmark database names: `tmp_benchmark_wide_numeric` and `tmp_benchmark_wide_text_nulls`.
 
+The `config.ini` file is located at `PROJECT_ROOT/phases/01_LegacyDB/src/config.ini`. The paths within this file are relative to the `PROJECT_ROOT/phases/01_LegacyDB/src/` directory, as scripts are expected to be run from there.
+
 #### 3.1.3. Verify External Dependencies (Graphviz)
 
 The Graphviz `dot` command-line tool is a required external dependency. Running `dot -V` in the terminal should return a version number for Graphviz. If not, Graphviz must be installed before proceeding to Stage 3. Installation instructions are provided for Windows (using Chocolatey), macOS (using Homebrew), and Debian/Ubuntu Linux.
@@ -1091,7 +1093,7 @@ To create the primary analytical notebook for Phase 1. This template's purpose i
 
 #### 4.8.2. Notebook Template: `template_comparative_analysis.ipynb`
 
-The complete template is saved as a `.ipynb` file, `template_comparative_analysis.ipynb`, located in the `phases/01_LegacyDB/notebooks/` directory. This notebook is the final analytical step of Phase 1, designed to synthesize all findings into a powerful, data-driven argument. The narrative flows from a high-level overview to deep dives into specific areas, culminating in a guided summary that directly informs the project's next steps.
+The complete template is saved as a `.ipynb` file, `template_comparative_analysis.ipynb`, located in the `phases/01_LegacyDB/notebooks/` directory. This notebook is the final analytical step of Phase 1, designed to synthesize all results to quantitatively compare the database architectures and provide the evidence for the final redesign recommendation.
 
 #### 4.8.3. Completing Task 4.2: Notes for IDE Agent
 
@@ -1308,3 +1310,5 @@ The following section outlines the atomized task plan for Phase 1 development, s
 <!-- end list -->
 
 ---
+
+```
