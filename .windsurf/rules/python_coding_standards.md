@@ -1,3 +1,8 @@
+---
+trigger: glob
+globs: *.py, *.ipynb
+---
+
 # Digital TMP Python Coding Standards
 
 ## Activation
@@ -23,9 +28,6 @@ Description: These rules apply to all Python files (`.py`) and Jupyter Notebook 
 
 - **Data Manipulation**: Prefer `Pandas` and `GeoPandas` for tabular and geospatial data manipulation/analysis.
 - **Database Interaction**: Use `SQLAlchemy` as the ORM for PostgreSQL databases.
-- **API Development**: Use `FastAPI` for building RESTful APIs.
-- **Data Validation**: Use `Pydantic` for data validation (data models, API request/response schemas).
-- **Geospatial Processing**: Leverage `Shapely` for geometric operations.
 - **Validation Frameworks**: Integrate `Great Expectations` for automated data quality validation in ETL pipelines. Consider `dbt` for data transformation workflows.
 - **Database Connectivity**: Use `psycopg2` for direct PostgreSQL database connections when ORM not applicable.
 
