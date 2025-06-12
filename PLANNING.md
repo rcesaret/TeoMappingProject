@@ -36,7 +36,25 @@ The Digital TMP project is built upon core methodological principles that ensure
 
 ---
 
-## 2. Project Architecture
+## 2. AI-Driven Workflow & Task Management Protocol
+
+This project is architected to be developed and executed with the assistance of the **Windsurf Cascade AI agent**. The agent's behavior is governed by a deterministic, task-driven protocol designed to maximize accuracy, quality, and reproducibility.
+
+### 2.1. Core Principles
+
+- **Determinism**: The AI functions as a state machine, executing a predefined script of tasks rather than improvising.
+- **Atomicity**: Work is decomposed into small, granular, and verifiable tasks.
+- **Context-Awareness**: Tasks act as pointers, directing the AI to detailed instructions within the project's full documentation suite.
+
+### 2.2. The Role of `TASKS.md`
+
+The `TASKS.md` file is the central "program" for the AI agent. It contains a structured list of all work items, their dependencies, and the explicit "Definition of Done" for each.
+
+**A detailed specification of the task schema and the agent's operational protocol is defined directly within the front matter of the `TASKS.md` file.** The agent is required by `global_rules.md` to adhere to this protocol at all times.
+
+---
+
+## 3. Project Architecture
 
 The project is decomposed into three nested units:
 
@@ -44,7 +62,7 @@ The project is decomposed into three nested units:
 * **Workflows** – cohesive processes within a phase
 * **Tasks** – atomic work items tracked in `TASKS.md`
 
-### 2.1 Phase Overview Table
+### 3.1 Phase Overview Table
 
 | Phase                              | Description                                                                                                                     | Key Outputs                                                                              |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
@@ -57,7 +75,7 @@ The project is decomposed into three nested units:
 | Phase 7 – PostGIS Database        | Design and deployment of production-grade spatial database with optimized schemas and performance tuning                        | PostGIS database, Docker containers, SQL dumps, API endpoints                            |
 | Phase 8 – Tutorials & Dashboards  | Development of user-facing applications and comprehensive tutorials for diverse analytical workflows                            | WebGIS dashboard, REST API, Python/R/QGIS tutorials                                      |
 
-### 2.2 Modular Phase Breakdown
+### 3.2 Modular Phase Breakdown
 
 <details>
 <summary>Phase 1 – Database Analysis</summary>
@@ -150,7 +168,7 @@ The project is decomposed into three nested units:
 
 ---
 
-## 3. Repository Structure
+## 4. Repository Structure
 
 The repository follows a modular structure aligned with project phases and workflows. Key folders include:
 
@@ -229,14 +247,14 @@ The repository follows a modular structure aligned with project phases and workf
 └── tests/                       \# Unit and integration tests by phase
 ```
 
-### 3.1 Root Directory Files and Folders
+### 4.1 Root Directory Files and Folders
 
 - `.env`, `.env.example` – project-specific credentials (Git-ignored)
 - `requirements.txt` – primary Python dependency list (pip-style)
 - `.gitignore` – specifies files and folders to be ignored by Git
 - `.windsurf/rules/` – directory for Windsurf IDE project-specific rule files
 
-### 3.2 Phase-Specific Directories (`phases/`)
+### 4.2 Phase-Specific Directories (`phases/`)
 
 Structured by project phase (e.g., `01_LegacyDB/`, `02_TransformDB/` etc.):
 
@@ -247,30 +265,30 @@ Structured by project phase (e.g., `01_LegacyDB/`, `02_TransformDB/` etc.):
   - `drafts/` – working documents and temporary files
   - `README.md` + `metadata.json` – workflow description and schema (conceptual, to be defined later)
 
-### 3.3 Data Directories (`data/`)
+### 4.3 Data Directories (`data/`)
 
 - `raw/`, `interim/`, `processed/` – represent a DVC-friendly data lifecycle
 - `external/` – stores Dropbox-downloaded datasets (e.g., raster tiles)
   - Ignored from Git via `.gitignore`
 
-### 3.4 Infrastructure Directories (`infrastructure/`)
+### 4.4 Infrastructure Directories (`infrastructure/`)
 
 - `db/legacy_db_sql_scripts/` – stores SQL exports of legacy databases
 - `docker/` – reserved for late-stage containerization, primarily in Phase 7
 - `cloud_downloads.md` – provides guidance for cloud import scripting (conceptual)
 
-### 3.5 Documentation and Project Materials (`docs/`, `project_materials/`)
+### 4.5 Documentation and Project Materials (`docs/`, `project_materials/`)
 
 - `architecture.md`, `overview.md`, `methods.md`, `data_sources.md`, `outputs_summary.md`, `references.md` – core human-readable project documentation.
 - `CRS_Catalogue.csv` - Defines all sanctioned spatial reference systems, including custom *Millon Space* CRSs. Extend via Pull Request (PR) only (conceptual for `PLANNING.md`).
 - `tDAR/` – contains archival formatting and metadata standards (conceptual, to be defined later).
 - `TMP_Project_DS_Portfolio_OptimizStrategy/` – stores strategy documents and summaries (conceptual).
 
-### 3.6 Testing Directory (`tests/`)
+### 4.6 Testing Directory (`tests/`)
 
 - Contains unit and integration tests, structured by phase, mirroring the `phases/` directory.
 
-### 3.7 Files Without Version Control (via `.gitignore`)
+### 4.7 Files Without Version Control (via `.gitignore`)
 
 - All `drafts/` folders
 - `data/external/ms_raster_tiles` (example large dataset)
@@ -279,16 +297,16 @@ Structured by project phase (e.g., `01_LegacyDB/`, `02_TransformDB/` etc.):
 - `knowledge_base/` contains knowledge files approved for the AI
 - Local notebooks, cache folders
 
-### 3.8 Notes on Large Files
+### 4.8 Notes on Large Files
 
 - **Git LFS** will manage large rasters and project imagery.
 - **DVC** (optional) can track heavy data evolution beyond Git-LFS capacity.
 
 ---
 
-## 4\. Technology Stack, Tools, and Dependencies
+## 5. Technology Stack, Tools, and Dependencies
 
-### 4.1 Core Programming Stack
+### 5.1 Core Programming Stack
 
 - **Language**: Python 3.11+
 - **Notebooks**: Jupyter (used for QA and geospatial EDA in Phases 2–8)
@@ -298,7 +316,7 @@ Structured by project phase (e.g., `01_LegacyDB/`, `02_TransformDB/` etc.):
 - **Databases:** PostgreSQL 17 with PostGIS 3.4
 - **GIS Desktop:** QGIS 3.40.5
 
-### 4.2 Key Python Libraries
+### 5.2 Key Python Libraries
 
 - **Data / ETL**: `pandas`, `numpy`, `sqlalchemy`, `pydantic`, `great_expectations`
 - **Geospatial**: `gdal`, `ogr`, `rasterio`, `fiona`, `geopandas`, `shapely`, `pyproj`, `whitebox` (conceptual additions based on project scope)
@@ -306,7 +324,7 @@ Structured by project phase (e.g., `01_LegacyDB/`, `02_TransformDB/` etc.):
 - **Web Services**: `fastapi`, `leaflet.js` (for dashboards)
 - **Testing**: `pytest`, `pytest-cov`, `pandas.testing`, `geopandas.testing`, and `great_expectations` (where applicable) (conceptual additions based on project scope)
 
-### 4.3 Technology Stack Rationale
+### 5.3 Technology Stack Rationale
 
 This project leverages a comprehensive technology stack combining industry-standard geospatial tools, modern data science frameworks, and cloud-native deployment strategies. Software selection prioritizes reproducibility, scalability, and long-term maintainability while ensuring compatibility with both research and archival infrastructure requirements.
 
@@ -317,13 +335,13 @@ This project leverages a comprehensive technology stack combining industry-stand
 - **Data Quality & Validation**: Great Expectations and dbt (optional) provide automated data validation frameworks, while custom SQL constraints enforce spatial and relational integrity throughout the pipeline.
 - **Archival Compatibility**: Tools selection prioritizes long-term preservation requirements, with exports to standard formats (Shapefile, GeoJSON, CSV) ensuring compatibility with future technological environments.
 
-### 4.4 Conda Environment Management - digital_tmp_base
+### 5.4 Conda Environment Management - digital_tmp_base
 
-#### 4.4.1 Environment Overview
+#### 5.4.1 Environment Overview
 
 The Digital TMP project uses a dedicated Conda environment named **digital_tmp_base** as the primary computational environment for all project work. This environment provides a consistent, reproducible foundation that includes all necessary Python packages, geospatial libraries, and analytical tools required across the eight project phases.
 
-#### 4.4.2 Environment Setup and Maintenance
+#### 5.4.2 Environment Setup and Maintenance
 
 - **Environment Definition**: The `digital_tmp_base_env.yml` file in the project root directory is the single source of truth for the digital_tmp_base environment specification. This file should be kept under version control.
 - **Environment Creation**: New team members or workstations should create the environment using:
@@ -340,7 +358,7 @@ The Digital TMP project uses a dedicated Conda environment named **digital_tmp_b
   3. Commit the updated environment.yml file to version control
   4. Notify team members to update their environments
 
-#### 4.4.3 Windsurf Guidelines for Conda Usage
+#### 5.4.3 Windsurf Guidelines for Conda Usage
 
 - **Default Environment**: All Python scripts, notebooks, and analysis should be run within the digital_tmp_base environment. The use of other environments requires explicit justification and documentation.
 - **Version Pinning**: All dependencies in environment.yml must have their versions pinned to ensure reproducible analysis across workstations and over time.
@@ -349,7 +367,7 @@ The Digital TMP project uses a dedicated Conda environment named **digital_tmp_b
 - **Documentation**: Document any non-standard environment configurations or workstation-specific adaptations in project notes.
 - **Testing**: Test environment portability by periodically creating fresh environments from environment.yml on different workstations to ensure reproducibility.
 
-#### 4.4.4 Key Environment Components
+#### 5.4.4 Key Environment Components
 
 The digital_tmp_base environment integrates several critical component groups:
 
@@ -362,23 +380,23 @@ The digital_tmp_base environment integrates several critical component groups:
 
 This comprehensive environment ensures that all project contributors work with identical software configurations, maintaining computational reproducibility and consistent analytical outputs across different computing environments.
 
-### 4.5 Metadata & Documentation
+### 5.5 Metadata & Documentation
 
 - **Markdown** for design notes; **YAML** side-cars for dataset metadata (conceptual).
 - **tDAR exports:** metadata mapped to tDAR schema (conceptual).
 - **LaTeX/Markdown with Pandoc** for comprehensive documentation generation.
 
-### 4.6 Continuous Integration and Quality Gates
+### 5.6 Continuous Integration and Quality Gates
 
 All automated enforcement (coverage floor, cyclomatic complexity, pre-commit hooks, schema-diff, etc.) is defined in `.windsurf/rules/` (conceptual, referring to sections 7-9 in `Doc06`). CI runs on GitHub Actions.
 
 ---
 
-## 5\. Data Sources Overview
+## 6. Data Sources Overview
 
 The Digital TMP project integrates multiple generations of archaeological datasets spanning over five decades of data collection, analysis, and reanalysis. These datasets represent one of the most comprehensive urban-scale archaeological surveys ever conducted, encompassing over 5,000 surface collection units across approximately 37.5 square kilometers of the ancient city of Teotihuacan. The project prioritizes data quality, rigorous metadata, and reproducibility in its integration efforts.
 
-### 5.1 Primary Dataset Index
+### 6.1 Primary Dataset Index
 
 | Dataset                  | Source                                      | Format          | Size    | Time Span    | Use Case                                                                  |
 | ------------------------ | ------------------------------------------- | --------------- | ------- | ------------ | ------------------------------------------------------------------------- |
@@ -387,7 +405,7 @@ The Digital TMP project integrates multiple generations of archaeological datase
 | **TMP\_DF10**      | ASU Teo Lab (Anne Sherfield)                | SQL dump (.sql) | \~20 MB | 2022-present | Most recent database with structural improvements and issue documentation |
 | **TMP\_REAN\_DF2** | ASU Teo Lab (Ian Robertson & Angela Huster) | SQL dump (.sql) | \~12 MB | 1973-1983    | Ceramic reanalysis with enhanced typological detail                       |
 
-### 5.2 Spatial Data Sources
+### 6.2 Spatial Data Sources
 
 | Dataset                                  | Source              | Format       | Size     | Coverage    | Use Case                                                |
 | ---------------------------------------- | ------------------- | ------------ | -------- | ----------- | ------------------------------------------------------- |
@@ -397,7 +415,7 @@ The Digital TMP project integrates multiple generations of archaeological datase
 | **Architectural Polygons**         | Anne Sherfield      | Shapefile    | \~30 MB  | Urban core  | Digitized architectural features with classification    |
 | **Modern Satellite Imagery**       | Various providers   | GeoTIFF      | \~1 GB   | Regional    | Reference data for georeferencing validation            |
 
-### 5.3 Ground Control Points & Reference Data
+### 6.3 Ground Control Points & Reference Data
 
 | Dataset                                         | Source            | Format        | Size     | Purpose          | Use Case                                                       |
 | ----------------------------------------------- | ----------------- | ------------- | -------- | ---------------- | -------------------------------------------------------------- |
@@ -405,7 +423,7 @@ The Digital TMP project integrates multiple generations of archaeological datase
 | **Satellite Images & Aerial Photography** | Various agencies  | TIFF/JPEG     | \~500 MB | Reference        | Modern reference for GCP validation and accuracy assessment    |
 | **Topographic Maps**                      | INEGI             | PDF/TIFF      | \~200 MB | Regional context | Mexican national topographic coverage for validation           |
 
-### 5.4 Known Data Quality Issues (High-level Summary)
+### 6.4 Known Data Quality Issues (High-level Summary)
 
 Despite decades of effort, the TMP digital archive presents complex legacy challenges including data fragmentation, quality, technological obsolescence, and incomplete documentation. This includes:
 
@@ -415,7 +433,7 @@ Despite decades of effort, the TMP digital archive presents complex legacy chall
 
 ---
 
-## 6\. Further Reading
+## 7. Further Reading
 
 - `global_rules.md` — Cross-project conventions & human best practices.
 - `.windsurf/rules/` — TMP-specific enforcement logic (directory for modular rules).
