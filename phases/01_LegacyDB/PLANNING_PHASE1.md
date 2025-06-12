@@ -277,14 +277,14 @@ Before initiating the pipeline, confirm that the following conditions are met. I
 
 | # | Check | Status |
 | :- | :--- | :--- |
-| 1 | Conda environment TMP_geo_db is activated? | [ ] Yes |
+| 1 | Conda environment digital_tmp_base is activated? | [ ] Yes |
 | 2 | src/config.ini has been reviewed and populated with the correct local PostgreSQL credentials? | [ ] Yes |
 | 3 | External dependency Graphviz is installed and accessible in the system PATH (verify with dot -V)? | [ ] Yes |
-| 4 | The sql/canonical_queries.sql file has been created and populated? | [ ] Yes |
+| 4 | The `sql/canonical_queries/*.sql` and `_categories.json` files have been created and populated? | [ ] Yes |
 
 #### 3.1.1. Activate Conda Environment
 
-The `TMP_geo_db` conda environment must be active in the terminal where the scripts will be run.
+The `digital_tmp_base` conda environment must be active in the terminal where the scripts will be run.
 
 #### 3.1.2. Verify `config.ini` Configuration
 
@@ -298,7 +298,7 @@ The Graphviz `dot` command-line tool is a required external dependency. Running 
 
 The performance benchmarking system has been enhanced with database-specific queries organized in `sql/canonical_queries/`:
 
-1. **Directory Structure**: 
+1. **Directory Structure**:
    - `_categories.json`: Metadata defining query categories and database mappings
    - `canonical_queries_df8.sql`: Queries for TMP_DF8's vertically partitioned schema
    - `canonical_queries_df9.sql`: Queries for TMP_DF9's highly normalized structure
@@ -327,7 +327,7 @@ The performance benchmarking system has been enhanced with database-specific que
          "description": "Tests raw I/O performance with full table scans"
        },
        "join_performance": {
-         "name": "Join Performance", 
+         "name": "Join Performance",
          "description": "Tests efficiency of multi-table joins and aggregations"
        },
        "complex_filtering": {
@@ -421,7 +421,7 @@ Task 1.2 is not complete until `src/00_setup_databases.py` is tested and validat
 ##### 4.1.1.1. Environment and Configuration Check
 
   * **PostgreSQL Server**: Ensure your local PostgreSQL server is running.
-  * **Conda Environment**: Make sure your `TMP_geo_db` conda environment is activated. The `psycopg2` library should be installed as part of the `base_project_env.yml` setup.
+  * **Conda Environment**: Make sure your `digital_tmp_base` conda environment is activated. The `psycopg2` library should be installed as part of the `base_project_env.yml` setup.
   * **`config.ini`**: Double-check that `src/config.ini` has the correct `password` and that the `sql_dump_dir` path is accurate, as we discussed.
 
 ##### 4.1.1.2. Running the Script
@@ -539,7 +539,7 @@ Execute the revised `01_create_benchmark_dbs.py` script. The goal is to leverage
 
 ##### 4.2.2.3. Execution ⚙️
 
-1.  Activate the `TMP_geo_db` conda environment.
+1.  Activate the `digital_tmp_base` conda environment.
 2.  Navigate the terminal to the `src/` directory.
 3.  Execute the script:
     ```bash
@@ -753,7 +753,7 @@ All preceding tasks (1.2, 1.3, 2.1) must be successfully completed. All six data
 
 ##### 4.4.3.3. Execution ⚙️
 
-1.  Activate the `TMP_geo_db` conda environment.
+1.  Activate the `digital_tmp_base` conda environment.
 2.  Navigate the terminal to the `src/` directory.
 3.  Execute the script: `python 02_run_profiling_pipeline.py`
 4.  **BE PATIENT**: This script queries every table and column. Depending on your machine, it could take anywhere from 5 to 30+ minutes to complete. Monitor the real-time log output in your console.
@@ -789,7 +789,7 @@ All preceding tasks (1.2, 1.3, 2.1) must be successfully completed. All six data
    - **Action**: Compare equivalent queries across databases
    - **Expected Patterns**:
      - **Baseline queries (1.1)**: Should show similar performance across all databases
-     - **Join performance queries (2.1)**: 
+     - **Join performance queries (2.1)**:
        - TMP_DF9: High latency (5 table joins required)
        - TMP_DF10: Very high latency (complex EAV joins)
        - TMP_DF8: Moderate latency (2-3 table joins)
@@ -822,7 +822,7 @@ The performance benchmarking system implements a sophisticated database-specific
 
 2. **Query Categories**: Three standardized categories ensure fair comparison:
    - **Baseline Performance**: Full table scans testing raw I/O
-   - **Join Performance**: Multi-table joins testing relationship traversal efficiency  
+   - **Join Performance**: Multi-table joins testing relationship traversal efficiency
    - **Complex Filtering**: Aggregations with multiple conditions testing analytical workload performance
 
 3. **Execution Strategy**: The `metrics_performance.py` module:
@@ -885,7 +885,7 @@ To execute the refined `03_generate_erds.py` script. This action will populate t
 
 ##### 4.5.3.3. Execution ⚙️
 
-1.  Activate the `TMP_geo_db` conda environment.
+1.  Activate the `digital_tmp_base` conda environment.
 2.  Navigate the terminal to the `src/` directory.
 3.  Execute the script:
     ```bash
@@ -964,7 +964,7 @@ To execute the `04_run_comparison.py` script. This is the final step in the auto
 
 ##### 4.6.3.3. Execution ⚙️
 
-1.  Activate the `TMP_geo_db` conda environment.
+1.  Activate the `digital_tmp_base` conda environment.
 2.  Navigate the terminal to the `src/` directory.
 3.  Execute the script:
     ```bash
