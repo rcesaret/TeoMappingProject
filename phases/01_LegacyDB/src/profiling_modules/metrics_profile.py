@@ -71,7 +71,7 @@ def get_all_column_profiles(engine: Engine, schema_name: str) -> List[Dict[str, 
             else:
                 record['null_count_estimate'] = 0
             all_profiles.append(record)
-            
+
         logging.info(f"Successfully generated column profiles for {len(all_profiles)} columns in schema '{schema_name}' using pg_stats.")
 
     except Exception as e:

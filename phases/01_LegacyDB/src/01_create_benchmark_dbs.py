@@ -45,24 +45,28 @@ BENCHMARK_TABLE_NAME = "wide_format_data"
 # This makes the script's logic clear and easily extensible.
 BENCHMARK_DB_TO_SQL_MAP = {
     "tmp_benchmark_wide_numeric": "flatten_df9.sql",
-    "tmp_benchmark_wide_text_nulls": "flatten_df9_text_nulls.sql"
+    "tmp_benchmark_wide_text_nulls": "flatten_df9_text_nulls.sql",
 }
 
 
 # --- Logging Setup ---
+
+
 def setup_logging(log_path: Path) -> None:
     """Configures logging to both console and a file."""
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s [%(levelname)-7s] %(message)s",
         handlers=[
-            logging.FileHandler(log_path, mode='w'), # Overwrite log on each run
-            logging.StreamHandler(sys.stdout)
-        ]
+            logging.FileHandler(log_path, mode="w"),  # Overwrite log on each run
+            logging.StreamHandler(sys.stdout),
+        ],
     )
 
 
 # --- Argument Parsing ---
+
+
 def parse_arguments() -> argparse.Namespace:
     """Parses command-line arguments."""
     parser = argparse.ArgumentParser(
@@ -72,12 +76,14 @@ def parse_arguments() -> argparse.Namespace:
         "--config",
         type=str,
         default="config.ini",
-        help="Path to the configuration file (default: config.ini)"
+        help="Path to the configuration file (default: config.ini)",
     )
     return parser.parse_args()
 
 
 # --- Database Operations ---
+
+
 def create_database(db_config: Dict, db_name: str) -> bool:
     """Creates a new PostgreSQL database if it doesn't already exist."""
     logging.info(f"Attempting to create database: '{db_name}'...")
@@ -85,7 +91,9 @@ def create_database(db_config: Dict, db_name: str) -> bool:
         with psycopg2.connect(**db_config) as conn:
             conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
             with conn.cursor() as cur:
-                cur.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(db_name)))
+                cur.execute(
+                    sql.SQL("CREATE DATABASE {}").format(sql.Identifier(db_name))
+                )
                 logging.info(f"Database '{db_name}' created successfully.")
     except psycopg2.errors.DuplicateDatabase:
         logging.warning(f"Database '{db_name}' already exists. Skipping creation.")
@@ -104,7 +112,9 @@ def get_sqlalchemy_engine(db_config: Dict, db_name: str) -> Engine:
         )
         return create_engine(db_url)
     except Exception as e:
-        logging.critical(f"Failed to create SQLAlchemy engine for '{db_name}'. Error: {e}")
+        logging.critical(
+            f"Failed to create SQLAlchemy engine for '{db_name}'. Error: {e}"
+        )
         sys.exit(1)
 
 
@@ -113,36 +123,44 @@ def extract_transform_data(engine: Engine, query_path: Path) -> pd.DataFrame | N
     if not query_path.is_file():
         logging.critical(f"SQL query file not found at: {query_path}")
         return None
-    
+
     logging.info(f"Reading query from '{query_path.name}'...")
-    with open(query_path, 'r', encoding='utf-8') as f:
+    with open(query_path, "r", encoding="utf-8") as f:
         query = f.read()
 
-    logging.info("Executing query against source database (this may take several minutes)...")
+    logging.info(
+        "Executing query against source database (this may take several minutes)..."
+    )
     try:
         with engine.connect() as connection:
             df = pd.read_sql_query(sql=text(query), con=connection)
-        logging.info(f"Successfully extracted data into DataFrame with shape: {df.shape}")
+        logging.info(
+            f"Successfully extracted data into DataFrame with shape: {df.shape}"
+        )
         return df
     except Exception as e:
-        logging.critical(f"Failed to execute query from '{query_path.name}'. Error: {e}")
+        logging.critical(
+            f"Failed to execute query from '{query_path.name}'. Error: {e}"
+        )
         return None
 
 
 def write_to_database(df: pd.DataFrame, engine: Engine) -> bool:
     """Writes a DataFrame to the specified database."""
     db_name = engine.url.database
-    logging.info(f"Writing {df.shape[0]} rows to table '{BENCHMARK_TABLE_NAME}' in database '{db_name}'...")
+    logging.info(
+        f"Writing {df.shape[0]} rows to table '{BENCHMARK_TABLE_NAME}' in database '{db_name}'..."
+    )
     try:
         # Using method='multi' is crucial for bulk insert performance.
         # chunksize helps manage memory for extremely large datasets.
         df.to_sql(
             name=BENCHMARK_TABLE_NAME,
             con=engine,
-            if_exists='replace',
+            if_exists="replace",
             index=False,
-            method='multi',
-            chunksize=1000
+            method="multi",
+            chunksize=1000,
         )
         logging.info(f"Successfully wrote data to '{db_name}'.")
         return True
@@ -152,11 +170,13 @@ def write_to_database(df: pd.DataFrame, engine: Engine) -> bool:
 
 
 # --- Main Orchestrator ---
+
+
 def main() -> None:
     """Main function to orchestrate the benchmark database creation."""
     args = parse_arguments()
     config_path = Path(args.config)
-    
+
     log_file_path = Path(__file__).parent / LOG_FILE_NAME
     setup_logging(log_file_path)
 
@@ -178,13 +198,15 @@ def main() -> None:
     except (configparser.NoSectionError, configparser.NoOptionError) as e:
         logging.critical(f"Config file is missing a required section or option: {e}")
         sys.exit(1)
-        
+
     logging.info("Starting benchmark database creation process...")
 
     # 1. Create the empty benchmark databases first
     for db_name in benchmark_dbs:
         if not create_database(db_config_root, db_name):
-            logging.critical(f"Halting: failed to create prerequisite database '{db_name}'.")
+            logging.critical(
+                f"Halting: failed to create prerequisite database '{db_name}'."
+            )
             sys.exit(1)
 
     # 2. Establish connection to the source database
@@ -194,18 +216,18 @@ def main() -> None:
     for db_name, sql_filename in BENCHMARK_DB_TO_SQL_MAP.items():
         logging.info(f"--- Processing benchmark database: {db_name} ---")
         query_path = sql_dir / sql_filename
-        
+
         # Extract and Transform using the specified SQL query
         df = extract_transform_data(source_engine, query_path)
         if df is None:
             logging.error(f"Halting: data extraction failed for {db_name}.")
-            continue # Try the next one, but this is a critical failure
+            continue  # Try the next one, but this is a critical failure
 
         # Load data into the target benchmark database
         target_engine = get_sqlalchemy_engine(db_config_root, db_name)
         if not write_to_database(df, target_engine):
             logging.error(f"Halting: failed to load data into {db_name}.")
-            
+
     logging.info("--- Benchmark database creation process complete. ---")
 
 

@@ -79,7 +79,7 @@ def get_table_level_metrics(engine: Engine, schema_name: str) -> List[Dict[str, 
     try:
         with engine.connect() as connection:
             df = pd.read_sql_query(query, connection, params={"schema": schema_name})
-        
+
         # Calculate bloat in Python for clarity
         df['bloat_bytes'] = df['actual_size_b'] - df['expected_size_b']
         df['bloat_percent'] = round(
@@ -89,7 +89,7 @@ def get_table_level_metrics(engine: Engine, schema_name: str) -> List[Dict[str, 
 
         # Drop helper columns before returning
         df = df.drop(columns=['expected_size_b', 'actual_size_b'])
-        
+
         table_metrics = df.to_dict('records')
         logging.info(f"Successfully calculated table-level metrics for {len(table_metrics)} tables in schema '{schema_name}'.")
 

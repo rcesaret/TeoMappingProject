@@ -32,6 +32,8 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 LOG_FILE_NAME = "00_setup_databases.log"
 
 # --- Logging Setup ---
+
+
 def setup_logging(log_path: Path) -> None:
     """Configures logging to both console and a file."""
     logging.basicConfig(
@@ -44,6 +46,8 @@ def setup_logging(log_path: Path) -> None:
     )
 
 # --- Argument Parsing ---
+
+
 def parse_arguments() -> argparse.Namespace:
     """Parses command-line arguments."""
     parser = argparse.ArgumentParser(
@@ -58,6 +62,8 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 # --- Database Operations ---
+
+
 def create_database(db_config: dict, db_name: str) -> bool:
     """
     Creates a new database in PostgreSQL if it doesn't already exist.
@@ -89,8 +95,9 @@ def create_database(db_config: dict, db_name: str) -> bool:
     except psycopg2.Error as e:
         logging.error(f"Failed to create database '{db_name}'. Error: {e}")
         return False
-    
+
     return True
+
 
 def populate_database(db_config: dict, db_name: str, sql_file_path: Path) -> bool:
     """
@@ -109,7 +116,7 @@ def populate_database(db_config: dict, db_name: str, sql_file_path: Path) -> boo
         return False
 
     logging.info(f"Populating '{db_name}' from '{sql_file_path.name}'...")
-    
+
     # Update config to connect to the newly created database
     target_db_config = db_config.copy()
     target_db_config["dbname"] = db_name
@@ -117,11 +124,11 @@ def populate_database(db_config: dict, db_name: str, sql_file_path: Path) -> boo
     try:
         with open(sql_file_path, 'r', encoding='utf-8') as f:
             sql_script = f.read()
-            
+
         with psycopg2.connect(**target_db_config) as conn:
             with conn.cursor() as cur:
                 cur.execute(sql_script)
-        
+
         logging.info(f"Successfully populated database '{db_name}'.")
 
     except psycopg2.Error as e:
@@ -130,15 +137,18 @@ def populate_database(db_config: dict, db_name: str, sql_file_path: Path) -> boo
     except IOError as e:
         logging.error(f"Could not read SQL file '{sql_file_path}'. Error: {e}")
         return False
-        
+
     return True
 
+
 # --- Main Orchestrator ---
+
+
 def main() -> None:
     """Main function to orchestrate database setup."""
     args = parse_arguments()
     config_path = Path(args.config)
-    
+
     # Assume log file is in the same directory as the script
     log_file_path = Path(__file__).parent / LOG_FILE_NAME
     setup_logging(log_file_path)
@@ -164,12 +174,12 @@ def main() -> None:
     except (configparser.NoSectionError, configparser.NoOptionError) as e:
         logging.critical(f"Configuration file is missing a required section or option: {e}")
         sys.exit(1)
-        
+
     logging.info("Starting legacy database setup process...")
 
     for db_name in legacy_dbs:
         logging.info(f"--- Processing: {db_name} ---")
-        
+
         # Create the database
         if not create_database(db_config, db_name):
             continue # Skip to next DB if creation failed
@@ -179,6 +189,7 @@ def main() -> None:
         populate_database(db_config, db_name, sql_file)
 
     logging.info("--- Legacy database setup process complete. ---")
+
 
 if __name__ == "__main__":
     main()
