@@ -317,41 +317,41 @@ This project leverages a comprehensive technology stack combining industry-stand
 - **Data Quality & Validation**: Great Expectations and dbt (optional) provide automated data validation frameworks, while custom SQL constraints enforce spatial and relational integrity throughout the pipeline.
 - **Archival Compatibility**: Tools selection prioritizes long-term preservation requirements, with exports to standard formats (Shapefile, GeoJSON, CSV) ensuring compatibility with future technological environments.
 
-### 4.4 Conda Environment Management - TMP_geo_db
+### 4.4 Conda Environment Management - digital_tmp_base
 
 #### 4.4.1 Environment Overview
 
-The Digital TMP project uses a dedicated Conda environment named **TMP_geo_db** as the primary computational environment for all project work. This environment provides a consistent, reproducible foundation that includes all necessary Python packages, geospatial libraries, and analytical tools required across the eight project phases.
+The Digital TMP project uses a dedicated Conda environment named **digital_tmp_base** as the primary computational environment for all project work. This environment provides a consistent, reproducible foundation that includes all necessary Python packages, geospatial libraries, and analytical tools required across the eight project phases.
 
 #### 4.4.2 Environment Setup and Maintenance
 
-- **Environment Definition**: The `environment.yml` file in the project root directory is the single source of truth for the TMP_geo_db environment specification. This file should be kept under version control.
+- **Environment Definition**: The `digital_tmp_base_env.yml` file in the project root directory is the single source of truth for the digital_tmp_base environment specification. This file should be kept under version control.
 - **Environment Creation**: New team members or workstations should create the environment using:
   ```bash
-  conda env create -f environment.yml
+  conda env create -f digital_tmp_base_env.yml
   ```
 - **Environment Activation**: Always activate the environment before any project work:
   ```bash
-  conda activate TMP_geo_db
+  conda activate digital_tmp_base
   ```
 - **Environment Updates**: When adding new dependencies:
-  1. Install the package directly: `conda install -n TMP_geo_db package_name` (or `pip install package_name` if not available via conda)
-  2. Export the updated environment: `conda env export -n TMP_geo_db --no-builds > environment.yml`
+  1. Install the package directly: `conda install -n digital_tmp_base package_name` (or `pip install package_name` if not available via conda)
+  2. Export the updated environment: `conda env export -n digital_tmp_base --no-builds > digital_tmp_base_env.yml`
   3. Commit the updated environment.yml file to version control
   4. Notify team members to update their environments
 
 #### 4.4.3 Windsurf Guidelines for Conda Usage
 
-- **Default Environment**: All Python scripts, notebooks, and analysis should be run within the TMP_geo_db environment. The use of other environments requires explicit justification and documentation.
+- **Default Environment**: All Python scripts, notebooks, and analysis should be run within the digital_tmp_base environment. The use of other environments requires explicit justification and documentation.
 - **Version Pinning**: All dependencies in environment.yml must have their versions pinned to ensure reproducible analysis across workstations and over time.
 - **Package Installation Order**: Always prefer conda-forge channel packages over pip installations to ensure binary compatibility, especially for geospatial libraries with complex dependencies.
-- **Environment Isolation**: Do not use the base conda environment for project work. Always use the dedicated TMP_geo_db environment to prevent dependency conflicts.
+- **Environment Isolation**: Do not use the base conda environment for project work. Always use the dedicated digital_tmp_base environment to prevent dependency conflicts.
 - **Documentation**: Document any non-standard environment configurations or workstation-specific adaptations in project notes.
 - **Testing**: Test environment portability by periodically creating fresh environments from environment.yml on different workstations to ensure reproducibility.
 
 #### 4.4.4 Key Environment Components
 
-The TMP_geo_db environment integrates several critical component groups:
+The digital_tmp_base environment integrates several critical component groups:
 
 - **Core Python Stack**: Python 3.11+ with standard scientific computing packages
 - **Geospatial Core**: GDAL, GeoPandas, Shapely, PyProj, and other geospatial libraries
