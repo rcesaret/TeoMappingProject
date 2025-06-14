@@ -2,7 +2,7 @@
 
 AI assistants **MUST** reference this file at the start of each coding or documentation session to stay aligned with the overall architecture, deliverables, and reproducibility vision.
 
-This file provides strategic, narrative context for collaborators and AI assistants. Machine-enforceable conventions now live in `global_rules.md` (generic) and `.windsurf/rules/` (TMP-specific). If procedure or behaviour guidance in this file ever conflicts with those rule files, **the rule files prevail**.
+This file provides strategic, narrative context for collaborators and AI assistants. Machine-enforceable conventions for this project live exclusively in the `.windsurf/rules/` directory. If procedure or behaviour guidance in this file ever conflicts with those rule files, **the rule files prevail**.
 
 ---
 
@@ -435,7 +435,6 @@ Despite decades of effort, the TMP digital archive presents complex legacy chall
 
 ## 7. Further Reading
 
-- `global_rules.md` — Cross-project conventions & human best practices.
 - `.windsurf/rules/` — TMP-specific enforcement logic (directory for modular rules).
 - `overview.md` — Project context, goals, background, project outline, architecture overview, general summaries.
 - `architecture.md` — Detailed system design and data-flow diagrams.
