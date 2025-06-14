@@ -89,10 +89,10 @@ protocol:
       - step: 6
         name: "Implement upon Approval"
         instruction: "Upon user approval, append the new, validated task structure to the `tasks` list in this file."
+---
+# TASK LIST
 
-# DIGITAL TMP: CURRENT TASKS
-
-## Phase 0
+## Unphased Tasks
 
   * id: P0
     description: "**Phase 0: Project Initialization & Protocol Finalization:** All tasks related to setting up the project structure and defining the AI agent's operational protocols."
@@ -111,26 +111,6 @@ protocol:
         description: "**Finalize Protocol:** Update the protocol to include universal context files and sections for unphased/discovered tasks."
         status: done✅
 
-## Discovered Tasks
-
-  * id: Discovered
-    description: "**Discovered Tasks:** A list of tasks identified during development that are not part of the original plan. These should be reviewed and assigned to a specific phase later."
-    status: pending⭕
-    context_files: ["global_rules.md"]
-    deliverables: ["A clear record of emergent work items."]
-    validation_steps: ["Periodically review with the user to move these tasks into a formal Phase."]
-    sub_tasks: []
-
-## Unphased Tasks
-
-  * id: Unphased
-    description: "**Unphased Tasks:** General or administrative tasks that do not belong to a specific project phase (e.g., updating global documentation, refactoring shared utilities)."
-    status: pending⭕
-    context_files: ["global_rules.md", "README.md"]
-    deliverables: ["Completion of general project maintenance and administrative actions."]
-    validation_steps: ["Confirm completion of the specified administrative task."]
-    sub_tasks: []
-
 ## Phase 1
 
   * id: P1
@@ -142,7 +122,7 @@ protocol:
     sub_tasks:
 
 ### Phase 1, Workflow 1
-
+* tasks:
       * id: P1.W1
         description: "**Workflow 1.1: Environment & Database Setup:** Establish the controlled, reproducible environment for the entire analytical phase."
         status: pending⭕
@@ -243,9 +223,6 @@ protocol:
                 context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#Testing-Strategy-for-01_create_benchmark_dbs.py"]
                 deliverables: ["tests/p1_w1/test_create_benchmark_dbs.py"]
                 validation_steps: ["Run 'pytest tests/p1_w1/test_create_benchmark_dbs.py' and assert all tests pass."]
-
-### Phase 1, Workflow 2
-
       * id: P1.W2
         description: "**Workflow 1.2: Metric & Artifact Generation:** Run the primary automated data-gathering engine of Phase 1."
         status: pending⭕
@@ -301,9 +278,6 @@ protocol:
                 context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#Testing-Strategy-for-Profiling-Pipeline-Orchestrator"]
                 deliverables: ["tests/p1_w2/test_profiling_pipeline.py", "tests/p1_w2/test_generate_erds.py"]
                 validation_steps: ["Run 'pytest tests/p1_w2/test_profiling_pipeline.py' and assert it passes.", "Run 'pytest tests/p1_w2/test_generate_erds.py' and assert it passes."]
-
-### Phase 1, Workflow 3
-
       * id: P1.W3
         description: "**Workflow 1.3: Aggregation & Synthesis:** Synthesize the raw metric files into concise, high-level reports."
         status: pending⭕
@@ -345,9 +319,6 @@ protocol:
                 context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#Testing-Strategy-for-Aggregation-Script"]
                 deliverables: ["tests/p1_w3/test_run_comparison.py"]
                 validation_steps: ["Run 'pytest tests/p1_w3/test_run_comparison.py' and assert all tests pass."]
-
-### Phase 1, Workflow 4
-
       * id: P1.W4
         description: "**Workflow 1.4: Analysis, Reporting, & Recommendation:** Perform the final analysis and synthesize findings into the Phase 1 white paper."
         status: pending⭕
