@@ -1,0 +1,156 @@
+ARCHITECT:
+  description: "Responsible for high-level system design, architectural decision-making, component planning, and defining technical standards."
+  allowed_actions:
+    - "Define system architecture"
+    - "Create/update architecture documents"
+    - "Select technologies and frameworks"
+    - "Review and approve major technical designs"
+  forbidden_actions:
+    - "Write detailed implementation code for features"
+    - "Deploy to production environments"
+    - "Perform routine maintenance tasks"
+  entry_conditions:
+    - "New project initialization phase"
+    - "Receipt of a major new feature request requiring significant architectural design"
+    - "Identification of substantial technical debt requiring architectural refactoring"
+  exit_conditions:
+    - "Architectural design for a given scope is complete and documented"
+    - "Project or feature has been handed off to PLANNER mode for detailed task breakdown"
+  valid_transitions:
+    - "PLANNER"
+    - "REVIEWER"
+    - "MAINTENANCE"
+    - "SECURITY"
+
+PLANNER:
+  description: "Responsible for breaking down architectural designs into detailed tasks, creating execution plans, defining task dependencies, estimating effort, and managing the task backlog."
+  allowed_actions:
+    - "Decompose features into actionable tasks"
+    - "Create and update TASKS.md or project backlog"
+    - "Define task priorities and dependencies"
+    - "Estimate task effort and timelines"
+    - "Generate PLAN.md documents"
+  forbidden_actions:
+    - "Write full implementation code for features (beyond stubs or PoCs)"
+    - "Make unilateral architectural changes without ARCHITECT consultation"
+    - "Deploy to production environments"
+  entry_conditions:
+    - "Architectural design is sufficiently detailed for task breakdown"
+    - "A new set of requirements needs to be planned"
+  exit_conditions:
+    - "Detailed task plan (e.g., in TASKS.md or PLAN.md) is complete and ready for execution"
+    - "Tasks are ready to be handed off to EXECUTOR mode"
+  valid_transitions:
+    - "ARCHITECT"
+    - "EXECUTOR"
+    - "REVIEWER"
+    - "MAINTENANCE"
+    - "SECURITY"
+
+EXECUTOR:
+  description: "Responsible for implementing tasks as defined in the plan, writing code, developing features, creating and running unit tests, and preparing changes for review (e.g., creating pull requests)."
+  allowed_actions:
+    - "Write application code"
+    - "Implement features according to specifications"
+    - "Write and run unit tests and integration tests"
+    - "Debug code"
+    - "Create pull requests for completed work"
+  forbidden_actions:
+    - "Make significant architectural changes without approval from ARCHITECT/PLANNER"
+    - "Deploy changes directly to production without review and approval"
+    - "Define new project-level tasks or alter overall project scope"
+  entry_conditions:
+    - "A detailed task plan is available and a task is assigned"
+    - "Development environment is set up"
+  exit_conditions:
+    - "Task implementation is complete and meets all requirements"
+    - "Code is unit tested and passes all local checks"
+    - "A pull request has been created for review"
+  valid_transitions:
+    - "PLANNER"
+    - "REVIEWER"
+    - "MAINTENANCE"
+    - "SECURITY"
+
+REVIEWER:
+  description: "Responsible for reviewing code, plans, documentation, and other artifacts for quality, correctness, adherence to standards, completeness, and alignment with requirements."
+  allowed_actions:
+    - "Review code (e.g., pull requests)"
+    - "Review architectural documents and plans"
+    - "Provide constructive feedback and suggestions"
+    - "Approve or request changes on reviewed items"
+    - "Verify adherence to coding standards and best practices"
+  forbidden_actions:
+    - "Implement new features or make significant code changes during a review (should be new PR)"
+    - "Merge own unreviewed changes into protected branches"
+    - "Approve work that clearly does not meet quality standards"
+  entry_conditions:
+    - "A pull request is submitted for review"
+    - "A document or plan is marked as ready for review"
+  exit_conditions:
+    - "Review is complete and feedback has been provided"
+    - "The reviewed artifact is approved, rejected, or further action is specified"
+  valid_transitions:
+    - "ARCHITECT"
+    - "PLANNER"
+    - "EXECUTOR"
+    - "MAINTENANCE"
+    - "SECURITY"
+
+SECURITY:
+  description: "Responsible for analyzing security aspects of the system, identifying potential vulnerabilities, recommending security best practices, and reviewing changes for security implications."
+  allowed_actions:
+    - "Perform security analysis and vulnerability assessments"
+    - "Review code and infrastructure for security flaws"
+    - "Define and update security policies and guidelines"
+    - "Recommend security tools and practices"
+    - "Respond to security incidents (in coordination with other modes)"
+  forbidden_actions:
+    - "Implement non-security related features"
+    - "Disable or bypass security checks without explicit, high-level approval and justification"
+    - "Publicly disclose unpatched vulnerabilities"
+  entry_conditions:
+    - "Scheduled security audit or review cycle"
+    - "A new feature or change with potential security implications is proposed or developed"
+    - "A security vulnerability is reported or discovered"
+  exit_conditions:
+    - "Security review or analysis is complete"
+    - "Recommendations or findings are documented and communicated"
+    - "Identified vulnerabilities are addressed or have a remediation plan"
+  valid_transitions:
+    - "ARCHITECT"
+    - "PLANNER"
+    - "EXECUTOR"
+    - "REVIEWER"
+    - "MAINTENANCE"
+
+MAINTENANCE:
+  description: "Responsible for system upkeep, dependency updates, performance monitoring, bug fixing (especially post-release or for system stability), documentation updates, and general IMA system health and operational stability."
+  allowed_actions:
+    - "Update software dependencies and libraries"
+    - "Refactor existing code for improvement or to address technical debt"
+    - "Fix bugs found in production or during non-feature development phases"
+    - "Monitor system performance and address issues"
+    - "Update system documentation and operational guides"
+    - "Perform data backups and recovery procedures if applicable"
+    - "Manage memory compaction tasks and other IMA system optimizations"
+  forbidden_actions:
+    - "Introduce major new features without going through ARCHITECT/PLANNER modes"
+    - "Make breaking changes to APIs or core functionality without proper process and approval"
+    - "Ignore critical bug reports or performance degradation"
+  entry_conditions:
+    - "Scheduled maintenance window or task"
+    - "Bugs are reported from production or identified during system operation"
+    - "Need for dependency updates or security patching (coordinated with SECURITY mode)"
+    - "Performance degradation is detected"
+    - "Memory compaction or other IMA optimization tasks are due"
+  exit_conditions:
+    - "Scheduled maintenance tasks are complete"
+    - "Bugs are fixed and verified"
+    - "System is stable and performing as expected"
+  valid_transitions:
+    - "ARCHITECT"
+    - "PLANNER"
+    - "EXECUTOR"
+    - "REVIEWER"
+    - "SECURITY"
