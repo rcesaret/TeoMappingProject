@@ -27,12 +27,12 @@ data/external/ms_raster_tiles
 
 # IDE & Tooling Specific
 .qgz
-mcp_test_sandbox/
 
 # Miscellaneous
 PROJECT_SETUP_CHECKLIST.md
 TMP_TO_DO_LIST.md
 link.txt
+new_.windsurf_dir/
 
 # ===================================================================
 # Configuration Files
