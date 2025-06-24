@@ -4,6 +4,7 @@
 > **Author:** Rudolf Cesaretti
 > **Last Updated:** June 11, 2025
 
+
 ## 1. Purpose & Core Objective
 
 This phase focuses on the systematic, quantitative evaluation of the four legacy Teotihuacan Mapping Project (TMP) databases: `DF8`, `DF9`, `DF10`, and `REAN_DF2`. The primary goal is to produce a set of actionable, data-driven insights into their quality, structural complexity, data content, and analytical performance.
