@@ -1,0 +1,5 @@
+---
+trigger: manual
+---
+
+# BASE MODE
