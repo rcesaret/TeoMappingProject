@@ -17,7 +17,7 @@
 *(A one-sentence summary of the memory.)*
 
 **Content:**
-*(The full, detailed content of the memory. This can be a code snippet, a configuration, a user instruction, a design pattern, etc.)*
+*(The full, detailed content of the memory. This can include notes, reports, instructions, code snippets, configurations, user instructions, design patterns, etc.)*
 
 **Relations:**
 - **Related To:** `MemoryID_ABC`
