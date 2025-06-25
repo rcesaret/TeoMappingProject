@@ -41,7 +41,7 @@ The frontmatter is enclosed in `---` and contains the metadata that configures t
 -   `rule_modes`: A YAML list of the on-demand workflow modes to be activated from the `.windsurf/modes/` directory. This is the primary mechanism for controlling the AI's behavior.
 -   `date_created`: Date of plan mode plan creation in `YYYY-MM-DD` format.
 -   `last_updated`: Date of plan mode plan's last update in `YYYY-MM-DD` format.
--   `status`: Current state of the plan mode plan, either "Draft", "Active", or "Completed".
+-   `status`: The current state of the plan. Valid values are `"Draft"`, `"Active"`, or `"Completed"`.
 
 **Canonical Example:**
 ```yaml
@@ -135,7 +135,16 @@ The final stage ensures the task was completed successfully and integrates the r
 
 ---
 
-## 4. Context Selection Protocol
+## 4. Critical Rules for Context Configuration
+
+To ensure the AI operates with full and correct context, the following rules for configuring the YAML frontmatter are MANDATORY:
+
+1.  **Instructional Guide Inclusion:** For every `mode-*.md` file listed in `rule_modes`, the corresponding instructional guide (`guide-*.md`) from the `.windsurf/instructions/` directory MUST be included in the `context_files` list. This provides the AI with the detailed, human-readable instructions necessary to correctly interpret and execute the high-level rules defined in the mode.
+    -   **Example:** If `rule_modes` contains `mode-python-testing.md`, then `context_files` MUST contain `.windsurf/instructions/guide-python-testing.md`.
+
+2.  **Context Minimization:** The `context_files` list should be as minimal as possible. Only include files that are directly relevant to the specific actions outlined in the plan's checklist. Avoid including entire directories or lists of non-essential files.
+
+## 5. Context Selection Protocol
 
 ### Purpose
 This protocol provides the definitive, systematic methodology for selecting the correct `rule_modes` and `instructional guides` when authoring a Windsurf `plan` file. This protocol is designed for the "Planner" agent persona, which operates *after* a detailed architectural blueprint and execution plan have been created for a given project phase.
@@ -223,7 +232,7 @@ You MUST follow this process when authoring the YAML frontmatter for a `.plan.md
 This example correctly demonstrates how a single, atomized task maps to a small, highly relevant, and size-constrained set of modes and guides.
 
 
-## 5. Authoring New Plan Files: A Step-by-Step Guide
+## 6. Authoring New Plan Files: A Step-by-Step Guide
 
 Follow this process to create a new plan file for any task.
 
@@ -266,7 +275,7 @@ Under `## Stage 4: Final Validation & Cleanup`, create checklist items that dire
 Read through your completed plan. Does it flow logically? Is every step a clear, unambiguous command? Does it produce all the required deliverables?
 
 ---
-## 6. Protocol for AI Plan Generation
+## 7. Protocol for AI Plan Generation
 
 This section provides the definitive, operational protocol for an AI Assistant (like Cascade) tasked with generating a `.plan.md` file. The AI MUST follow this sequence precisely to ensure the generated plan is valid, effective, and aligned with project standards.
 
@@ -310,7 +319,7 @@ This section provides the definitive, operational protocol for an AI Assistant (
     -   Does the `Final Stage` include every `validation_step` from `TASKS.md`?
     -   Is every action truly atomic?
 
-## 7. Example: Creating a Plan for a Hypothetical Task
+## 8. Example: Creating a Plan for a Hypothetical Task
 
 Let's assume the following task exists in `TASKS.md`:
 
@@ -401,6 +410,3 @@ status: "Draft"
 - [ ] **Lint Code:** Run the command `ruff check --fix phases/01_LegacyDB/tests/test_00_setup_databases.py` and verify that it reports no errors.
 - [ ] **Format Code:** Run the command `ruff format phases/01_LegacyDB/tests/test_00_setup_databases.py` to ensure consistent formatting.
 - [ ] **Propose Task Update:** Propose the required changes to `TASKS.md` to update the status of task `P1.W1.T4.1` to `done`.
-```
-
----
