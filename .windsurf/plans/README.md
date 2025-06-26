@@ -38,7 +38,7 @@ The frontmatter is enclosed in `---` and contains the metadata that configures t
 -   `task_id`: The unique ID from `TASKS.md` that this plan executes.
 -   `description`: A concise, one-sentence summary of the plan's overall goal.
 -   `context_files`: A YAML list of all files the AI needs to read to have complete context. This MUST include both source code files and relevant instructional guides from `.windsurf/instructions/`.
--   `rule_modes`: A YAML list of the on-demand workflow modes to be activated from the `.windsurf/modes/` directory. This is the primary mechanism for controlling the AI's behavior.
+-   `rule_mode`: The on-demand workflow rule mode to be activated from the `.windsurf/modes/` directory. This is the primary mechanism for controlling the AI's task-/plan- specific behavior.
 -   `date_created`: Date of plan mode plan creation in `YYYY-MM-DD` format.
 -   `last_updated`: Date of plan mode plan's last update in `YYYY-MM-DD` format.
 -   `status`: The current state of the plan. Valid values are `"Draft"`, `"Active"`, or `"Completed"`.
@@ -52,10 +52,10 @@ context_files:
   - "phases/04_Georef/src/gcp_processor.py"
   - ".windsurf/instructions/guide-python-style.md"
   - ".windsurf/instructions/guide-database-design.md"
+  - ".windsurf/instructions/guide-python-style.md"
+  - ".windsurf/instructions/mode-geospatial-scripting.md"
 rule_modes:
   - "mode-python-scripting.md"
-  - "mode-python-testing.md"
-  - "mode-geospatial-scripting.md"
 date_created: 2025-06-23
 last_updated: 2025-06-24
 status: Draft
@@ -72,7 +72,7 @@ This is the most critical setup stage. It is divided into three distinct levels 
 
 #### Global Context Review:
 
-This section is **standard and should not change** between plans. It lists the core project-wide documents and the complete rule suite. This ensures every task is executed with full awareness of the project's foundational principles.
+**This section is standard, universal and *MUST NOT* change.** It lists the core project-wide documents and the complete rule suite. This ensures every task is executed with full awareness of the project's foundational principles.
 
 **Example:**
 ```markdown
@@ -139,60 +139,92 @@ The final stage ensures the task was completed successfully and integrates the r
 
 To ensure the AI operates with full and correct context, the following rules for configuring the YAML frontmatter are MANDATORY:
 
-1.  **Instructional Guide Inclusion:** For every `mode-*.md` file listed in `rule_modes`, the corresponding instructional guide (`guide-*.md`) from the `.windsurf/instructions/` directory MUST be included in the `context_files` list. This provides the AI with the detailed, human-readable instructions necessary to correctly interpret and execute the high-level rules defined in the mode.
-    -   **Example:** If `rule_modes` contains `mode-python-testing.md`, then `context_files` MUST contain `.windsurf/instructions/guide-python-testing.md`.
+1.  **Instructional Guide Inclusion:** Most tasks require attaching multiple instructional guides as context files. These are selected using a two-stage process:
+    -   **Step 1: Mode-Associated Guides:** Given the specific `mode-*.md` file included for `rule_mode`, the corresponding instructional guide (`guide-*.md`) from the `.windsurf/instructions/` directory MUST be included in the `context_files` list. This provides the AI with the detailed, human-readable instructions necessary to correctly interpret and execute the high-level rules defined in the mode.
+        -   **Example:** If `rule_modes` contains `mode-python-testing.md`, then `context_files` MUST contain `.windsurf/instructions/guide-python-testing.md`.
+	-   **Step 2: Supplementary Guides:** Many tasks involve multi-modal contexts that are not fully covered by the rule mode and its associated instructional guide(s). As such, you MUST identify any other, additional instructional guides that are directly relevant to the task, and include these in the `context_files` list.
+        -   **Example:** If a task primarily involves python scripting with `mode-python-scripting.md` as the `rule_mode`, but also involves generating SQL queries within a python-based framework, then `context_files` MUST contain both `guide-python-style.md` (the rule-mode-associated instructional guide) AND `guide-sql-best-practices.md` (a supplementary instructional guide necessary for adequate guidance on the SQL component).
 
-2.  **Context Minimization:** The `context_files` list should be as minimal as possible. Only include files that are directly relevant to the specific actions outlined in the plan's checklist. Avoid including entire directories or lists of non-essential files.
+2.  **The Principle of Direct Relevance:** The `context_files` list must not include files that are only indirectly or tangentially related to the present task. Only include files that are directly relevant to the specific actions outlined in the plan's checklist. Avoid including entire directories or lists of non-essential files.
 
 ## 5. Context Selection Protocol
 
 ### Purpose
-This protocol provides the definitive, systematic methodology for selecting the correct `rule_modes` and `instructional guides` when authoring a Windsurf `plan` file. This protocol is designed for the "Planner" agent persona, which operates *after* a detailed architectural blueprint and execution plan have been created for a given project phase.
+
+This protocol provides the definitive, systematic methodology for selecting the correct `rule_mode` and 'instructional guides' when authoring a Windsurf `plan` file. This protocol is designed for the "Planner" agent persona, which operates *after* a detailed architectural blueprint and execution plan have been created for a given project phase.
 
 ### Core Principles
 
 -   **Atomicity is Prerequisite:** This protocol is only to be applied to **fully atomized tasks** from the `TASKS.md` file—tasks that have been broken down into the smallest possible, verifiable units of work by the architectural planning process. Applying this protocol to coarse-grained tasks will result in context window overruns and mission failure.
 -   **Task-Driven Context:** The context selection is dictated by the specific verbs and nouns of the atomized task description. The goal is to create the "perfect context": the most minimal yet complete set of instructions for the Executor AI to succeed without ambiguity.
--   **Symbiotic Relationship:** Rule modes and instructional guides are a symbiotic pair. A `rule_mode` provides the concise, enforceable directives, while its corresponding `guide` provides the deep context, rationale, and detailed examples. **Activating a mode without including its corresponding guide in `context_files` is a protocol violation.**
+-   **Symbiotic Relationship:** Rule modes and instructional guides are a symbiotic pair. A `rule_mode` provides the concise, enforceable directives, while 'instructional guides' provide the deep context, rationale, examples, and detailed guidelines and protocols.
+-   **Activating a mode without including its corresponding guide in `context_files` is a protocol violation.**
+-   **Failure to include all additional instructional guides that are directly relevant to the task/plan in `context_files` is a protocol violation.**
 
-This matrix is the primary reference tool for selecting the appropriate context. The "Planner" agent MUST use this table to map task requirements to the correct set of files.
+### Context Selection Protocol
 
-> **Note for the Planner Agent:** The total character count of all selected `rule_modes` plus the core "Always On" rules (approx. 2,200 characters) MUST NOT exceed the system's hard limit of **12,000 characters**. You must use the `Character Count` column to manage this budget.
+The following tables are the key reference tools for selecting the appropriate context. You MUST use these tables to map task requirements to the correct set of files.
 
-### The Context Selection Matrix
+#### Table 1: Rule Mode Selection Matrix
 
-| Mode / Rule File | Character Count | Dependencies | Corresponding Guide | Description & Primary Use Case |
-| :--- | :--- | :--- | :--- | :--- |
-| `00-core.md` | ~1,228 | (none) | (none) | **Always On.** Defines core AI persona, security, and meta-rules. |
-| `01-project-management.md` | ~958 | (none) | (none) | **Always On.** Governs interaction with `TASKS.md` and project plans. |
-| `mode-base.md` | ~517 | (none) | (none) | A minimal, general-purpose mode for simple, ad-hoc tasks. Use for tasks that do not fit any other specialized mode. |
-| `mode-plan-architecture.md` | ~1,481 | (none) | `guide-architecture-planning.md` | **Task:** Design, strategize, architect. For high-level architectural planning and generating blueprint documents. |
-| `mode-plan-tasking.md` | ~1,511 | (none) | `guide-task-planning.md` | **Task:** Plan, deconstruct, itemize. For atomizing architectural plans into `TASKS.md` entries and creating `.plan.md` files. |
-| `mode-python-scripting.md` | ~2,491 | (none) | `guide-python-style.md` | **Task:** Create, implement, refactor Python code. Enforces style, structure, and best practices. **This is a core dependency for other Python modes.** |
-| `mode-python-execution.md` | ~1,215 | `mode-python-scripting.md` | `guide-python-style.md` | **Task:** Run, execute, deploy a Python script. Governs conda environment and command generation. |
-| `mode-python-testing.md` | ~2,058 | `mode-python-scripting.md` | `guide-python-style.md` | **Task:** Test, validate Python code. Governs `pytest` usage, mocking, and test structure. |
-| `mode-python-debugging.md`| ~2,139 | `mode-python-scripting.md` | `guide-python-style.md` | **Task:** Debug, fix, diagnose a Python script. Provides a systematic diagnostic protocol. |
-| `mode-sql-scripting.md` | ~1,673 | (none) | `guide-sql-best-practices.md` | **Task:** Create, write, refactor `.sql` scripts. Enforces formatting and query structure. |
-| `mode-database-design.md` | (tbd) | `mode-sql-scripting.md` | `guide-database-design.md` | **Task:** Design schema, create table. Governs DDL, indexing, and migrations. |
-| `mode-geospatial-scripting.md`| ~2,698 | `mode-python-scripting.md` | `guide-geospatial-protocols.md` | **Task:** Process spatial data, handle CRS. Specialized rules for `geopandas` and PostGIS. |
-| `mode-review.md` | ~1,518 | (none) | (all relevant guides) | **Task:** Review, audit, QA. A meta-mode for validating output against other standards. |
-| `mode-document.md` | ~1,128 | (none) | `guide-analysis-reporting.md` | **Task:** Document, update README. Governs high-level project documentation. |
-| `mode-report-writing.md` | ~1,229 | (none) | `guide-analysis-reporting.md` | **Task:** Analyze, report findings, summarize. Governs formal reports and scientific writing. |
-| `mode-tools-mcp.md` | ~1,772 | (none) | (none) | **Task:** Use external tool, search web. A cross-cutting mode for activating MCP tools. |
+**Protocol:** The Planner agent MUST use this matrix to select the required `rule_mode` for a given task's `.plan.md` file. The selection is based on the task's primary objective. The "Always On" core rules are foundational and are not selected here. In all cases, **you must only select one rule mode from the following table** to include under `rule_mode` for the plan/task. As such, **you should select the *most appropriate* / *most directly relevant* rule mode**.
+
+| Mode / Rule File | Character Count | Primary Use Case & Task Verbs |
+| :--- | :--- | :--- |
+| `mode-01-architecture-planning.md`| 3793 | For high-level architectural planning and generating blueprint documents. (e.g., *design*, *strategize*, *architect*) |
+| `mode-02-tasks-plans.md` | 3693 | For deconstructing architectural plans into `TASKS.md` entries and creating `.plan.md` execution files. (e.g., *plan*, *deconstruct*, *itemize*) |
+| `mode-code-review.md` | 4815 | For performing a rigorous audit of code against all project standards. A meta-mode. (e.g., *review*, *audit*, *validate*) |
+| `mode-project-docs.md` | 4443 | For authoring and maintaining high-level project documentation (`README.md`, `architecture.md`, etc.). (e.g., *document*, *update*, *write*) |
+| `mode-georeferencing.md` | 5314 | For tasks involving high-precision georeferencing, custom CRS transformations, and spatial accuracy validation. (e.g., *georeference*, *transform CRS*) |
+| `mode-geospatial-scripting.md`| 6047 | For creating or modifying Python scripts that use geospatial libraries (`geopandas`, `shapely`, `pyproj`). (e.g., *process spatial data*, *analyze geometry*) |
+| `mode-gis-digitization.md` | 4609 | For tasks involving the manual digitization of features from raster maps using QGIS. (e.g., *digitize*, *trace features*) |
+| `mode-postgis-deployment.md` | 5805 | For deploying, managing, and migrating the production PostGIS database. Governs Docker, backups, and security. (e.g., *deploy*, *migrate db*, *backup*) |
+| `mode-python-debugging.md`| 4973 | For diagnosing and fixing errors in Python scripts using a systematic protocol. (e.g., *debug*, *fix*, *diagnose*) |
+| `mode-python-execution.md`| 3972 | For generating commands to run Python scripts, enforcing the use of the correct conda environment. (e.g., *run*, *execute*) |
+| `mode-python-scripting.md`| 5040 | For creating, implementing, or refactoring any Python code. Enforces style and best practices. **(Core dependency for most Python tasks)**. (e.g., *create*, *implement*, *refactor*) |
+| `mode-python-testing.md` | 4802 | For writing `pytest` unit and integration tests for Python code, including mocking. (e.g., *test*, *write tests*) |
+| `mode-report-writing.md` | 4910 | For analyzing data and writing formal reports or scientific summaries. (e.g., *analyze*, *report*, *summarize*) |
+| `mode-sql-scripting.md` | 5925 | For writing or refactoring `.sql` files, enforcing formatting and best practices for SQL queries. (e.g., *query*, *write SQL*) |
+| `mode-tdar-packaging.md` | 5116 | For preparing and packaging project datasets and metadata for archival in tDAR. (e.g., *package for archival*, *prepare tDAR*) |
+
+
+#### Table 2: Instructional Guide Cross-Reference
+
+**Protocol:** After selecting `rule_mode` from Table 1, the Planner agent MUST consult this table to identify ALL instructional guides directly relevant to the present task/plan (there will usually be multiple instructional guides for any given task). To make the appropriate selections, you must follow the two-step process:
+1. select all instructional guides that correspond to the selected mode from Table 1.
+2. select all additional other instructional guides that are directly relevant to the task/plan.
+
+Every identified guide MUST be added to the `context_files` list in the `.plan.md` file.
+
+| Instructional Guide | Supported Mode(s) | Summary of Provided Strategic Knowledge |
+| :--- | :--- | :--- |
+| `guide-analysis-reporting.md` | `mode-report-writing.md` | Provides protocols for structuring formal analysis, writing for a dual audience (technical/non-technical), and generating publication-quality figures and tables. |
+| `guide-architecture-planning.md`| `mode-01-architecture-planning.md`| Details the process of high-level system design, creating blueprint documents, and translating strategic goals into technical requirements. |
+| `guide-code-review.md` | `mode-code-review.md` | Expands on the QA protocol, providing deep context on how to audit for strategic alignment, performance, security, and maintainability. Gives examples of anti-patterns. |
+| `guide-general-coding-standards.md`| (All Python & SQL Modes) | A general reference for universal best practices like DRY, SOLID, and defensive coding that apply across different languages. |
+| `guide-geospatial-protocols.md`| `mode-geospatial-scripting.md`, `mode-georeferencing.md` | Details the unique challenges of archaeological geospatial data, including CRS transformations, handling distortions, and ensuring spatial integrity. |
+| `guide-jupyter-notebooks.md`| (Python modes for any task involving Jupyter notebooks) | Provides best practices for writing clean, reproducible, and well-documented Jupyter Notebooks for data exploration and analysis. |
+| `guide-plans.md` | `mode-02-tasks-plans.md`| Provides the deep rationale for the "Context Selection Protocol," explaining how to create perfectly scoped and contextually complete plan files. |
+| `guide-postgis-deployment.md` | `mode-postgis-deployment.md`| Explains the "why" behind the strict deployment rules, covering Docker security, the importance of GiST indexing, and versioned migration strategies with `alembic`. |
+| `guide-project-docs.md` | `mode-project-docs.md` | Guides the AI on how to write for a dual audience, maintain a consistent project lexicon via the glossary, and use Mermaid diagrams effectively. |
+| `guide-python-debugging.md`| `mode-python-debugging.md`| Outlines a systematic approach to debugging, including interpreting tracebacks, forming hypotheses, and using logging for validation. |
+| `guide-python-execution.md` | `mode-python-execution.md` | Explains the critical importance of environment purity via `conda`, the technical reasons for using `python -m`, and how to interpret exit codes and tracebacks. |
+| `guide-python-style.md` | (All Python & Geospatial Modes) | The canonical guide to Python style for this project, expanding on PEP8, Black, `ruff`, and the use of type hints and docstrings. |
+| `guide-python-testing.md` | `mode-python-testing.md` | Details the project's testing philosophy, including the TDD-based approach, use of `pytest`, and the critical role of mocking for external services like databases. |
+| `guide-sql-best-practices.md`| `mode-sql-scripting.md` | Provides best practices for writing clean, performant, and maintainable SQL, including formatting, commenting, and avoiding common pitfalls. |
+| `guide-tasks.md` | `mode-02-tasks-plans.md`| Explains the philosophy of "task atomicity" and guides the AI in deconstructing large goals into small, verifiable units for `TASKS.md`. |
+| `guide-database-design.md` | (No Associated Mode; Select for any task directly involving database design) | Explains the principles of relational and spatial database design, including normalization, indexing strategies, and data typing for the TMP project. |
 
 ### Context Selection Protocol
 
 You MUST follow this process when authoring the YAML frontmatter for a `.plan.md` file.
 
 1.  **Analyze the Atomized Task:** Read the `Description` and `Acceptance Criteria` for the single, atomized task from `TASKS.md`. Identify the single primary verb and subject.
-2.  **Select the Primary Mode & Guide:** Using the Context Selection Matrix, find the row that corresponds to the primary verb/subject of the task. This gives you the primary `rule_mode` and its corresponding `guide`.
-3.  **Add Dependencies:** Check the `Dependencies` column for your selected mode. Add any listed dependent modes (e.g., if you selected `mode-python-testing.md`, you must also add `mode-python-scripting.md`).
+2.  **Select the Rule Mode:** Using Table 1, find the row that corresponds to the most directly relevant verb/subject of the task. This gives you the primary `rule_mode`.
+3.  **Add Instructional Guides:** Using Table 2, select all instructional guides corresponding to the selected rule mode. Then, using your detailed knowledge of the task you are planning, select any other instructional guides that are *directly* relevant to the task/plan.
 4.  **Consolidate Context:**
-    -   Create the `rule_modes` list from the primary mode and its dependencies.
+    -   Populate the `rule_mode` field from the selected rule mode.
     -   Create the `context_files` list, starting with the corresponding guide(s) for all selected modes. Add all other specific source code files mentioned in the task description.
-5.  **Perform Character Count & Sufficiency Checks:**
-    -   Sum the `Character Count` values for your selected modes and the core rules. Ensure the total is well under the 12,000 character limit.
-    -   Perform the final Context Sufficiency Check: Ask "Does the Executor AI have everything it needs to perform every action in this plan without ambiguity?"
 
 ### Workflow Example
 
@@ -207,13 +239,11 @@ You MUST follow this process when authoring the YAML frontmatter for a `.plan.md
 -   **Applying the Protocol:**
     1.  **Deconstruct:** Verbs = "Implement," "calculate." Nouns = "function," "Python," "database connection," "SQL queries."
     2.  **Select Primary Mode:** The primary action is writing a Python function that executes SQL. The most specific mode is `mode-python-scripting.md`.
-    3.  **Add Dependencies:** The `mode-python-scripting.md` has no hard dependencies, but since the task involves SQL, we should also include `mode-sql-scripting.md` to guide the SQL query generation.
+    3.  **Add Instructional Guides:** The `mode-python-scripting.md` is associated with `guide-python-style.md`, and since the task involves SQL, we should also include `guide-sql-best-practices.md` to guide the SQL query generation.
     4.  **Consolidate Context:**
-        -   `rule_modes`: `mode-python-scripting.md`, `mode-sql-scripting.md`
+        -   `rule_mode`: `mode-python-scripting.md`
         -   `guides`: `guide-python-style.md`, `guide-sql-best-practices.md`
-    5.  **Checks:**
-        -   **Character Count:** Core (~2.2k) + Python Scripting (~2.5k) + SQL Scripting (~1.7k) = ~6.4k characters. This is well within the 12k limit.
-        -   **Sufficiency:** The context seems sufficient for this targeted task.
+    5.  **Sufficiency Check:** The context seems sufficient for this targeted task.
 
 -   **Resulting `plan` Frontmatter:**
     ```yaml
@@ -224,12 +254,11 @@ You MUST follow this process when authoring the YAML frontmatter for a `.plan.md
       - "phases/01_LegacyDB/src/profiling_modules/metrics_basic.py"
       - ".windsurf/instructions/guide-python-style.md"
       - ".windsurf/instructions/guide-sql-best-practices.md"
-    rule_modes:
+    rule_mode:
       - "mode-python-scripting.md"
-      - "mode-sql-scripting.md"
     ---
     ```
-This example correctly demonstrates how a single, atomized task maps to a small, highly relevant, and size-constrained set of modes and guides.
+This example correctly demonstrates how a single, atomized task maps to a mode and small, highly relevant, and size-constrained set of instructional guides.
 
 
 ## 6. Authoring New Plan Files: A Step-by-Step Guide
@@ -250,7 +279,7 @@ Start the file with the YAML metadata block.
   - the task being undertaken in the current plan (e.g. what are the target files??)
   - The current task from `TASKS.md`, as well as immediately upstream/downstream and dependent tasks from `TASKS.md`
   - the 'Phase-Specific Context Review' files (see above) to identify all appropriate Task-Specific Context Review `context_files` for the present plan.
-- Carefully follow the 'Context Selection Protocol', above (section 4), to select the correct `rule_modes` and `instructional guides` (instructional guides go under `context_files`) for the current plan
+- Carefully follow the 'Context Selection Protocol', above (section 4), to select the correct `rule_mode` and `instructional guides` (instructional guides go under `context_files`) for the current plan
 - Finally, add or update the metdata for the following fields as necessary:
   - date_created
   - last_updated
@@ -294,10 +323,8 @@ This section provides the definitive, operational protocol for an AI Assistant (
 -   **Action:** Execute the **Context Selection Protocol** as defined in **Section 4** of this document.
 -   **Process:**
     1.  Analyze the task's primary verb and subject (e.g., "Implement Python function," "Test SQL script").
-    2.  Use the **Context Selection Matrix** to identify the primary `rule_mode` and its corresponding `guide`.
-    3.  Add all dependency modes.
-    4.  Consolidate all required guides and source files into the `context_files` list in the YAML frontmatter.
-    5.  Verify the total character count of the selected rules is within the system limit.
+    2.  Use the **Context Selection Protocol** to identify the primary `rule_mode`, its corresponding instructional guide(s), and any other directly relevant instructional guides.
+    3.  Consolidate all required guides and source files into the `context_files` list in the YAML frontmatter.
 
 ### Step 3: Author the Plan Using the Standard Structure
 
@@ -305,7 +332,7 @@ This section provides the definitive, operational protocol for an AI Assistant (
     1.  `Objectives`
     2.  `Stage 1: Context Ingestion & Verification` (with Global, Phase-Specific, and Task-Specific sub-sections)
     3.  `Stage 2: Preparation`
-    4.  `Stage 3: Execution` (or subsequent numbered stages for complex tasks)
+    4.  Stages 3+: (Subsequent numbered stages; could be several for complex tasks)
     5.  `Final Stage: Validation & Cleanup`
 -   **Constraint:** All steps within the stages must be **atomic**, **sequential**, and written as **imperative commands**.
 
@@ -315,7 +342,7 @@ This section provides the definitive, operational protocol for an AI Assistant (
 -   **Checklist:**
     -   Does the `task_id` in the YAML match the filename?
     -   Is the `context_files` list complete for every action in the plan?
-    -   Are the `rule_modes` correctly selected per the protocol?
+    -   Is the `rule_mode` correctly selected per the protocol?
     -   Does the `Final Stage` include every `validation_step` from `TASKS.md`?
     -   Is every action truly atomic?
 
@@ -351,9 +378,9 @@ description: "Write comprehensive pytest unit tests for the `00_setup_databases.
 context_files:
   - "phases/01_LegacyDB/src/00_setup_databases.py"
   - "phases/01_LegacyDB/PLANNING_PHASE1.md"
+  - ".windsurf/instructions/guide-python-testing.md"
   - ".windsurf/instructions/guide-python-style.md"
-rule_modes:
-  - "mode-python-scripting.md"
+rule_mode:
   - "mode-python-testing.md"
 date_created: "2025-06-24"
 last_updated: "2025-06-24"
@@ -410,3 +437,6 @@ status: "Draft"
 - [ ] **Lint Code:** Run the command `ruff check --fix phases/01_LegacyDB/tests/test_00_setup_databases.py` and verify that it reports no errors.
 - [ ] **Format Code:** Run the command `ruff format phases/01_LegacyDB/tests/test_00_setup_databases.py` to ensure consistent formatting.
 - [ ] **Propose Task Update:** Propose the required changes to `TASKS.md` to update the status of task `P1.W1.T4.1` to `done`.
+```
+
+---
