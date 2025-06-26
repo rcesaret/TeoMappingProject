@@ -50,10 +50,8 @@ task_id: P4.3.1
 description: "Refactor the GCP outlier detection to use the IQR method and add database integration tests."
 context_files:
   - "phases/04_Georef/src/gcp_processor.py"
+  - ".windsurf/instructions/guide-general-coding-standards.md"
   - ".windsurf/instructions/guide-python-style.md"
-  - ".windsurf/instructions/guide-database-design.md"
-  - ".windsurf/instructions/guide-python-style.md"
-  - ".windsurf/instructions/mode-geospatial-scripting.md"
 rule_modes:
   - "mode-python-scripting.md"
 date_created: 2025-06-23
@@ -141,9 +139,9 @@ To ensure the AI operates with full and correct context, the following rules for
 
 1.  **Instructional Guide Inclusion:** Most tasks require attaching multiple instructional guides as context files. These are selected using a two-stage process:
     -   **Step 1: Mode-Associated Guides:** Given the specific `mode-*.md` file included for `rule_mode`, the corresponding instructional guide (`guide-*.md`) from the `.windsurf/instructions/` directory MUST be included in the `context_files` list. This provides the AI with the detailed, human-readable instructions necessary to correctly interpret and execute the high-level rules defined in the mode.
-        -   **Example:** If `rule_modes` contains `mode-python-testing.md`, then `context_files` MUST contain `.windsurf/instructions/guide-python-testing.md`.
+        -   **Example:** If `rule_modes` contains `mode-python-testing.md`, then `context_files` MUST contain `.windsurf/instructions/guide-python-testing.md`, as well as `.windsurf/instructions/guide-general-coding-standards.md` (which is required for ALL coding tasks).
 	-   **Step 2: Supplementary Guides:** Many tasks involve multi-modal contexts that are not fully covered by the rule mode and its associated instructional guide(s). As such, you MUST identify any other, additional instructional guides that are directly relevant to the task, and include these in the `context_files` list.
-        -   **Example:** If a task primarily involves python scripting with `mode-python-scripting.md` as the `rule_mode`, but also involves generating SQL queries within a python-based framework, then `context_files` MUST contain both `guide-python-style.md` (the rule-mode-associated instructional guide) AND `guide-sql-best-practices.md` (a supplementary instructional guide necessary for adequate guidance on the SQL component).
+        -   **Example:** If a task primarily involves python scripting with `mode-python-scripting.md` as the `rule_mode`, but also involves generating SQL queries within a python-based framework, then `context_files` MUST contain `guide-python-style.md` (the rule-mode-associated instructional guide), `guide-general-coding-standards.md`(required for ALL coding tasks), AND `guide-sql-best-practices.md` (a supplementary instructional guide necessary for adequate guidance on the SQL component).
 
 2.  **The Principle of Direct Relevance:** The `context_files` list must not include files that are only indirectly or tangentially related to the present task. Only include files that are directly relevant to the specific actions outlined in the plan's checklist. Avoid including entire directories or lists of non-essential files.
 
@@ -201,7 +199,7 @@ Every identified guide MUST be added to the `context_files` list in the `.plan.m
 | `guide-analysis-reporting.md` | `mode-report-writing.md` | Provides protocols for structuring formal analysis, writing for a dual audience (technical/non-technical), and generating publication-quality figures and tables. |
 | `guide-architecture-planning.md`| `mode-01-architecture-planning.md`| Details the process of high-level system design, creating blueprint documents, and translating strategic goals into technical requirements. |
 | `guide-code-review.md` | `mode-code-review.md` | Expands on the QA protocol, providing deep context on how to audit for strategic alignment, performance, security, and maintainability. Gives examples of anti-patterns. |
-| `guide-general-coding-standards.md`| (All Python & SQL Modes) | A general reference for universal best practices like DRY, SOLID, and defensive coding that apply across different languages. |
+| `guide-general-coding-standards.md`| (**Required for ALL coding tasks**) | A general reference for universal best practices like DRY, SOLID, and defensive coding that apply across different languages. |
 | `guide-geospatial-protocols.md`| `mode-geospatial-scripting.md`, `mode-georeferencing.md` | Details the unique challenges of archaeological geospatial data, including CRS transformations, handling distortions, and ensuring spatial integrity. |
 | `guide-jupyter-notebooks.md`| (Python modes for any task involving Jupyter notebooks) | Provides best practices for writing clean, reproducible, and well-documented Jupyter Notebooks for data exploration and analysis. |
 | `guide-plans.md` | `mode-02-tasks-plans.md`| Provides the deep rationale for the "Context Selection Protocol," explaining how to create perfectly scoped and contextually complete plan files. |
@@ -239,10 +237,10 @@ You MUST follow this process when authoring the YAML frontmatter for a `.plan.md
 -   **Applying the Protocol:**
     1.  **Deconstruct:** Verbs = "Implement," "calculate." Nouns = "function," "Python," "database connection," "SQL queries."
     2.  **Select Primary Mode:** The primary action is writing a Python function that executes SQL. The most specific mode is `mode-python-scripting.md`.
-    3.  **Add Instructional Guides:** The `mode-python-scripting.md` is associated with `guide-python-style.md`, and since the task involves SQL, we should also include `guide-sql-best-practices.md` to guide the SQL query generation.
+    3.  **Add Instructional Guides:** The `mode-python-scripting.md` is associated with `guide-python-style.md`, and since the task involves coding, we MUST include `guide-general-coding-standards.md`. Because the task also involves SQL, we must also include `guide-sql-best-practices.md` to guide the SQL query generation.
     4.  **Consolidate Context:**
         -   `rule_mode`: `mode-python-scripting.md`
-        -   `guides`: `guide-python-style.md`, `guide-sql-best-practices.md`
+        -   `guides`: `guide-python-style.md`, `guide-general-coding-standards.md`, `guide-sql-best-practices.md`
     5.  **Sufficiency Check:** The context seems sufficient for this targeted task.
 
 -   **Resulting `plan` Frontmatter:**
@@ -252,6 +250,7 @@ You MUST follow this process when authoring the YAML frontmatter for a `.plan.md
     description: "Implement the `calculate_basic_metrics` function in `profiling_modules/metrics_basic.py`."
     context_files:
       - "phases/01_LegacyDB/src/profiling_modules/metrics_basic.py"
+	  - ".windsurf/instructions/guide-general-coding-standards.md"
       - ".windsurf/instructions/guide-python-style.md"
       - ".windsurf/instructions/guide-sql-best-practices.md"
     rule_mode:
@@ -378,6 +377,7 @@ description: "Write comprehensive pytest unit tests for the `00_setup_databases.
 context_files:
   - "phases/01_LegacyDB/src/00_setup_databases.py"
   - "phases/01_LegacyDB/PLANNING_PHASE1.md"
+  - ".windsurf/instructions/guide-general-coding-standards.md"
   - ".windsurf/instructions/guide-python-testing.md"
   - ".windsurf/instructions/guide-python-style.md"
 rule_mode:
@@ -405,14 +405,15 @@ status: "Draft"
     - [ ] `docs/overview.md`
     - [ ] `docs/architecture.md`
     - [ ] `docs/technical_specs.md`
-    - [ ] The complete rule suite in the `.windsurf/rules/` directory.
-- [ ] **Phase-Specific Context Review:** Exhaustively review the following files to understand the present phase and workflow context:
+]- [ ] **Phase-Specific Context Review:** Exhaustively review the following files to understand the present phase and workflow context:
     - [ ] `phases/01_LegacyDB/README.md`
     - [ ] `phases/01_LegacyDB/PLANNING_PHASE1.md`
 - [ ] **Task-Specific Context Review:** Exhaustively review the following files to understand the specific requirements of task `P1.W1.T4.1`:
     - [ ] The Python script to be tested: `phases/01_LegacyDB/src/00_setup_databases.py`.
     - [ ] The testing strategy section of the Phase 1 plan: `phases/01_LegacyDB/PLANNING_PHASE1.md#Testing-Strategy-for-00_setup_databases.py`.
-    - [ ] The Python style and testing guide: `.windsurf/instructions/guide-python-style.md`.
+    - [ ] The general coding guide: `.windsurf/instructions/guide-general-coding-standards.md`.
+	- [ ] The Python coding and style guide: `.windsurf/instructions/guide-python-style.md`.
+	- [ ] The Python testing guide: `.windsurf/instructions/guide-python-testing.md`.
 
 ### Stage 2: Preparation
 
