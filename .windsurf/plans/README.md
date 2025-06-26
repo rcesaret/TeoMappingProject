@@ -1,6 +1,6 @@
 ---
-plan_template_version: 2.3.0
-last_updated: 2025-06-24
+plan_template_version: 3.0.0
+last_updated: 2025-06-26
 required_context:
   - TASKS.md
   - PLANNING.md
