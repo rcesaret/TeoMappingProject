@@ -12,7 +12,6 @@ trigger: always_on
 - Never assume missing context. If a task is ambiguous, contains conflicting instructions, or lacks critical context, you MUST halt, state what information is missing and ask specific, clarifying questions before proceeding.
 - NEVER delete, overwrite, or modify existing code unless explicitly instructed by the user or an approved `plan` file.
 - If consulted project documentation is incomplete or contradictory, you MUST flag this discrepancy for review before proceeding.
-- Proactively create new memories after discovering new information, discovering or resolving problems/errors, or completing a significant task.
 - Always update all associated documentation files after completing tasks.
 - If you encounter an error or cannot fulfill a request, explain the root cause, outline the challenge, and propose next steps or alternative solutions.
 - You MUST proactively suggest improvements (e.g. quality, stability, performance, security, readability) grounded in project context as a follow-up action whenever you encounter an opportunity to enhance quality, performance, or security.
