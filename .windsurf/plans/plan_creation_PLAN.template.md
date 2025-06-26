@@ -6,7 +6,7 @@ context_files:
   - ".windsurf/plans/README.md"
   - ".windsurf/plans/PLAN.template.md"
   - ".windsurf/instructions/guide-task-planning.md"
-rule_modes:
+rule_mode:
   - "mode-plan-tasking.md"
 date_created: "2025-06-25"
 last_updated: "2025-06-25"
@@ -48,16 +48,17 @@ status: "Active"
 
 - [ ] **Execute Context Selection Protocol:** Following the protocol in `.windsurf/plans/README.md`, perform the following:
     - [ ] **Analyze Task:** Read the `description` and `Acceptance Criteria` for the target task from `TASKS.md`. Identify the primary verb and subject (e.g., "Implement Python function," "Test SQL script").
-    - [ ] **Select Primary Mode & Guide:** Use the "Context Selection Matrix" to find the `rule_mode` that corresponds to the primary verb/subject. Note its corresponding `guide`.
-    - [ ] **Add Dependencies:** Check the `Dependencies` column for the selected mode and add any listed dependent modes.
-    - [ ] **Verify Character Count:** Sum the character counts for all selected modes plus the core rules (`00-core.md`, `01-project-management.md`) and ensure the total is under the 12,000 character limit.
+    - [ ] **Select Rule Mode:** Use Table 1 (Rule Mode Selection Matrix) to find the `rule_mode` that corresponds to the primary verb/subject.
+	- [ ] **Select Rule Mode Associated Guide:** Use Table 1 (Rule Mode Selection Matrix) to find the instructional guide that corresponds to the selected `rule_mode`.
+	- [ ] **Select Additional Task-Relevant Guides:** Use Table 2 to identify any additional directly relevant guides. More specifically, select any other instructional guide(s) from Table 2 that are *directly relevant* to the current task you are planning by comparing the instructional guides from Table 2 to any components of the current task that are **NOT** covered by the `rule_mode` associated instructional guide (selected in the previous step).
+    - [ ] **Verify Context Completeness:** Ensure that for every `mode-*.md` selected, the corresponding `guide-*.md` is included in the context files list.
 - [ ] **Populate YAML Fields:** Fill the YAML frontmatter of the new plan file:
     - [ ] `task_id`: The exact ID of the target task (e.g., "P1.W1.T4.1").
     - [ ] `description`: A concise, one-sentence summary of the plan's goal.
     - [ ] `context_files`: Create a complete list containing:
         - All files listed in the `context_files` section of the target task in `TASKS.md`.
-        - The corresponding `guide-*.md` file for every `mode-*.md` selected above.
-    - [ ] `rule_modes`: Create a list of all modes selected above (primary and dependencies).
+        - All instructional guide `guide-*.md` files selected above.
+    - [ ] `rule_mode`: List the rule mode selected above.
     - [ ] `date_created` and `last_updated`: Set to the current date in `YYYY-MM-DD` format.
     - [ ] `status`: Set to `"Draft"`.
 
@@ -85,3 +86,5 @@ status: "Active"
     - [ ] **Verify Context Completeness:** Confirm that for every `mode-*.md` in `rule_modes`, the corresponding `guide-*.md` is present in `context_files`.
     - [ ] **Verify Atomicity:** Read through all execution steps. Ensure each is a single, unambiguous command.
     - [ ] **Verify Validation Coverage:** Confirm that every `validation_step` from `TASKS.md` is explicitly covered in the `Final Stage` of the new plan.
+
+---
