@@ -15,7 +15,7 @@ trigger: manual
 - `snake_case` for all variables, functions, and methods.
 - `PascalCase` for all class names.
 - `UPPER_SNAKE_CASE` for global constants.
-- Organize code into clearly separated modules, grouped by feature or responsibility. A file should not exceed 500 lines; refactor into smaller helper modules if it approaches this limit. Functions should not exceed 50 lines.
+- Organize code into clearly separated modules, grouped by feature or responsibility. A file should not exceed 600 lines; refactor into smaller helper modules if it approaches this limit. Functions should not exceed 50 lines.
 - All file paths MUST be handled using `pathlib.Path` objects to ensure cross-platform compatibility. String-based path manipulation is forbidden.
 
 ## DOCUMENTATION & TYPE HINTING
