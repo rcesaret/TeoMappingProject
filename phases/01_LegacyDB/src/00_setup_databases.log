@@ -125,3 +125,53 @@ DETAIL:  Key (code)=(-1) already exists.
 DETAIL:  Key (ssn)=(1) already exists.
 
 2025-06-12 18:44:28,648 [INFO   ] --- Legacy database setup process complete. ---
+2025-06-30 14:26:56,157 [INFO   ] Starting legacy database setup process...
+2025-06-30 14:26:56,157 [INFO   ] --- Processing: TMP_DF8 ---
+2025-06-30 14:26:56,157 [INFO   ] Attempting to create database: 'TMP_DF8'...
+2025-06-30 14:26:56,231 [INFO   ] Database 'TMP_DF8' already exists. Skipping creation.
+2025-06-30 14:26:56,231 [INFO   ] Populating 'TMP_DF8' from 'TMP_DF8.sql'...
+2025-06-30 14:26:56,619 [ERROR  ] Failed to populate database 'TMP_DF8'. Error: duplicate key value violates unique constraint "ssn_master_pkey"
+DETAIL:  Key (ssn)=(1) already exists.
+
+2025-06-30 14:26:56,620 [INFO   ] --- Processing: TMP_DF9 ---
+2025-06-30 14:26:56,620 [INFO   ] Attempting to create database: 'TMP_DF9'...
+2025-06-30 14:26:56,667 [INFO   ] Database 'TMP_DF9' already exists. Skipping creation.
+2025-06-30 14:26:56,667 [INFO   ] Populating 'TMP_DF9' from 'TMP_DF9.sql'...
+2025-06-30 14:26:56,930 [ERROR  ] Failed to populate database 'TMP_DF9'. Error: duplicate key value violates unique constraint "Codes_ArchInterpAltern_pkey"
+DETAIL:  Key (code)=(-1) already exists.
+
+2025-06-30 14:26:56,931 [INFO   ] --- Processing: TMP_DF10 ---
+2025-06-30 14:26:56,931 [INFO   ] Attempting to create database: 'TMP_DF10'...
+2025-06-30 14:26:57,074 [INFO   ] Database 'TMP_DF10' already exists. Skipping creation.
+2025-06-30 14:26:57,074 [INFO   ] Populating 'TMP_DF10' from 'TMP_DF10.sql'...
+2025-06-30 14:26:57,567 [ERROR  ] Failed to populate database 'TMP_DF10'. Error: constraint "fk_archToSSN_SSN" for relation "archToSSN" already exists
+
+2025-06-30 14:26:57,570 [INFO   ] --- Processing: TMP_REAN_DF2 ---
+2025-06-30 14:26:57,570 [INFO   ] Attempting to create database: 'TMP_REAN_DF2'...
+2025-06-30 14:26:57,626 [INFO   ] Database 'TMP_REAN_DF2' already exists. Skipping creation.
+2025-06-30 14:26:57,627 [INFO   ] Populating 'TMP_REAN_DF2' from 'TMP_REAN_DF2.sql'...
+2025-06-30 14:26:57,885 [ERROR  ] Failed to populate database 'TMP_REAN_DF2'. Error: duplicate key value violates unique constraint "REAN_00_pkey"
+DETAIL:  Key (ssn)=(1) already exists.
+
+2025-06-30 14:26:57,887 [INFO   ] --- Legacy database setup process complete. ---
+2025-06-30 14:32:14,712 [INFO   ] Starting legacy database setup process...
+2025-06-30 14:32:48,961 [INFO   ] Starting legacy database setup process...
+2025-06-30 14:33:29,208 [INFO   ] Starting legacy database setup process...
+2025-06-30 14:46:27,754 [INFO   ] Starting legacy database setup process...
+2025-06-30 14:46:27,755 [INFO   ] --- Processing: TMP_DF8 ---
+2025-06-30 14:46:27,882 [INFO   ] Successfully dropped database: TMP_DF8
+2025-06-30 14:46:28,305 [INFO   ] Successfully created database: TMP_DF8
+2025-06-30 14:46:30,863 [INFO   ] Successfully populated database: TMP_DF8
+2025-06-30 14:46:30,864 [INFO   ] --- Processing: TMP_DF9 ---
+2025-06-30 14:46:31,243 [INFO   ] Successfully dropped database: TMP_DF9
+2025-06-30 14:46:31,414 [INFO   ] Successfully created database: TMP_DF9
+2025-06-30 14:46:33,564 [INFO   ] Successfully populated database: TMP_DF9
+2025-06-30 14:46:33,566 [INFO   ] --- Processing: TMP_DF10 ---
+2025-06-30 14:46:34,022 [INFO   ] Successfully dropped database: TMP_DF10
+2025-06-30 14:46:34,293 [INFO   ] Successfully created database: TMP_DF10
+2025-06-30 14:46:47,823 [INFO   ] Successfully populated database: TMP_DF10
+2025-06-30 14:46:47,824 [INFO   ] --- Processing: TMP_REAN_DF2 ---
+2025-06-30 14:46:48,329 [INFO   ] Successfully dropped database: TMP_REAN_DF2
+2025-06-30 14:46:48,496 [INFO   ] Successfully created database: TMP_REAN_DF2
+2025-06-30 14:46:50,272 [INFO   ] Successfully populated database: TMP_REAN_DF2
+2025-06-30 14:46:50,273 [INFO   ] --- Legacy database setup process complete. ---
