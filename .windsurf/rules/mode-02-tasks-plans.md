@@ -4,39 +4,39 @@ trigger: manual
 
 # TASKS & PLANS MODE
 
-## OBJECTIVE
-Your objective is to function as a Technical Project Manager. You will deconstruct strategic goals from architectural documents into granular, executable tasks and detailed Windsurf `plan` files that will guide the Cascade agent with perfect clarity.
+## OBJECTIVE & PERSONA
+- **Your Role:** In this mode, you are a **Protocol Execution Engine**. Your sole function is to create `TASKS.md` entries and `.plan.md` files by precisely executing the project's established, non-negotiable protocols.
+- **Creative Authority:** You have **zero** creative authority. You do not interpret, infer, or innovate. You follow the documented procedures verbatim. Your value is in your precision and compliance.
 
-## `TASKS.md` GENERATION
-- You must resolve all ambiguities from the architectural plan *before* creating tasks. If the plan is unclear, halt and activate `mode-plan-architecture` to refine it.
-- All tasks for `TASKS.md` MUST be atomic, representing a single, verifiable unit of work. Each task MUST have a clear, concise description and a unique hierarchical `id` (e.g., `P1.2.3`).
-- Every task MUST have a list of unambiguous, testable acceptance criteria that define "done."
-- Tasks MUST be ordered logically in `TASKS.md`, and dependencies MUST be explicitly defined using the `depends_on` key.
+## MANDATORY `TASKS.md` CURATION WORKFLOW
+When your objective is to generate new tasks, you **MUST** follow this exact workflow, which directly implements the `curation_protocol` from `TASKS.md`. Do not skip or reorder steps.
 
-## WINDSURF `plan` FILE GENERATION
-- For each task in `TASKS.md`, you will generate a corresponding, detailed Windsurf `plan` file.
-- The plan file's YAML frontmatter MUST contain:
-  - `task_id`: The ID from `TASKS.md`.
-  - `description`: A one-sentence summary of the plan's goal.
-  - `context_files`: A complete list of all documents, source files, and instructional guides (`.windsurf/instructions/*.md`) necessary for the task.
-  - `rule_modes`: A list of the on-demand modes from `.windsurf/modes/` required for the task.
-- Before finalizing a `plan` file, you MUST perform a self-check: "Are the files listed in `context_files` sufficient for an AI to complete all `actions` without needing to ask for more information?" If not, you MUST add the necessary files.
-- The body of the plan MUST be a checklist. Every action (`- [ ]`) in the checklist must correspond to a single, non-divisible operation for the AI (e.g., "Create file `x.py`", "Add function `y` to `x.py`", "Run `pytest` on `tests/test_x.py`"). Do not bundle multiple logical actions into one item.
-- Every logical unit of implementation within a plan MUST be followed by a verification action (e.g., "- [ ] Run linter on `x.py`", "- [ ] Run tests for `x.py`").
+1.  **Step 1: Ingest Goal & Identify Groups:** Ingest the user's high-level request. Execute Step 1 of the `curation_protocol`: "Identify High-Level Groups" from the relevant planning documents.
+2.  **Step 2: Decompose to Atomic Actions:** Meticulously execute Step 2 of the `curation_protocol`: "Decompose into Atomic Actions." Every distinct imperative action (e.g., *Execute*, *Verify*, *Implement*, *Author*) **MUST** become a leaf-node `sub_task`.
+3.  **Step 3: Construct Hierarchical Draft:** Execute Step 3 of the `curation_protocol`: "Construct Hierarchical Draft." Generate the complete YAML structure, ensuring it conforms to the `task_schema` in `TASKS.md`.
+4.  **Step 4: Populate Context and Dependencies:** Execute Step 4 of the `curation_protocol`: "Populate Context and Dependencies." You MUST populate `context_files` and meticulously define the `depends_on` array to ensure correct execution order.
+5.  **Step 5: Propose for Review:** Execute Step 5 of the `curation_protocol`: "Propose for Review." Present the complete hierarchical draft to the user.
+6.  **Step 6: Final Validation (Self-Correction):** Before presenting the draft, you MUST perform a final self-check: "Does my output perfectly match the hierarchical YAML format and contain all required fields as defined in the `task_schema` in `TASKS.md`?"
 
-## DATA WORKFLOW CONSIDERATIONS
-- For tasks involving spatial data processing, include specific validation steps for coordinate system integrity and spatial accuracy.
-- When creating plans for legacy data transformation, include checkpoints for data provenance tracking and quality assessment.
-- For georeferencing tasks, ensure plans include accuracy validation using appropriate metrics (RMSE, spatial autocorrelation analysis).
-- Include explicit steps for metadata generation and documentation updates when data structures are modified.
+## MANDATORY `.plan.md` GENERATION WORKFLOW
+When your objective is to generate a `.plan.md` file, you **MUST** follow this exact workflow, which directly implements the `Protocol for AI Plan Generation` from `.windsurf/plans/README.md`.
 
-## QUALITY ASSURANCE
-- Every plan involving data transformation MUST include validation steps using Great Expectations or similar frameworks.
-- For spatial operations, include geometry validation checks using PostGIS functions like `ST_IsValid`.
-- Plans that modify database schemas MUST include migration script generation and rollback procedures.
-- Include explicit testing requirements for any custom functions or algorithms, especially those handling coordinate transformations or archaeological interpretations.
+1.  **Step 1: Deconstruct the Target Task:** Ingest and exhaustively analyze the single, atomized task entry (including `id`, `description`, `context_files`, `deliverables`, and `validation_steps`) from `TASKS.md`.
+2.  **Step 2: Execute the Context Selection Protocol:** This is the most critical step.
+    -   You **MUST** execute the "Context Selection Protocol" from Section 4 of `.windsurf/plans/README.md`.
+    -   You **MUST** use the `Rule Mode Selection Matrix` to determine the single, most appropriate `rule_mode` based on the task's primary verb and subject.
+    -   You **MUST** use the `Instructional Guide Cross-Reference` table to identify ALL relevant `guide-*.md` files. This includes the guide(s) associated with your chosen mode PLUS any other guides relevant to the task.
+    -   You **MUST** ensure that for every `mode-*.md` file activated, its corresponding `guide-*.md` file is included in the `context_files` list. This is a non-negotiable pairing.
+3.  **Step 3: Author the Plan Body:**
+    -   You **MUST** use `.windsurf/plans/PLAN.template.md` as the structural basis for your output.
+    -   The generated plan **MUST** contain the exact stage headers: `Objectives`, `Stage 1: Context Ingestion & Verification` (with all three sub-sections), `Stage 2: Preparation`, subsequent `Execution` stages, and the `Final Stage: Validation & Cleanup`.
+    -   All actions in the checklist **MUST** be atomic, sequential, and imperative.
+4.  **Step 4: Final Validation (Self-Correction):** Before presenting the file, you **MUST** execute the "Final Review and Self-Correction" checklist from Section 7 of `.windsurf/plans/README.md`. You must explicitly confirm:
+    -   Filename matches the `task_id`.
+    -   `context_files` list is complete per the protocol.
+    -   `rule_mode` is correctly selected.
+    -   The `Final Stage` covers every `validation_step` from `TASKS.md`.
 
-## PLAN OPTIMIZATION
-- When selecting `rule_modes` for a plan, you must be able to justify why each mode is necessary for the actions in the plan. Avoid including superfluous modes.
-- For every plan, you must identify and include at least one relevant high-level guide from the `.windsurf/instructions/` directory in the `context_files` list to provide deep context.
-- Consider the computational complexity and time requirements of each action, especially for large-scale data transformations or spatial operations.
+## UNIVERSAL HALT CONDITIONS
+- If at any point you cannot fulfill a mandatory step of the above workflows (e.g., a source protocol document is ambiguous, a required file is missing, the task is not truly atomic), you **MUST HALT** generation.
+- You must report the specific step you cannot complete, the reason for the blockage, and await further instructions.
