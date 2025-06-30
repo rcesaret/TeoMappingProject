@@ -1,77 +1,124 @@
 ---
 guide_id: "guide-plans"
-version: "1.0"
-last_updated: "2025-06-26"
+version: 2.0
+last_updated: "2025-06-30"
 related_mode: "mode-02-tasks-plans.md"
 ---
 
-# GUIDE: Windsurf Plan Creation
+# Strategic Guide: Authoring Windsurf Plan Files
 
-## 1. CORE OBJECTIVE
-To master the art and science of authoring Windsurf `plan` files. A plan is the single most critical document for ensuring successful, predictable, and verifiable task execution by the Cascade agent. Your objective is to translate a single, atomic task from `TASKS.md` into a plan that provides the AI with **perfect, unambiguous context** and a precise, sequential action checklist.
+## 1. The Philosophy: A Plan as a "Perfect Context" Package
 
-## 2. GOVERNING PRINCIPLES
-- **Principle of Perfect Context:** A plan is successful if, and only if, the AI can execute it from start to finish without needing to ask a single clarifying question. This means the `context_files` and `rule_modes` you select must be the complete, minimal set of information required for the task.
-- **Principle of Atomicity:** A plan corresponds to *one and only one* atomic task from `TASKS.md`. The actions within the plan must also be atomic, representing the smallest possible units of work (e.g., "create a file," "add one function," "run one test command").
-- **Principle of Verifiability:** Every significant action in a plan must be followed by a verification step. Implementation is meaningless without immediate validation (e.g., linting, testing, checking file existence).
-- **Principle of Protocol Adherence:** The selection of context is not arbitrary. You MUST strictly follow the **Context Selection Protocol** to determine the correct `rule_modes` and `guides`.
+A Windsurf `.plan.md` file in this project is architected to be more than a simple checklist. It is a **"Perfect Context" Package**: a self-contained, hermetically sealed operational instruction set for the Cascade AI agent.
 
-## 3. PROCEDURAL PROTOCOL: The Context Selection Protocol
-This protocol is the mandatory procedure for populating a plan's YAML frontmatter.
+Its purpose is to provide the agent with *everything* it needs to complete its task, and *nothing* it doesn't. This eliminates ambiguity, prevents hallucination, and makes the AI's behavior deterministic and verifiable. A perfectly authored plan is the cornerstone of a trusted, autonomous execution system.
 
-**Step 1: Analyze the Target Task**
-- Ingest the single, atomized task entry from `TASKS.md`.
-- Identify the primary action verb (e.g., "Implement," "Test," "Refactor," "Debug") and the primary subject noun (e.g., "Python function," "SQL script," "Project Documentation").
+## 2. Architectural Deep Dive: The Three-Tiered Context Review
 
-**Step 2: Consult the Context Selection Matrix**
-- Use the matrix in `.windsurf/plans/README.md` to map the task's primary action/subject to the corresponding primary `rule_mode`.
-- Note the required `guide` file associated with that mode.
-- Identify all dependent modes listed in the `Dependencies` column.
+The `Stage 1: Context Ingestion & Verification` section of every plan is mandatory and has a precise, three-tiered structure. This structure is designed to load context methodically, moving from the general to the specific.
 
-**Step 3: Consolidate Context & Manage Budget**
-- **`rule_modes` List:** Compile the list of the primary mode and all its dependencies.
-- **`context_files` List:**
-  1. Start by adding the corresponding `guide-*.md` file for *every* mode you selected. This is non-negotiable.
-  2. Add all files listed in the `context_files` section of the source task in `TASKS.md`.
-  3. Add any other source files that are logically necessary for the AI to understand the full context of the actions in the plan.
-- **Character Count Budget:** Sum the character counts of all selected modes (from the matrix) plus the core rules (`00-core.md`, `01-project-management.md`). You MUST ensure this total is safely under the **12,000 character** system limit. If it is too high, your task is likely not atomic enough, and you should return to the tasking phase.
-
-**Step 4: Final Sufficiency Review**
-- Before finalizing the plan, perform a mental dry run. Read every action in the plan's checklist. For each action, ask: "Based *only* on the files listed in `context_files`, does the AI have every single piece of information it needs?" If the answer is no, you must add the missing context.
-
-## 4. CONTEXT-SPECIFIC EXAMPLES & HEURISTICS
-**Scenario:** The task is to refactor a Python function in `gcp_processor.py` to improve its performance.
-
-**BAD PLAN CONTEXT:**
-```yaml
-context_files:
-  - "phases/04_Georef/src/gcp_processor.py"
-rule_modes:
-  - "mode-python-scripting.md"
+```mermaid
+graph TD
+    subgraph "Agent's Understanding"
+        A(<b>Global Context</b><br/>Project-wide standards, architecture, and core rules) --> B(<b>Phase-Specific Context</b><br/>The goals and files for the current multi-workflow phase)
+        B --> C(<b>Task-Specific Context</b><br/>The exact files and instructions needed for this single, atomic action)
+    end
+    style A fill:#cde4ff
+    style B fill:#a4caff
+    style C fill:#7abfff
 ````
 
-**Reasoning:* This is insufficient. It provides the rule for *how* to write Python, but not the guide. It also lacks the rules and guide for performance optimization, which is the core of the task.*
+  - **Tier 1: Global Context**
 
-**GOOD PLAN CONTEXT:**
+      - **Purpose:** To load the foundational, project-wide principles.
+      - **Rationale:** This ensures that every single task, no matter how small, is executed with full awareness of the overall project architecture, glossary, and standards. It prevents "contextual drift" where an agent focused on a small task forgets the bigger picture.
+
+  - **Tier 2: Phase-Specific Context**
+
+      - **Purpose:** To load the context for the current major workflow or phase.
+      - **Rationale:** This narrows the agent's focus to the current part of the project (e.g., `PLANNING_PHASE1.md`), ensuring its actions are relevant to the current strategic objectives without needing to re-read all planning documents.
+
+  - **Tier 3: Task-Specific Context**
+
+      - **Purpose:** To load the hyper-specific files and instructions needed for the immediate task.
+      - **Rationale:** This is the final and most focused layer. It tells the agent "read these exact files, and these files only, to perform the following checklist." This is a critical optimization that prevents the agent from reading irrelevant files, saving time and tokens.
+
+## 3\. Mastering the `Context Selection Protocol`
+
+The YAML frontmatter is the plan's control panel. Populating it correctly via the **`Context Selection Protocol`** (from `.windsurf/plans/README.md`) is the most important part of authoring a plan.
+
+### 3.1. The Symbiotic Relationship: Why Modes and Guides MUST Be Paired
+
+Think of modes and guides as a **schematic and its corresponding engineering manual**.
+
+  - **`rule_mode` (The Schematic):** Provides the concise, machine-enforceable rules. It's the "what" and "how" in a technical sense (e.g., "Use `ruff` for formatting").
+  - **`guide` (The Manual):** Provides the deep strategic context, rationale, examples, and anti-patterns. It's the "why" (e.g., "Here is *why* we use `ruff` and here are examples of good vs. bad formatting in the context of our project's specific needs.").
+
+**Activating a mode without its corresponding guide is a protocol violation.** It is equivalent to giving an engineer a schematic but withholding the manual that explains the tolerances, material specs, and assembly procedures. It invites error.
+
+### 3.2. Worked Example: From Task to Frontmatter
+
+Let's follow the protocol for `task_id: P1.W1.T4.1` from the project's `README.md`.
+
+1.  **Analyze Task:** The description is: "**Implement and Pass Tests for `00_setup_databases.py`**: Create and execute pytest integration tests..."
+
+2.  **Identify Verb/Subject:** The primary action is **Testing** a **Python script**.
+
+3.  **Consult Matrix 1 (Mode Selection):** The `Rule Mode Selection Matrix` in `.windsurf/plans/README.md` clearly maps the verb "test" to `mode-python-testing.md`. This is our `rule_mode`.
+
+4.  **Consult Matrix 2 (Guide Selection):** The `Instructional Guide Cross-Reference` table shows:
+
+      - `mode-python-testing.md` requires `guide-python-testing.md`.
+      - All Python modes require `guide-python-style.md`.
+      - All coding tasks require `guide-general-coding-standards.md`.
+
+5.  **Assemble Frontmatter:** The result is a perfectly formed, protocol-compliant context definition.
+
+    ```yaml
+    ---
+    task_id: "P1.W1.T4.1"
+    description: "Write comprehensive pytest unit tests for the `00_setup_databases.py` script."
+    context_files:
+      - "phases/01_LegacyDB/src/00_setup_databases.py"
+      - "phases/01_LegacyDB/PLANNING_PHASE1.md"
+      - ".windsurf/instructions/guide-python-testing.md"   # Required by mode
+      - ".windsurf/instructions/guide-python-style.md"      # Required by Python modes
+      - ".windsurf/instructions/guide-general-coding-standards.md" # Required by all coding tasks
+    rule_mode:
+      - "mode-python-testing.md"
+    ---
+    ```
+
+### 3.3. Anatomy of a Protocol Violation
+
+The following is an example of **incorrect** frontmatter and constitutes a protocol violation that would trigger a `HALT` condition:
 
 ```yaml
+# VIOLATION EXAMPLE - DO NOT USE
+---
+task_id: "P1.W1.T4.1"
+description: "Write tests for the database script."
 context_files:
-  - "phases/04_Georef/src/gcp_processor.py"
-  - ".windsurf/instructions/guide-python-style.md"
-  - ".windsurf/instructions/guide-performance-optimization.md" # Assumed to exist
-rule_modes:
-  - "mode-python-scripting.md"
-  - "mode-performance-optimization.md" # Assumed to exist
+  - "phases/01_LegacyDB/src/00_setup_databases.py"
+# VIOLATION #1: Missing guide-python-testing.md, which is required by the mode.
+# VIOLATION #2: Missing guide-python-style.md and guide-general-coding-standards.md.
+rule_mode:
+  - "mode-python-testing.md"
+---
 ```
 
-**Reasoning:* This context is complete. It provides the file to be changed, the rules for Python scripting and performance, and, crucially, the corresponding instructional guides that explain the *rationale* behind those rules.*
+## 4\. The Principle of Atomic Actions in Checklists
 
-## 5\. ANTI-PATTERNS & TROUBLESHOOTING
+Just as tasks must be atomic, the checklist items within a plan must also be atomic.
 
-  - **Anti-Pattern: The "Kitchen Sink" Plan.** Do not list every file in the project in `context_files`. This wastes tokens and confuses the AI. Be surgical.
-  - **Anti-Pattern: Bundled Actions.** An action like "- [ ] Implement the database service and write tests" is not atomic. This should be at least 5-10 separate atomic actions. Break it down.
-  - **Troubleshooting: AI asks for clarification.** If the AI has to ask a question, your plan has failed. Analyze the question. It will reveal the piece of context you forgot to include in `context_files`. Archive the failed plan and generate a new, more complete one.
+  - **BAD (Compound Action):** `- [ ] Implement the success path test, including mocking the database and asserting the correct calls.`
+  - **GOOD (Atomic Actions):**
+      - `- [ ] Create a test function test_setup_databases_success.`
+      - `- [ ] Use unittest.mock.patch to mock the psycopg2.connect function.`
+      - `- [ ] Configure the mock connection and cursor to return expected values.`
+      - `- [ ] Call the main function from 00_setup_databases.py.`
+      - `- [ ] Assert that the mock cursor's execute method was called with the expected SQL commands.`
 
-<!-- end list -->
+This granularity makes the AI's progress traceable and verifiable at every step.
 
 ---
