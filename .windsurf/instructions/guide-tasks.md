@@ -1,99 +1,83 @@
 ---
 guide_id: "guide-tasks"
-version: "1.0"
-last_updated: "2025-06-26"
+version: 2.0
+last_updated: "2025-06-30"
 related_mode: "mode-02-tasks-plans.md"
 ---
 
-# GUIDE: Task Deconstruction & `TASKS.md` Authoring
+# Strategic Guide: Authoring `TASKS.md`
 
-## 1. CORE OBJECTIVE
-To master the process of deconstructing high-level strategic goals into a series of perfectly **atomic, verifiable, and sequential** tasks within `TASKS.md`. This document is the definitive source of truth for the project's execution backlog. A well-authored `TASKS.md` is the foundation of a predictable AI-driven workflow.
+## 1. The Philosophy: Tasks as the Project's DNA
 
-## 2. GOVERNING PRINCIPLES
-- **Principle of Atomicity:** A task is atomic if it represents a single, indivisible unit of work that can be completed in one logical session and verified independently. "Implement feature X" is not atomic. "Create file `feature_x.py`" is atomic.
-- **Principle of Verifiability:** Every task must have a set of unambiguous, testable `validation_steps`. These steps are the "definition of done." If you cannot write a validation step for a task, it is likely not atomic.
-- **Principle of Explicit Dependency:** The workflow is not a guess. Every task MUST explicitly state its prerequisites using the `depends_on` key. This creates a Directed Acyclic Graph (DAG) of work that the AI can follow reliably.
-- **Principle of Clarity:** Task descriptions must be written in clear, imperative language (e.g., "Create," "Implement," "Refactor," "Verify"). Avoid vague descriptions that leave room for interpretation.
+Welcome to the strategic guide for authoring `TASKS.md`. In this project, `TASKS.md` is not merely a to-do list; it is the **canonical, machine-readable blueprint of intent**. Each entry is a gene in the project's DNA, precisely defining a unit of work to ensure that the AI-driven workflow is predictable, verifiable, and robust.
 
-## 3. PROCEDURAL PROTOCOL: From Goal to `TASKS.md`
-**Step 1: Ingest the High-Level Goal**
-- Start with a strategic objective from a source like `PLANNING.md` or `architecture.md`. Example: "Develop a data validation module for the legacy database ingestion pipeline."
+The principles of **Atomicity**, **Verifiability**, and **Explicit Dependency** are not suggestions; they are architectural requirements. Adhering to them is the primary defense against ambiguous execution and the foundation for building a system that can one day operate autonomously.
 
-**Step 2: Deconstruct into Logical Epics**
-- Break the high-level goal into major functional blocks or "epics." These are not yet atomic tasks.
-- Example Epics:
-  - 1. Design Validation Schema
-  - 2. Implement Core Validation Logic
-  - 3. Implement Reporting for Validation Failures
-  - 4. Write Unit & Integration Tests
+## 2. Architectural Deep Dive: The `curation_protocol`
 
-**Step 3: Decompose Epics into Atomic Tasks**
-- For each epic, break it down further into the smallest possible actions. This is the most critical step. Think about every single file creation, function addition, configuration change, and verification step.
-- Example Decomposition for Epic 2 ("Implement Core Validation Logic"):
-  - `P2.W2.T1`: Create file `phases/02_TransformDB/src/validator.py`.
-  - `P2.W2.T2`: In `validator.py`, define class `DataValidator`.
-  - `P2.W2.T3`: In `DataValidator`, implement method `validate_row(row: dict) -> bool`.
-  - `P2.W2.T4`: In `DataValidator`, implement method `run_validation(data: list) -> dict`.
+The `curation_protocol` within `TASKS.md` is the mandatory, non-negotiable manufacturing process for creating new tasks. Understanding the *why* behind each step is critical for high-fidelity execution.
 
-**Step 4: Define `validation_steps` for Each Atomic Task**
-- For each atomic task, define how you will prove it is "done."
-- Example Validation for `P2.W2.T1`:
-  - `validation_steps:`
-    - `- "Confirm file 'phases/02_TransformDB/src/validator.py' exists."`
-    - `- "Run 'ruff check --fix' on the new file and confirm no errors."`
+### **Step 1: Identify High-Level Groups**
+- **Goal:** To establish the main organizational units of work.
+- **Rationale:** This step ensures that all atomic tasks are nested within a logical, hierarchical structure (e.g., Phase -> Workflow -> Stage). This prevents a flat, unmanageable list of tasks and provides high-level context for any given action. It is the macro-level organization before the micro-level decomposition.
+- **Common Pitfall:** Skipping this and going straight to creating leaf-node tasks. This results in "orphan" tasks that lack strategic context, making it difficult to track progress at a workflow level.
 
-**Step 5: Map Dependencies**
-- Review your list of atomic tasks. For each task, identify which other tasks must be completed *before* it can start.
-- Example Dependency: `P2.W2.T2` (defining the class) `depends_on: ["P2.W2.T1"]` (creating the file).
+### **Step 2: Decompose into Atomic Actions**
+- **Goal:** To break down high-level requirements into the smallest possible, verifiable units of work.
+- **Rationale:** This is the most critical step for AI success. An AI agent struggles with compound commands like "build the feature." It excels at discrete commands like "create file `x.py`," "add function `y`," "write test for function `y`." Atomicity eliminates ambiguity and makes success for each step a binary state (done/not done).
+- **Worked Example:**
+    - **High-Level Goal:** "Add a new API endpoint to fetch user details."
+    - **INCORRECT (Non-Atomic):** `- id: P5.1, description: "Create the user details endpoint."`
+    - **CORRECT (Atomic Decomposition):**
+        - `- id: P5.1, description: "**Create Controller File:** Create empty file at '/api/controllers/user_controller.py'."`
+        - `- id: P5.2, description: "**Define Route:** In 'user_controller.py', add a GET route for '/users/{user_id}'."`
+        - `- id: P5.3, description: "**Implement Service Logic:** In 'services/user_service.py', implement the 'get_user_by_id' function."`
+        - `- id: P5.4, description: "**Write Unit Test:** In a new test file, write a unit test for the 'get_user_by_id' service function."`
+- **Common Pitfall:** Creating tasks with "and" in the description (e.g., "Implement the function and write the tests"). This is a clear signal that the task is not atomic and must be split.
 
-**Step 6: Author the Final `TASKS.md` Entry**
-- Assemble all the pieces into the final YAML format for `TASKS.md`. Ensure all keys (`id`, `description`, `status`, `depends_on`, `context_files`, `deliverables`, `validation_steps`) are correctly populated.
+### **Step 3: Construct Hierarchical Draft**
+- **Goal:** To assemble the decomposed atomic actions into the correct YAML format.
+- **Rationale:** Structure is not arbitrary. The agent must generate a syntactically perfect YAML draft that conforms to the `task_schema` in `TASKS.md`. This ensures the file remains machine-parsable for dependency checks and status roll-ups.
 
-## 4. CONTEXT-SPECIFIC EXAMPLES & HEURISTICS
-**Scenario:** A high-level goal is "Add a new API endpoint to fetch user details."
+### **Step 4: Populate Context and Dependencies**
+- **Goal:** To create the web of relationships that enables correct execution.
+- **Rationale:**
+    - `context_files`: This field tells the *next* agent (the plan executor) which files it needs to read. It's the hand-off of information. Omitting a file here guarantees a plan will be executed with incomplete context.
+    - `depends_on`: This creates the Directed Acyclic Graph (DAG) of the project. Without it, the agent has no way of knowing the correct execution order. This is the primary mechanism that prevents race conditions and ensures prerequisites are met.
 
-**INCORRECT (NON-ATOMIC) TASK:**
-```yaml
-- id: P5.1
-  description: "Create the user details endpoint."
-  validation_steps:
-    - "Confirm the endpoint works."
+### **Step 5 & 6: Propose for Review & Implement**
+- **Goal:** To ensure human oversight and finalize the integration of new tasks.
+- **Rationale:** These steps formalize the human-in-the-loop review process, which is critical for building trust and catching architectural errors before they enter the execution phase.
+
+## 3. The Art of the `description` and `validation_steps`
+
+- **`description`:** The format `**Succinct Task Title:** A detailed explanation...` is mandatory. The title gives a human reviewer an instant understanding of the task's purpose. The detail provides the AI with the necessary specifics to avoid ambiguity.
+- **`validation_steps`:** These are the task's "Definition of Done." They must be **testable assertions**, not vague goals.
+    - **BAD:** `validation_steps: ["Confirm the code works."]`
+    - **GOOD:** `validation_steps: ["Run 'pytest tests/p1_w3/test_run_comparison.py' and assert all tests pass."]`
+    - **GOOD:** `validation_steps: ["Verify that 'comparison_matrix.csv' is created in the 'outputs/reports' directory."]`
+
+## 4. Visualizing the Workflow: The Task-Plan Dependency
+
+An error in task authoring creates a fatal flaw that cascades through the entire system. Consider this dependency chain, which is enforced by the project's rules:
+
+```mermaid
+graph TD
+    A[High-Level Goal from PLANNING.md] --> B{TASKS.md Curation};
+    B --> C(<b>Atomic Task in TASKS.md</b>);
+    C --> D{Plan Generation};
+    D --> E(<b>.plan.md File</b>);
+    E --> F{Plan Execution};
+    F --> G[Deliverable & Validation];
+
+    subgraph "Protocol Violation Point"
+        direction LR
+        B;
+    end
+
+    style B fill:#f9f,stroke:#333,stroke-width:2px;
 ````
 
-**Reasoning:* This is far too broad. "Create the endpoint" involves creating files, adding routes, writing service logic, writing tests, and more. "Confirm it works" is not a testable validation step.*
-
-**CORRECT (ATOMIC) TASK DECOMPOSITION:**
-
-```yaml
-- id: P5.1
-  description: "Create file '/api/controllers/user_controller.py'."
-  deliverables: ["/api/controllers/user_controller.py"]
-  validation_steps: ["Confirm file exists and passes linting."]
-- id: P5.2
-  description: "In 'user_controller.py', add a GET route for '/users/{user_id}'."
-  depends_on: ["P5.1"]
-  validation_steps: ["Inspect file to confirm route definition exists."]
-- id: P5.3
-  description: "Implement the service logic in 'services/user_service.py' to fetch a user by ID from the database."
-  depends_on: ["P5.1"] # Can be worked on in parallel with P5.2
-  validation_steps: ["Confirm 'get_user_by_id' function is present."]
-- id: P5.4
-  description: "Create test file '/api/tests/test_user_controller.py'."
-  depends_on: ["P5.2", "P5.3"]
-  validation_steps: ["Confirm test file exists."]
-- id: P5.5
-  description: "In 'test_user_controller.py', write a unit test for the GET '/users/{user_id}' endpoint, mocking the user_service."
-  depends_on: ["P5.4"]
-  validation_steps: ["Run 'pytest /api/tests/test_user_controller.py' and confirm it passes."]
-```
-
-## 5\. ANTI-PATTERNS & TROUBLESHOOTING
-
-  - **Anti-Pattern: The Vague Verb.** Avoid descriptions like "Manage users" or "Handle data." Use strong, imperative verbs: "Create," "Implement," "Define," "Verify," "Refactor."
-  - **Anti-Pattern: Implicit Dependencies.** If `TaskB` needs a file created by `TaskA`, you MUST state `depends_on: ["TaskA"]`. Do not assume the AI will infer the correct order.
-  - **Troubleshooting: A task feels too big.** If you are writing a `plan` file for a task and the execution checklist has more than 20-25 steps, it is a strong signal that the original task was not atomic. You must stop, return to `TASKS.md`, and break the parent task down further.
-
-<!-- end list -->
+As the diagram shows, a failure to correctly apply the `curation_protocol` at step **(B)** results in a malformed task **(C)**. This guarantees that the subsequent plan **(E)** will be flawed, leading to incorrect execution **(F)** and failed validations **(G)**. Perfecting the task curation process is the most effective way to ensure the health of the entire workflow.
 
 ---
