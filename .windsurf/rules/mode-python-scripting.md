@@ -5,6 +5,7 @@ trigger: manual
 # PYTHON SCRIPTING
 
 ## CORE STANDARDS & FORMATTING
+- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-python-style.md`, which is the PRIMARY SOURCE OF TRUTH for all python coding tasks.
 - All code MUST be compatible with Python 3.11+.
 - All code MUST strictly adhere to PEP 8.
 - All Python files MUST be formatted using the `ruff` formatter. The maximum line length is 88 characters.
@@ -15,7 +16,7 @@ trigger: manual
 - `snake_case` for all variables, functions, and methods.
 - `PascalCase` for all class names.
 - `UPPER_SNAKE_CASE` for global constants.
-- Organize code into clearly separated modules, grouped by feature or responsibility. A file should not exceed 600 lines; refactor into smaller helper modules if it approaches this limit. Functions should not exceed 50 lines.
+- Organize code into clearly separated modules, grouped by feature or responsibility. A file should not exceed 600 lines; refactor into smaller helper modules if it approaches this limit.
 - All file paths MUST be handled using `pathlib.Path` objects to ensure cross-platform compatibility. String-based path manipulation is forbidden.
 
 ## DOCUMENTATION & TYPE HINTING
@@ -24,11 +25,11 @@ trigger: manual
 - For complex or non-obvious algorithms, you MUST add an inline comment block starting with `# REASON:` to explain the rationale behind the implementation choice.
 
 ## LANGUAGE IDIOMS & BEST PRACTICES
-- Prioritize idiomatic Python for readability and performance. Use list comprehensions, generator expressions, and dictionary comprehensions over manual loops where appropriate. Maximize algorithmic big-O efficiency.
+- Prioritize idiomatic Python for readability and performance. Use list comprehensions, generator expressions, and dictionary comprehensions over manual loops where appropriate.
 - Implement `try...except` blocks for operations that can fail (e.g., file I/O, API calls, database connections). Raise specific, meaningful exceptions (e.g., `ValueError`, `TypeError`) rather than generic `Exception`.
 - Implement input validation for functions that receive external data. Use assertions (`assert`) to check for internal state validity and program invariants during development.
 - You MUST use `with` statements for managing external resources like file handles and database connections to guarantee they are properly closed, even if errors occur.
-- Implement consistent, structured logging using the `logging` module to aid in debugging and monitoring. Do not use `print()` for logging in application code.
+- Implement consistent, structured logging using the `logging` module to aid in debugging and monitoring. Do not use `print()` for logging.
 
 ## DATA-SPECIFIC LIBRARY USAGE
 - You MUST prefer `pandas` and `geopandas` for all tabular and vector geospatial data manipulation tasks.
@@ -45,11 +46,10 @@ trigger: manual
 
 ## ARCHAEOLOGICAL DATA HANDLING
 - For functions handling collection unit IDs (SSN), always validate against the expected range and format before processing.
-- When processing coordinate data, always validate and document the coordinate reference system being used.
-- Include specific validation for known TMP data quality issues (e.g., "Total Counts Problem") with clear error reporting.
-- For functions processing ceramic typology data, implement validation against controlled vocabularies when available.
+- Validate and document the CRS for all coordinate data.
+- Include specific validation for known TMP data quality issues with clear error reporting.
 
 ## ADVANCED PATTERNS
-- For functions with more than two or three arguments, especially if they are of the same type, you MUST make the arguments following the first two keyword-only (using `*`) to improve clarity and prevent calling errors.
+- For functions with >2-3 args, use keyword-only arguments (`*`).
 - For any function that sets up and tears down a resource or context (e.g., a temporary file, a database transaction), you MUST implement it as a context manager using the `@contextmanager` decorator from `contextlib`.
 - Classes should be designed with minimal public methods (< 5-7). Methods should be cohesive and operate on the class's state. Prefer composition over inheritance where possible.
