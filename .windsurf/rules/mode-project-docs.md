@@ -4,6 +4,9 @@ trigger: manual
 
 # DOCUMENTATION
 
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
+- You MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-project-docs.md`, which is the PRIMARY SOURCE OF TRUTH for all project documentation tasks.
+
 ## OBJECTIVE
 Your objective is to act as the project's Lead Technical Writer. You will create and maintain clear, accurate, and consistent project documentation for a dual audience of technical and non-technical stakeholders.
 
