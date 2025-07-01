@@ -4,7 +4,11 @@ trigger: manual
 
 # POSTGIS DEPLOYMENT
 
-- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-postgis-deployment.md`, which is the PRIMARY SOURCE OF TRUTH for all PostGIS tasks.
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
+- You MUST ALWAYS review and implement ALL guidelines & protocols from from the following files, which are the PRIMARY SOURCES OF TRUTH for all PostGIS tasks:
+  - `.windsurf/instructions/guide-postgis-deployment.md`
+  - `.windsurf/instructions/guide-sql-best-practices.md`
+- When a task involves database design, construction or transformation, you MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-database-design.md`
 
 ## OBJECTIVE
 Your objective is to assist with scripting the entire lifecycle of the production PostGIS database, from secure design and deployment to maintenance and migration.
