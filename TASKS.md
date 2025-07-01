@@ -125,7 +125,7 @@ protocol:
 * tasks:
       * id: P1.W1
         description: "**Workflow 1.1: Environment & Database Setup:** Establish the controlled, reproducible environment for the entire analytical phase."
-        status: pending⭕
+        status: done✅
         context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#Workflow-1.1", "phases/01_LegacyDB/README.md"]
         deliverables: ["Completion of all sub-tasks for Workflow 1.1."]
         validation_steps: ["Confirm that the 'status' of all tasks in the 'sub_tasks' list is 'done'."]
@@ -204,7 +204,7 @@ protocol:
                 validation_steps: ["Run query 'SELECT COUNT(*) FROM wide_format_data WHERE \"archInterp_stability\" IS NULL;' in 'tmp_benchmark_wide_text_nulls' and assert result is > 4000.", "Run query 'SELECT \"description_TMPPhase\" FROM wide_format_data WHERE \"SSN\" = 1;' in 'tmp_benchmark_wide_text_nulls' and assert result is '4. Middle Tlamimilolpa'."]
           * id: P1.W1.T4
             description: "**Stage: Testing:** Implement and pass all unit and integration tests for this workflow's scripts."
-            status: pending⭕
+            status: done✅
             context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#Stage-4-Testing", ".windsurf/rules/python_coding_standards.md"]
             deliverables: ["Completion of all sub-tasks for Testing."]
             validation_steps: ["Confirm that the 'status' of all tasks in the 'sub_tasks' list is 'done'."]
