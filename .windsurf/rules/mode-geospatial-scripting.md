@@ -5,6 +5,7 @@ trigger: manual
 # GEOSPATIAL PYTHON SCRIPTING
 
 ## CORE GEOSPATIAL PRINCIPLES
+- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-geospatial-protocols.md`, which is the PRIMARY SOURCE OF TRUTH for all python geospatial coding tasks.
 - The single most critical rule is ensuring that all geospatial data has a correctly defined and appropriate Coordinate Reference System (CRS). All other spatial operations depend on this foundation. An undefined CRS is a critical error.
 - All transformations and analytical steps must be scripted to ensure the process is reproducible and the data provenance is clear.
 
