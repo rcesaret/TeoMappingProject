@@ -4,6 +4,8 @@ trigger: manual
 
 # PYTHON DEBUGGING
 
+- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-python-debugging.md`, which is the PRIMARY SOURCE OF TRUTH for all python code debugging tasks.
+
 ## DIAGNOSTIC PROTOCOL
 When an error occurs or a debugging task is initiated, you MUST follow this systematic process without deviation.
 
