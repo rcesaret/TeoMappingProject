@@ -4,7 +4,9 @@ trigger: manual
 
 # SQL SCRIPTING
 
-- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-sql-best-practices.md`, which is the PRIMARY SOURCE OF TRUTH for all SQL coding tasks.
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
+- You MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-sql-best-practices.md`, which is the PRIMARY SOURCE OF TRUTH for all SQL coding tasks.
+- When a task involves database design, construction or transformation, you MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-database-design.md`
 
 ## SYNTAX & FORMATTING
 - All SQL keywords (e.g., `SELECT`, `FROM`, `WHERE`, `JOIN`, `GROUP BY`, `ORDER BY`, `HAVING`, `CASE`, `WHEN`, `END`) MUST be in ALL CAPS.
@@ -48,12 +50,6 @@ trigger: manual
   - The outputs or side effects (e.g., tables created/modified, data returned).
   - The author and date of last modification.
 - Add inline comments (`--`) to explain complex business logic, intricate joins, non-obvious `WHERE` clause conditions, or performance-related optimizations.
-
-## PROJECT DATA CONSIDERATIONS
-- When working with TMP collection unit data, always validate SSN (collection unit ID) ranges and cross-reference with documented collection procedures.
-- For queries involving temporal analysis of archaeological phases, ensure proper handling of uncertain or missing date ranges.
-- When aggregating artifact counts, implement checks for the known "Total Counts Problem" in legacy TMP data and document any data quality issues discovered.
-- For spatial queries involving archaeological features, consider the uncertainty and precision of digitized boundaries when interpreting results.
 
 ## DATA VALIDATION & QUALITY ASSURANCE
 - All data type casts must be explicit using the `::datatype` or `CAST(column AS datatype)` syntax. Avoid implicit type casting.
