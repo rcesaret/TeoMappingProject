@@ -1,0 +1,50 @@
+2025-07-01 08:52:36,992 [INFO   ] --- Starting benchmark database creation process ---
+2025-07-01 08:52:36,992 [ERROR  ] Fatal error during setup: Config file not found: config.ini
+2025-07-01 08:54:18,694 [INFO   ] --- Starting benchmark database creation process ---
+2025-07-01 08:54:18,734 [INFO   ] Force-recreate enabled for 'tmp_benchmark_wide_numeric'.
+2025-07-01 08:54:19,002 [INFO   ] Dropped database 'tmp_benchmark_wide_numeric'.
+2025-07-01 08:54:19,002 [INFO   ] Force-recreate enabled for 'tmp_benchmark_wide_text'.
+2025-07-01 08:54:19,003 [INFO   ] Database 'tmp_benchmark_wide_text' does not exist – skipping drop.
+2025-07-01 08:54:19,150 [INFO   ] Successfully created database: tmp_benchmark_wide_numeric
+2025-07-01 08:54:19,310 [INFO   ] Successfully created database: tmp_benchmark_wide_text
+2025-07-01 08:54:19,311 [INFO   ] --- Processing benchmark database: tmp_benchmark_wide_numeric ---
+2025-07-01 08:54:19,312 [ERROR  ] SQL query file not found: ..\sql\flatten_df9.sql
+2025-07-01 08:54:19,312 [ERROR  ] Halting: data extraction failed for tmp_benchmark_wide_numeric.
+2025-07-01 08:54:19,312 [INFO   ] --- Processing benchmark database: tmp_benchmark_wide_text ---
+2025-07-01 08:54:19,313 [ERROR  ] SQL query file not found: ..\sql\text.sql
+2025-07-01 08:54:19,313 [ERROR  ] Halting: data extraction failed for tmp_benchmark_wide_text.
+2025-07-01 08:54:19,313 [INFO   ] --- Benchmark database creation process complete. ---
+2025-07-01 08:58:56,554 [INFO   ] --- Starting benchmark database creation process ---
+2025-07-01 08:58:56,605 [INFO   ] Force-recreate enabled for 'tmp_benchmark_wide_numeric'.
+2025-07-01 08:58:57,001 [INFO   ] Dropped database 'tmp_benchmark_wide_numeric'.
+2025-07-01 08:58:57,002 [INFO   ] Force-recreate enabled for 'tmp_benchmark_wide_text'.
+2025-07-01 08:58:57,047 [INFO   ] Dropped database 'tmp_benchmark_wide_text'.
+2025-07-01 08:58:57,241 [INFO   ] Successfully created database: tmp_benchmark_wide_numeric
+2025-07-01 08:58:57,384 [INFO   ] Successfully created database: tmp_benchmark_wide_text
+2025-07-01 08:58:57,385 [INFO   ] --- Processing benchmark database: tmp_benchmark_wide_numeric ---
+2025-07-01 08:58:57,449 [INFO   ] Executing data extraction query from: flatten_df9.sql
+2025-07-01 08:58:58,100 [INFO   ] Successfully extracted 5050 rows.
+2025-07-01 08:58:58,101 [INFO   ] Loading data into table 'wide_format_data'...
+2025-07-01 08:59:04,941 [INFO   ] Successfully loaded data.
+2025-07-01 08:59:04,941 [INFO   ] --- Processing benchmark database: tmp_benchmark_wide_text ---
+2025-07-01 08:59:04,941 [ERROR  ] SQL query file not found: C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\sql\text.sql
+2025-07-01 08:59:04,943 [ERROR  ] Halting: data extraction failed for tmp_benchmark_wide_text.
+2025-07-01 08:59:04,943 [INFO   ] --- Benchmark database creation process complete. ---
+2025-07-01 10:00:59,297 [INFO   ] --- Starting benchmark database creation process ---
+2025-07-01 10:00:59,346 [INFO   ] Force-recreate enabled for 'tmp_benchmark_wide_numeric'.
+2025-07-01 10:00:59,610 [INFO   ] Dropped database 'tmp_benchmark_wide_numeric'.
+2025-07-01 10:00:59,610 [INFO   ] Force-recreate enabled for 'tmp_benchmark_wide_text_nulls'.
+2025-07-01 10:00:59,714 [INFO   ] Dropped database 'tmp_benchmark_wide_text_nulls'.
+2025-07-01 10:00:59,844 [INFO   ] Successfully created database: tmp_benchmark_wide_numeric
+2025-07-01 10:00:59,971 [INFO   ] Successfully created database: tmp_benchmark_wide_text_nulls
+2025-07-01 10:00:59,972 [INFO   ] --- Processing benchmark database: tmp_benchmark_wide_numeric ---
+2025-07-01 10:01:00,031 [INFO   ] Executing data extraction query from: flatten_df9.sql
+2025-07-01 10:01:00,618 [INFO   ] Successfully extracted 5050 rows.
+2025-07-01 10:01:00,621 [INFO   ] Loading data into table 'wide_format_data'...
+2025-07-01 10:01:06,724 [INFO   ] Successfully loaded data.
+2025-07-01 10:01:06,724 [INFO   ] --- Processing benchmark database: tmp_benchmark_wide_text_nulls ---
+2025-07-01 10:01:06,724 [INFO   ] Executing data extraction query from: flatten_df9_text_nulls.sql
+2025-07-01 10:01:08,455 [INFO   ] Successfully extracted 5050 rows.
+2025-07-01 10:01:08,457 [INFO   ] Loading data into table 'wide_format_data'...
+2025-07-01 10:01:17,133 [INFO   ] Successfully loaded data.
+2025-07-01 10:01:17,133 [INFO   ] --- Benchmark database creation process complete. ---
