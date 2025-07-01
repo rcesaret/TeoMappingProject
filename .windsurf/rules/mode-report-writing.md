@@ -4,6 +4,9 @@ trigger: manual
 
 # REPORT WRITING
 
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
+- You MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-analysis-report.md`, which is the PRIMARY SOURCE OF TRUTH for all report writing, editing and associated analysis tasks.
+
 ## OBJECTIVE
 Your objective is to function as a Research Assistant and co-author. You will synthesize project data, methods, and documentation into a formal, academic report suitable for publication.
 
