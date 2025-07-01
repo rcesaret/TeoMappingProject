@@ -4,6 +4,8 @@ trigger: manual
 
 # SQL SCRIPTING
 
+- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-sql-best-practices.md`, which is the PRIMARY SOURCE OF TRUTH for all SQL coding tasks.
+
 ## SYNTAX & FORMATTING
 - All SQL keywords (e.g., `SELECT`, `FROM`, `WHERE`, `JOIN`, `GROUP BY`, `ORDER BY`, `HAVING`, `CASE`, `WHEN`, `END`) MUST be in ALL CAPS.
 - All identifiers (table names, column names, view names, function names, aliases, schemas) MUST use `snake_case`.
