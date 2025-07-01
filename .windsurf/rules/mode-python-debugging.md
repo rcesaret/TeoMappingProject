@@ -4,7 +4,11 @@ trigger: manual
 
 # PYTHON DEBUGGING
 
-- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-python-debugging.md`, which is the PRIMARY SOURCE OF TRUTH for all python code debugging tasks.
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
+- You MUST ALWAYS review and implement ALL guidelines & protocols from from the following files, which are the PRIMARY SOURCES OF TRUTH for all python debugging tasks:
+  - `.windsurf/instructions/guide-python-debugging.md`
+  - `.windsurf/instructions/guide-python-style.md`
+- When a task involves Jupyter notebooks (`*.ipynb`), you MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-jupyter-notebooks.md`
 
 ## DIAGNOSTIC PROTOCOL
 When an error occurs or a debugging task is initiated, you MUST follow this systematic process without deviation.
