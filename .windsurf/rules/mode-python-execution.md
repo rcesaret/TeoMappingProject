@@ -4,7 +4,11 @@ trigger: manual
 
 # PYTHON EXECUTION
 
-- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-python-execution.md`, which is the PRIMARY SOURCE OF TRUTH for all python code execution & validation tasks.
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
+- You MUST ALWAYS review and implement ALL guidelines & protocols from from the following files, which are the PRIMARY SOURCES OF TRUTH for all python execution & validation tasks:
+  - `.windsurf/instructions/guide-python-execution.md`
+  - `.windsurf/instructions/guide-python-style.md`
+- When a task involves Jupyter notebooks (`*.ipynb`), you MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-jupyter-notebooks.md`
 
 ## ENVIRONMENT MANAGEMENT
 - All Python scripts, tests, and tools MUST be executed within the `digital_tmp_base` conda environment defined in `envs/digital_tmp_base_env.yml`. This is non-negotiable.
