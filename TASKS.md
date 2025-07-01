@@ -218,7 +218,7 @@ protocol:
                 validation_steps: ["Confirm all tests in 'test_setup_databases.py' pass with exit code 0.", "Confirm 'ruff check' passes on the test file."]
               * id: P1.W1.T4.2
                 description: "**Implement and Pass Tests for `01_create_benchmark_dbs.py`:** Create and execute pytest integration tests for the benchmark database setup script, debugging until all tests pass."
-                status: pending⭕
+                status: done✅
                 depends_on: ["P1.W1.T3.4"]
                 context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#Testing-Strategy-for-01_create_benchmark_dbs.py"]
                 deliverables: ["tests/p1_w1/test_create_benchmark_dbs.py"]
