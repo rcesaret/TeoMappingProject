@@ -1,7 +1,6 @@
 ---
 trigger: model_decision
 description: Implement this rule whenever planning, designing, generating, editing, refactoring, reviewing, testing or debugging project code; Globs include *.py, *.ipynb, *.sql, *.R, *.Rmd
-globs: *.py, *.ipynb, *.sql, *.R, *.Rmd
 ---
 
 # GENERAL CODING STANDARDS
