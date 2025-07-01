@@ -4,8 +4,11 @@ trigger: manual
 
 # PYTHON SCRIPTING
 
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
+- You MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-python-style.md`, which is the PRIMARY SOURCE OF TRUTH for all python coding tasks.
+- When a task involves Jupyter notebooks (`*.ipynb`), you MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-jupyter-notebooks.md`
+
 ## CORE STANDARDS & FORMATTING
-- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-python-style.md`, which is the PRIMARY SOURCE OF TRUTH for all python coding tasks.
 - All code MUST be compatible with Python 3.11+.
 - All code MUST strictly adhere to PEP 8.
 - All Python files MUST be formatted using the `ruff` formatter. The maximum line length is 88 characters.
