@@ -54,3 +54,95 @@ The `mcp3_edit_block` tool requires absolute string precision to function correc
 ### Implication/Action
 
 When an `mcp3_edit_block` call fails with a "Search content not found" error, the most efficient and reliable recovery strategy is to immediately use the provided "closest match" text as the `old_string` for the next attempt. This is superior to manually re-reading the file and reconstructing the string, as it bypasses potential discrepancies introduced by file changes or subtle formatting that is easy to miss. This should be the standard operating procedure for recovering from this specific tool failure.
+
+
+---
+
+### Title: Robust `psql` Execution on Windows with Pager/Encoding Issues
+
+**Date:** 2025-07-01
+
+**Task ID:** P1.W2.T2.1
+
+**Corpus:** rcesaret/TeoMappingProject
+
+**Tags:** `psql`, `windows`, `powershell`, `encoding`, `troubleshooting`, `best-practice`
+
+#### Lesson Learned
+
+When executing command-line tools like `psql` non-interactively on Windows, especially within a controlled or automated environment, standard output redirection can be unreliable due to pager conflicts and character encoding issues. If a command fails due to an incompatible pager (e.g., `PAGER=cat` on Windows) or produces garbled output files, a more robust solution is required.
+
+#### Best Practice
+
+The most reliable method to capture clean, correctly encoded output from `psql` on Windows is to leverage PowerShell's `Out-File` cmdlet. This provides explicit control over the output stream and file encoding, bypassing both pager and encoding problems.
+
+**Recommended Command Format:**
+
+```powershell
+powershell -Command "psql [args] | Out-File -FilePath [filename] -Encoding utf8"
+```
+
+This technique should be the default approach for capturing `psql` output for verification or processing in this project's Windows-based execution environment. It is more resilient than attempting to disable pagers with flags (which may not be supported) or using simple redirection (`>`), which does not guarantee a readable file encoding.
+---
+
+### Title: Architecturally Sound Database Population from Large SQL Dumps
+
+**Date:** 2025-07-01
+
+**Task ID:** P1.W2.T2.1
+
+**Corpus:** rcesaret/TeoMappingProject
+
+**Tags:** `postgresql`, `python`, `sqlalchemy`, `subprocess`, `psql`, `etl`, `architecture`, `best-practice`
+
+#### Lesson Learned
+
+When tasked with populating a database from a large, multi-statement `.sql` dump file within a Python application, attempting to read the file's contents into a string and executing it via a DBAPI driver (like `psycopg2` through SQLAlchemy) is an anti-pattern. This approach is fragile and prone to errors related to parameter interpolation (e.g., misinterpreting literal `%` characters), character encoding, and transaction control.
+
+#### Best Practice
+
+The definitive and most robust architectural pattern is to delegate the execution to the database's native command-line utility. For PostgreSQL, this is `psql`.
+
+**Implementation Strategy:**
+1.  **Use `subprocess.run()`:** Invoke `psql` from Python using the `subprocess` module.
+2.  **Pass by File, Not String:** Use the `-f` flag in `psql` to point directly to the `.sql` file. This is highly efficient as the file is streamed directly by `psql`.
+3.  **Secure Credential Handling:** Pass the password via the `PGPASSWORD` environment variable within the `subprocess` call's environment, rather than exposing it as a command-line argument.
+4.  **Robust Error Handling:** Wrap the `subprocess.run()` call in `try...except` blocks to catch `FileNotFoundError` (if `psql` isn't in the PATH) and `CalledProcessError` (to inspect `psql`'s stderr on failure).
+
+This method is more reliable, performant, and secure. It correctly separates the concerns of application logic (in Python) and database administration (handled by `psql`).
+
+---
+
+### Title: CWD-Independent Path Management for Portable Python Scripts
+
+**Date:** 2025-07-01
+
+**Task ID:** P1.W2.T2.1
+
+**Corpus:** rcesaret/TeoMappingProject
+
+**Tags:** `python`, `pathlib`, `configuration`, `scripting`, `best-practice`, `portability`
+
+#### Lesson Learned
+
+Python scripts that rely on the Current Working Directory (CWD) for locating resources like configuration files or data assets are inherently brittle and not portable. A script's behavior should be deterministic regardless of where it is executed from.
+
+#### Best Practice
+
+Establish a single, reliable "anchor" path and resolve all other paths relative to it. The main configuration file is an ideal anchor.
+
+**Implementation Strategy:**
+1.  **Mandatory Config Path Argument:** Modify the script to accept a mandatory command-line argument (e.g., `--config`) that takes the absolute path to the configuration file.
+2.  **Use `pathlib.Path`:** Represent all paths as `pathlib.Path` objects.
+3.  **Resolve from Anchor:** Once the absolute path to the config file is known, use its `parent` directory as the base for resolving all other relative paths specified within the config file.
+
+**Example:**
+```python
+# config_path is a Path object for 'C:/project/src/config.ini'
+# path_section['sql_dir'] is '../data/sql'
+
+# config_path.parent -> 'C:/project/src'
+# config_path.parent / path_section['sql_dir'] -> 'C:/project/src/../data/sql'
+# (config_path.parent / path_section['sql_dir']).resolve() -> 'C:/project/data/sql'
+```
+This pattern ensures that as long as the relative structure between the config file and its resources is maintained, the script will function correctly from any location.
