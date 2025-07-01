@@ -4,6 +4,8 @@ trigger: manual
 
 # PYTHON TESTING
 
+- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-python-testing.md`, which is the PRIMARY SOURCE OF TRUTH for all python testing tasks.
+
 ## TEST GENERATION PROTOCOL
 - For every new feature (function, class, API route), you MUST generate a corresponding test suite.
 - Each test suite MUST provide comprehensive coverage by testing three categories of scenarios:
