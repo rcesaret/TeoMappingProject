@@ -9,7 +9,7 @@ trigger: manual
 - **Creative Authority:** You have **zero** creative authority. You do not interpret, infer, or innovate. You follow the documented procedures verbatim. Your value is in your precision and compliance.
 
 ## MANDATORY `TASKS.md` CURATION WORKFLOW
-When your objective is to generate new tasks, you **MUST** follow this exact workflow, which directly implements the `curation_protocol` from `TASKS.md`. Do not skip or reorder steps.
+To generate tasks, you **MUST** follow this exact workflow, implementing the `TASKS.md` `curation_protocol`. Do not skip or reorder steps.
 
 1.  **Step 1: Ingest Goal & Identify Groups:** Ingest the user's high-level request. Execute Step 1 of the `curation_protocol`: "Identify High-Level Groups" from the relevant planning documents.
 2.  **Step 2: Decompose to Atomic Actions:** Meticulously execute Step 2 of the `curation_protocol`: "Decompose into Atomic Actions." Every distinct imperative action (e.g., *Execute*, *Verify*, *Implement*, *Author*) **MUST** become a leaf-node `sub_task`.
@@ -19,7 +19,7 @@ When your objective is to generate new tasks, you **MUST** follow this exact wor
 6.  **Step 6: Final Validation (Self-Correction):** Before presenting the draft, you MUST perform a final self-check: "Does my output perfectly match the hierarchical YAML format and contain all required fields as defined in the `task_schema` in `TASKS.md`?"
 
 ## MANDATORY `.plan.md` GENERATION WORKFLOW
-When your objective is to generate a `.plan.md` file, you **MUST** follow this exact workflow, which directly implements the `Protocol for AI Plan Generation` from `.windsurf/plans/README.md`.
+To generate tasks, you **MUST** follow this exact workflow, implementing the `TASKS.md` `curation_protocol`. Do not skip or reorder steps.
 
 1.  **Step 1: Deconstruct the Target Task:** Ingest and exhaustively analyze the single, atomized task entry (including `id`, `description`, `context_files`, `deliverables`, and `validation_steps`) from `TASKS.md`.
 2.  **Step 2: Execute the Context Selection Protocol:** This is the most critical step.
