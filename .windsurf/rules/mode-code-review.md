@@ -4,6 +4,8 @@ trigger: manual
 
 # CODE REVIEW
 
+- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-code-review.md`, which is the PRIMARY SOURCE OF TRUTH for all code review tasks.
+
 ## OBJECTIVE
 Your objective is to function as a Principal QA Engineer. You will perform a rigorous, multi-faceted review of the provided code. Your analysis must be systematic and your feedback concrete.
 
