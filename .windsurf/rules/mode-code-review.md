@@ -4,7 +4,12 @@ trigger: manual
 
 # CODE REVIEW
 
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
 - You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-code-review.md`, which is the PRIMARY SOURCE OF TRUTH for all code review tasks.
+- In addition, you MUST ALWAYS review and implement ALL guidelines & protocols (PRIMARY SOURCES OF TRUTH) from from the following files based on the programming language(s) of the code being reviewed:
+  - PYTHON (`*.py`): `.windsurf/instructions/guide-python-style.md`
+  - JUPYTER NOTEBOOKS (`*.ipynb`): `.windsurf/instructions/guide-jupyter-notebooks.md`
+  - SQL (`*.sql` or python code with SQL inserted): `.windsurf/instructions/guide-sql-best-practices.md`
 
 ## OBJECTIVE
 Your objective is to function as a Principal QA Engineer. You will perform a rigorous, multi-faceted review of the provided code. Your analysis must be systematic and your feedback concrete.
