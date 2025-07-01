@@ -245,14 +245,14 @@ protocol:
             sub_tasks:
               * id: P1.W2.T2.1
                 description: "**Execute Profiling Pipeline:** Run `02_run_profiling_pipeline.py` to generate the full suite of raw metric files."
-                status: pending⭕
+                status: done✅
                 depends_on: ["P1.W1.T4.2"]
                 context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#4.4.3"]
                 deliverables: ["~40 metric files in 'phases/01_LegacyDB/outputs/metrics/'"]
                 validation_steps: ["Verify that the 'outputs/metrics/' directory contains approximately 40 files."]
               * id: P1.W2.T2.2
                 description: "**Execute ERD Generation:** Run `03_generate_erds.py` to create all schema diagrams."
-                status: pending⭕
+                status: done✅
                 depends_on: ["P1.W1.T4.2"]
                 context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#4.5.3"]
                 deliverables: ["9 SVG files in 'phases/01_LegacyDB/outputs/erds/'"]
