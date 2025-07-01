@@ -4,6 +4,8 @@ trigger: manual
 
 # PYTHON EXECUTION
 
+- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-python-execution.md`, which is the PRIMARY SOURCE OF TRUTH for all python code execution & validation tasks.
+
 ## ENVIRONMENT MANAGEMENT
 - All Python scripts, tests, and tools MUST be executed within the `digital_tmp_base` conda environment defined in `envs/digital_tmp_base_env.yml`. This is non-negotiable.
 - Before generating any execution command, you MUST first generate the command to activate the correct conda environment: `conda activate digital_tmp_base`. This is always the first step.
