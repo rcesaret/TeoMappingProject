@@ -2,6 +2,87 @@
 
 **Objective:** To systematically document errors, their causes, and how they were fixed to prevent recurrence.
 
+## Profiling Modules Unit Testing Failures
+
+- **Task ID:** `P1.W2.T3.1`
+- **File(s) Affected:** `metrics_profile.py`, `metrics_schema.py`, `test_metrics_schema.py`
+- **Date Encountered:** 2025-07-01
+
+### Description
+
+Multiple test failures were occurring in the profiling modules test suite, specifically in the following tests:
+1. Missing `row_count_exact` field in `metrics_profile.py` output
+2. Error message string mismatch in `metrics_profile.py` logs
+3. Incomplete tuple-unwrapping for engine parameters in `metrics_profile.py`
+4. Unconditional dropping of helper columns in `metrics_schema.py`
+5. Incomplete test mock in `test_metrics_schema.py`
+
+### Root Cause Analysis
+
+1. **Missing Field**: The `get_all_column_profiles` function was calculating total rows for each table but not explicitly adding the `row_count_exact` field to each output record, which tests were expecting.
+
+2. **Error Message Mismatch**: The error log message format in `metrics_profile.py` did not exactly match the string expected in the test assertions.
+
+3. **Tuple Unwrapping**: The code had basic unwrapping for engine parameters passed as tuples but lacked proper validation checks.
+
+4. **Unconditional Column Dropping**: The function in `metrics_schema.py` was attempting to drop columns that might not exist in the DataFrame, causing KeyError exceptions.
+
+5. **Incomplete Test Mock**: The test was providing a mock DataFrame that was missing columns required for calculations in the implementation code.
+
+### Resolution
+
+1. **For Missing Field**:
+   ```python
+   # Added explicit field assignment before conditional logic
+   record["row_count_exact"] = total_rows
+   ```
+
+2. **For Error Message**:
+   ```python
+   # Updated to match test expectations
+   logging.error(
+       "Failed to get column profiles for schema '%s': %s",
+       schema_name,
+       e,
+   )
+   ```
+
+3. **For Tuple Unwrapping**:
+   ```python
+   # Enhanced safety checks
+   if isinstance(engine, tuple) and len(engine) > 0:
+       engine = engine[0]  # Extract just the engine from the tuple
+   ```
+
+4. **For Unconditional Column Dropping**:
+   ```python
+   # Implemented conditional approach
+   helper_columns = ["expected_size_b", "actual_size_b"]
+   columns_to_drop = [col for col in helper_columns if col in df.columns]
+   if columns_to_drop:
+       df = df.drop(columns=columns_to_drop)
+   ```
+
+5. **For Test Mock Completeness**:
+   ```python
+   # Updated mock DataFrame to include all required columns
+   mock_df = pd.DataFrame({
+       "table_name": ["table1"],
+       "total_size_mb": [0.20],
+       "bloat_ratio_estimate": [0.05],
+       "expected_size_b": [1000],
+       "actual_size_b": [1200]
+   })
+   ```
+
+### Lesson Learned
+
+1. Always ensure that functions return exactly the data structure expected by tests, including all required fields.
+2. Standardize error message formats across modules and ensure they match test expectations.
+3. Implement robust validation when processing input parameters, especially for complex objects like SQLAlchemy engines.
+4. Always check for column existence before performing operations on DataFrames.
+5. Ensure test mocks provide all the data necessary for the function under test to operate correctly.
+
 ## Entry Template
 
 ---
@@ -128,3 +209,21 @@ The AI was executing the legacy and benchmark database setup scripts (`00_setup_
 
 **Lesson Learned:**
 For executing large, pre-existing SQL dump files, using a direct `psql` subprocess call is architecturally superior to using a Python DBAPI driver. It avoids complex parsing and escaping issues. Furthermore, it's crucial to distinguish between deterministic code errors and transient environmental failures; the latter often only require a retry.
+
+## PostgreSQL Schema Reflection and Case-Sensitivity Failure
+
+**Problem:** The profiling pipeline (`02_run_profiling_pipeline.py`) failed to find tables in legacy PostgreSQL databases. It was using the database names directly (e.g., `TMP_DF9`) for schema reflection.
+
+**Root Cause:** PostgreSQL, by default, stores unquoted identifiers (like schema names) in lowercase. The reflection mechanism was therefore targeting a non-existent, uppercase schema (`TMP_DF9`) instead of the actual lowercase one (`tmp_df9`). A related issue was the incorrect assumption that benchmark databases used a schema name identical to the database name, when they default to the `public` schema.
+
+**Solution:** The script was updated to programmatically handle these cases. Legacy database names are now converted to lowercase before being used for schema reflection. For benchmark databases, the schema is now hardcoded to `public`. This ensures that SQLAlchemy's reflection mechanism always targets the correct, existing schema.
+
+---
+
+## SQL CTE Scope Error in Table Metrics Query
+
+**Problem:** The profiling pipeline crashed with a `column "bs" does not exist` error when calculating table-level metrics in `profiling_modules/metrics_schema.py`.
+
+**Root Cause:** The complex SQL query for calculating table bloat was structurally flawed. A column (`bs`) defined in a Common Table Expression (CTE) was being referenced in a part of the query where it was out of scope.
+
+**Solution:** The entire query was rewritten using a chained CTE pattern. The query was broken into multiple, sequential CTEs (`constants`, `no_toast`, `table_bytes`), where each subsequent CTE could access the columns defined in the previous ones. This ensured all necessary values were correctly passed down and were visible in the final `SELECT` statement, permanently resolving the scoping issue.
