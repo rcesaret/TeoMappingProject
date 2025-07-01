@@ -4,7 +4,11 @@ trigger: manual
 
 # PYTHON TESTING
 
-- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-python-testing.md`, which is the PRIMARY SOURCE OF TRUTH for all python testing tasks.
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
+- You MUST ALWAYS review and implement ALL guidelines & protocols from from the following files, which are the PRIMARY SOURCES OF TRUTH for all python testing tasks:
+  - `.windsurf/instructions/guide-python-testing.md`
+  - `.windsurf/instructions/guide-python-style.md`
+- When a task involves Jupyter notebooks (`*.ipynb`), you MUST ALWAYS review and implement ALL guidelines & protocols from `.windsurf/instructions/guide-jupyter-notebooks.md`
 
 ## TEST GENERATION PROTOCOL
 - For every new feature (function, class, API route), you MUST generate a corresponding test suite.
