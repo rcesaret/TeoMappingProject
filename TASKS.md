@@ -266,7 +266,7 @@ protocol:
             sub_tasks:
               * id: P1.W2.T3.1
                 description: "**Implement and Pass Unit Tests for `profiling_modules`:** Create a dedicated test file for each of the 7 profiling modules and implement comprehensive unit tests using a mock database fixture, debugging until all pass."
-                status: pending⭕
+                status: done✅
                 depends_on: ["P1.W2.T2.2"]
                 context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#Per-Module-Test-Plan"]
                 deliverables: ["tests/p1_w2/test_profiling_base.py", "tests/p1_w2/test_metrics_basic.py", "tests/p1_w2/test_metrics_schema.py", "tests/p1_w2/test_metrics_profile.py", "tests/p1_w2/test_metrics_interop.py", "tests/p1_w2/test_metrics_performance.py"]
