@@ -298,14 +298,14 @@ protocol:
     validation_steps: ["Confirm all sub-tasks are 'done'."]
   * id: P1.W3.T2
     description: "**Stage: Execution & Validation:** Run the aggregation script and validate its outputs."
-    status: pending⭕
+    status: done✅
     context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#3.4"]
     deliverables: ["Completion of all sub-tasks for Execution & Validation."]
     validation_steps: ["Confirm that the 'status' of all tasks in the 'sub_tasks' list is 'done'."]
     sub_tasks:
   * id: P1.W3.T2.1
     description: "**Execute Aggregation Script:** Run `04_run_comparison.py` to generate the final summary reports."
-    status: pending⭕
+    status: done✅
     depends_on: ["P1.W2.T3.2"]
     context_files: ["phases/01_LegacyDB/PLANNING_PHASE1.md#4.6.3"]
     deliverables: ["phases/01_LegacyDB/outputs/reports/comparison_matrix.csv", "phases/01_LegacyDB/outputs/reports/comparison_report.md"]
