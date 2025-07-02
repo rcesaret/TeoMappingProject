@@ -1,47 +1,47 @@
-2025-07-01 12:11:54,738 [INFO   ] root: --- Starting ERD Generation Pipeline ---
-2025-07-01 12:11:54,738 [INFO   ] root: Reading configuration from: c:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\src\config.ini
-2025-07-01 12:11:54,740 [INFO   ] root: ================================================================================
-2025-07-01 12:11:54,740 [INFO   ] root: Processing Database 1/6: TMP_DF8
-2025-07-01 12:11:54,740 [INFO   ] root: ================================================================================
-2025-07-01 12:11:54,752 [INFO   ] root: Reflecting schema 'tmp_df8'...
-2025-07-01 12:11:54,872 [INFO   ] root: Generating ERD for 'Full ERD for TMP_DF8' -> TMP_DF8_full_ERD_20250701-121154.svg
-2025-07-01 12:11:55,466 [INFO   ] root: Successfully generated SVG.
-2025-07-01 12:11:55,466 [INFO   ] root: ================================================================================
-2025-07-01 12:11:55,466 [INFO   ] root: Processing Database 2/6: TMP_DF9
-2025-07-01 12:11:55,466 [INFO   ] root: ================================================================================
-2025-07-01 12:11:55,466 [INFO   ] root: Reflecting schema 'tmp_df9'...
-2025-07-01 12:11:55,595 [INFO   ] root: Generating ERD for 'Full ERD for TMP_DF9' -> TMP_DF9_full_ERD_20250701-121154.svg
-2025-07-01 12:11:56,412 [INFO   ] root: Successfully generated SVG.
-2025-07-01 12:11:56,412 [INFO   ] root: Generating focused ERDs for 'TMP_DF9'...
-2025-07-01 12:11:56,412 [INFO   ] root: Generating ERD for 'TMP_DF9 - Core_Data_Tables' -> TMP_DF9_focused_Core_Data_Tables_20250701-121154.svg
-2025-07-01 12:11:56,979 [INFO   ] root: Successfully generated SVG.
-2025-07-01 12:11:56,979 [INFO   ] root: Generating ERD for 'TMP_DF9 - Ceramic_System' -> TMP_DF9_focused_Ceramic_System_20250701-121154.svg
-2025-07-01 12:11:57,636 [INFO   ] root: Successfully generated SVG.
-2025-07-01 12:11:57,637 [INFO   ] root: Generating ERD for 'TMP_DF9 - Lithic_System' -> TMP_DF9_focused_Lithic_System_20250701-121154.svg
-2025-07-01 12:11:58,275 [INFO   ] root: Successfully generated SVG.
-2025-07-01 12:11:58,275 [INFO   ] root: ================================================================================
-2025-07-01 12:11:58,275 [INFO   ] root: Processing Database 3/6: TMP_DF10
-2025-07-01 12:11:58,275 [INFO   ] root: ================================================================================
-2025-07-01 12:11:58,275 [INFO   ] root: Reflecting schema 'tmp_df10'...
-2025-07-01 12:11:58,399 [INFO   ] root: Generating ERD for 'Full ERD for TMP_DF10' -> TMP_DF10_full_ERD_20250701-121154.svg
-2025-07-01 12:11:59,131 [INFO   ] root: Successfully generated SVG.
-2025-07-01 12:11:59,132 [INFO   ] root: ================================================================================
-2025-07-01 12:11:59,132 [INFO   ] root: Processing Database 4/6: TMP_REAN_DF2
-2025-07-01 12:11:59,132 [INFO   ] root: ================================================================================
-2025-07-01 12:11:59,132 [INFO   ] root: Reflecting schema 'tmp_rean_df2'...
-2025-07-01 12:11:59,255 [INFO   ] root: Generating ERD for 'Full ERD for TMP_REAN_DF2' -> TMP_REAN_DF2_full_ERD_20250701-121154.svg
-2025-07-01 12:12:00,003 [INFO   ] root: Successfully generated SVG.
-2025-07-01 12:12:00,005 [INFO   ] root: ================================================================================
-2025-07-01 12:12:00,005 [INFO   ] root: Processing Database 5/6: tmp_benchmark_wide_numeric
-2025-07-01 12:12:00,005 [INFO   ] root: ================================================================================
-2025-07-01 12:12:00,006 [INFO   ] root: Reflecting schema 'public'...
-2025-07-01 12:12:00,130 [INFO   ] root: Generating ERD for 'Full ERD for tmp_benchmark_wide_numeric' -> tmp_benchmark_wide_numeric_full_ERD_20250701-121154.svg
-2025-07-01 12:12:00,830 [INFO   ] root: Successfully generated SVG.
-2025-07-01 12:12:00,830 [INFO   ] root: ================================================================================
-2025-07-01 12:12:00,830 [INFO   ] root: Processing Database 6/6: tmp_benchmark_wide_text_nulls
-2025-07-01 12:12:00,830 [INFO   ] root: ================================================================================
-2025-07-01 12:12:00,830 [INFO   ] root: Reflecting schema 'public'...
-2025-07-01 12:12:00,939 [INFO   ] root: Generating ERD for 'Full ERD for tmp_benchmark_wide_text_nulls' -> tmp_benchmark_wide_text_nulls_full_ERD_20250701-121154.svg
-2025-07-01 12:12:01,759 [INFO   ] root: Successfully generated SVG.
-2025-07-01 12:12:01,759 [INFO   ] root: ================================================================================
-2025-07-01 12:12:01,760 [INFO   ] root: --- ERD Generation Pipeline Finished ---
+2025-07-02 15:34:24,917 [INFO   ] root: --- Starting ERD Generation Pipeline ---
+2025-07-02 15:34:24,918 [INFO   ] root: Reading configuration from: phases\01_LegacyDB\src\config.ini
+2025-07-02 15:34:24,920 [INFO   ] root: ================================================================================
+2025-07-02 15:34:24,920 [INFO   ] root: Processing Database 1/6: TMP_DF8
+2025-07-02 15:34:24,920 [INFO   ] root: ================================================================================
+2025-07-02 15:34:24,932 [INFO   ] root: Reflecting schema 'tmp_df8'...
+2025-07-02 15:34:25,053 [INFO   ] root: Generating ERD for 'Full ERD for TMP_DF8' -> TMP_DF8_full_ERD_20250702-153424.svg
+2025-07-02 15:34:25,706 [INFO   ] root: Successfully generated SVG.
+2025-07-02 15:34:25,706 [INFO   ] root: ================================================================================
+2025-07-02 15:34:25,707 [INFO   ] root: Processing Database 2/6: TMP_DF9
+2025-07-02 15:34:25,707 [INFO   ] root: ================================================================================
+2025-07-02 15:34:25,707 [INFO   ] root: Reflecting schema 'tmp_df9'...
+2025-07-02 15:34:25,946 [INFO   ] root: Generating ERD for 'Full ERD for TMP_DF9' -> TMP_DF9_full_ERD_20250702-153424.svg
+2025-07-02 15:34:26,690 [INFO   ] root: Successfully generated SVG.
+2025-07-02 15:34:26,690 [INFO   ] root: Generating focused ERDs for 'TMP_DF9'...
+2025-07-02 15:34:26,691 [INFO   ] root: Generating ERD for 'TMP_DF9 - Core_Data_Tables' -> TMP_DF9_focused_Core_Data_Tables_20250702-153424.svg
+2025-07-02 15:34:27,294 [INFO   ] root: Successfully generated SVG.
+2025-07-02 15:34:27,295 [INFO   ] root: Generating ERD for 'TMP_DF9 - Ceramic_System' -> TMP_DF9_focused_Ceramic_System_20250702-153424.svg
+2025-07-02 15:34:27,851 [INFO   ] root: Successfully generated SVG.
+2025-07-02 15:34:27,851 [INFO   ] root: Generating ERD for 'TMP_DF9 - Lithic_System' -> TMP_DF9_focused_Lithic_System_20250702-153424.svg
+2025-07-02 15:34:28,470 [INFO   ] root: Successfully generated SVG.
+2025-07-02 15:34:28,470 [INFO   ] root: ================================================================================
+2025-07-02 15:34:28,471 [INFO   ] root: Processing Database 3/6: TMP_DF10
+2025-07-02 15:34:28,471 [INFO   ] root: ================================================================================
+2025-07-02 15:34:28,471 [INFO   ] root: Reflecting schema 'tmp_df10'...
+2025-07-02 15:34:28,563 [INFO   ] root: Generating ERD for 'Full ERD for TMP_DF10' -> TMP_DF10_full_ERD_20250702-153424.svg
+2025-07-02 15:34:29,153 [INFO   ] root: Successfully generated SVG.
+2025-07-02 15:34:29,155 [INFO   ] root: ================================================================================
+2025-07-02 15:34:29,155 [INFO   ] root: Processing Database 4/6: TMP_REAN_DF2
+2025-07-02 15:34:29,155 [INFO   ] root: ================================================================================
+2025-07-02 15:34:29,156 [INFO   ] root: Reflecting schema 'tmp_rean_df2'...
+2025-07-02 15:34:29,256 [INFO   ] root: Generating ERD for 'Full ERD for TMP_REAN_DF2' -> TMP_REAN_DF2_full_ERD_20250702-153424.svg
+2025-07-02 15:34:29,827 [INFO   ] root: Successfully generated SVG.
+2025-07-02 15:34:29,827 [INFO   ] root: ================================================================================
+2025-07-02 15:34:29,827 [INFO   ] root: Processing Database 5/6: tmp_benchmark_wide_numeric
+2025-07-02 15:34:29,827 [INFO   ] root: ================================================================================
+2025-07-02 15:34:29,828 [INFO   ] root: Reflecting schema 'public'...
+2025-07-02 15:34:29,932 [INFO   ] root: Generating ERD for 'Full ERD for tmp_benchmark_wide_numeric' -> tmp_benchmark_wide_numeric_full_ERD_20250702-153424.svg
+2025-07-02 15:34:30,601 [INFO   ] root: Successfully generated SVG.
+2025-07-02 15:34:30,601 [INFO   ] root: ================================================================================
+2025-07-02 15:34:30,601 [INFO   ] root: Processing Database 6/6: tmp_benchmark_wide_text_nulls
+2025-07-02 15:34:30,602 [INFO   ] root: ================================================================================
+2025-07-02 15:34:30,603 [INFO   ] root: Reflecting schema 'public'...
+2025-07-02 15:34:30,703 [INFO   ] root: Generating ERD for 'Full ERD for tmp_benchmark_wide_text_nulls' -> tmp_benchmark_wide_text_nulls_full_ERD_20250702-153424.svg
+2025-07-02 15:34:31,589 [INFO   ] root: Successfully generated SVG.
+2025-07-02 15:34:31,589 [INFO   ] root: ================================================================================
+2025-07-02 15:34:31,589 [INFO   ] root: --- ERD Generation Pipeline Finished ---

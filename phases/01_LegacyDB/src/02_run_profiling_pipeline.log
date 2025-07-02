@@ -1,168 +1,168 @@
-2025-07-01 12:50:02,181 [INFO   ] root: --- Starting Database Profiling Pipeline ---
-2025-07-01 12:50:02,181 [INFO   ] root: Reading configuration from: c:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\src\config.ini
-2025-07-01 12:50:02,182 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,182 [INFO   ] root: Processing Database 1/6: TMP_DF8
-2025-07-01 12:50:02,182 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,219 [INFO   ] root: Target schema for 'TMP_DF8' is 'tmp_df8'.
-2025-07-01 12:50:02,219 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-01 12:50:02,274 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF8'.
-2025-07-01 12:50:02,274 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF8_basic_metrics.json
-2025-07-01 12:50:02,274 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-01 12:50:02,284 [INFO   ] root: Successfully counted objects for schema 'tmp_df8'.
-2025-07-01 12:50:02,284 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF8_schema_counts.json
-2025-07-01 12:50:02,284 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-01 12:50:02,331 [INFO   ] root: Successfully calculated table-level metrics for 27 tables in schema 'tmp_df8'.
-2025-07-01 12:50:02,336 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF8_table_metrics.csv
-2025-07-01 12:50:02,336 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-01 12:50:02,348 [INFO   ] root: Successfully retrieved structural metrics for 320 columns in schema 'tmp_df8'.
-2025-07-01 12:50:02,351 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF8_column_structure.csv
-2025-07-01 12:50:02,351 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-01 12:50:02,351 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-01 12:50:02,385 [INFO   ] root: Successfully generated column profiles for 320 columns in schema 'tmp_df8' using pg_stats.
-2025-07-01 12:50:02,387 [INFO   ] root: Successfully saved 'column_profiles' results to TMP_DF8_column_profiles.csv
-2025-07-01 12:50:02,387 [INFO   ] root: --> Running: Interoperability Metrics
-2025-07-01 12:50:02,394 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df8'.
-2025-07-01 12:50:02,395 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF8_interop_metrics.json
-2025-07-01 12:50:02,395 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-01 12:50:02,395 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-01 12:50:02,395 [WARNING] root: No specific queries found for database 'TMP_DF8', using legacy approach
-2025-07-01 12:50:02,395 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_DF8'.
-2025-07-01 12:50:02,395 [INFO   ] root: --- Finished processing TMP_DF8 ---
-2025-07-01 12:50:02,395 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,395 [INFO   ] root: Processing Database 2/6: TMP_DF9
-2025-07-01 12:50:02,395 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,395 [INFO   ] root: Target schema for 'TMP_DF9' is 'tmp_df9'.
-2025-07-01 12:50:02,395 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-01 12:50:02,452 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF9'.
-2025-07-01 12:50:02,454 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF9_basic_metrics.json
-2025-07-01 12:50:02,454 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-01 12:50:02,463 [INFO   ] root: Successfully counted objects for schema 'tmp_df9'.
-2025-07-01 12:50:02,463 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF9_schema_counts.json
-2025-07-01 12:50:02,464 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-01 12:50:02,546 [INFO   ] root: Successfully calculated table-level metrics for 62 tables in schema 'tmp_df9'.
-2025-07-01 12:50:02,548 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF9_table_metrics.csv
-2025-07-01 12:50:02,548 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-01 12:50:02,560 [INFO   ] root: Successfully retrieved structural metrics for 393 columns in schema 'tmp_df9'.
-2025-07-01 12:50:02,563 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF9_column_structure.csv
-2025-07-01 12:50:02,563 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-01 12:50:02,564 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-01 12:50:02,615 [INFO   ] root: Successfully generated column profiles for 305 columns in schema 'tmp_df9' using pg_stats.
-2025-07-01 12:50:02,619 [INFO   ] root: Successfully saved 'column_profiles' results to TMP_DF9_column_profiles.csv
-2025-07-01 12:50:02,619 [INFO   ] root: --> Running: Interoperability Metrics
-2025-07-01 12:50:02,626 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df9'.
-2025-07-01 12:50:02,627 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF9_interop_metrics.json
-2025-07-01 12:50:02,627 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-01 12:50:02,627 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-01 12:50:02,627 [WARNING] root: No specific queries found for database 'TMP_DF9', using legacy approach
-2025-07-01 12:50:02,628 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_DF9'.
-2025-07-01 12:50:02,628 [INFO   ] root: --- Finished processing TMP_DF9 ---
-2025-07-01 12:50:02,628 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,628 [INFO   ] root: Processing Database 3/6: TMP_DF10
-2025-07-01 12:50:02,628 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,629 [INFO   ] root: Target schema for 'TMP_DF10' is 'tmp_df10'.
-2025-07-01 12:50:02,629 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-01 12:50:02,682 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF10'.
-2025-07-01 12:50:02,683 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF10_basic_metrics.json
-2025-07-01 12:50:02,683 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-01 12:50:02,691 [INFO   ] root: Successfully counted objects for schema 'tmp_df10'.
-2025-07-01 12:50:02,693 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF10_schema_counts.json
-2025-07-01 12:50:02,693 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-01 12:50:02,720 [INFO   ] root: Successfully calculated table-level metrics for 9 tables in schema 'tmp_df10'.
-2025-07-01 12:50:02,722 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF10_table_metrics.csv
-2025-07-01 12:50:02,722 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-01 12:50:02,729 [INFO   ] root: Successfully retrieved structural metrics for 38 columns in schema 'tmp_df10'.
-2025-07-01 12:50:02,731 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF10_column_structure.csv
-2025-07-01 12:50:02,731 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-01 12:50:02,731 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-01 12:50:02,768 [INFO   ] root: Successfully generated column profiles for 38 columns in schema 'tmp_df10' using pg_stats.
-2025-07-01 12:50:02,770 [INFO   ] root: Successfully saved 'column_profiles' results to TMP_DF10_column_profiles.csv
-2025-07-01 12:50:02,770 [INFO   ] root: --> Running: Interoperability Metrics
-2025-07-01 12:50:02,777 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df10'.
-2025-07-01 12:50:02,778 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF10_interop_metrics.json
-2025-07-01 12:50:02,778 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-01 12:50:02,778 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-01 12:50:02,778 [WARNING] root: No specific queries found for database 'TMP_DF10', using legacy approach
-2025-07-01 12:50:02,779 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_DF10'.
-2025-07-01 12:50:02,779 [INFO   ] root: --- Finished processing TMP_DF10 ---
-2025-07-01 12:50:02,779 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,779 [INFO   ] root: Processing Database 4/6: TMP_REAN_DF2
-2025-07-01 12:50:02,779 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,779 [INFO   ] root: Target schema for 'TMP_REAN_DF2' is 'tmp_rean_df2'.
-2025-07-01 12:50:02,779 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-01 12:50:02,830 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_REAN_DF2'.
-2025-07-01 12:50:02,831 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_REAN_DF2_basic_metrics.json
-2025-07-01 12:50:02,831 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-01 12:50:02,840 [INFO   ] root: Successfully counted objects for schema 'tmp_rean_df2'.
-2025-07-01 12:50:02,840 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_REAN_DF2_schema_counts.json
-2025-07-01 12:50:02,840 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-01 12:50:02,865 [INFO   ] root: Successfully calculated table-level metrics for 13 tables in schema 'tmp_rean_df2'.
-2025-07-01 12:50:02,866 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_REAN_DF2_table_metrics.csv
-2025-07-01 12:50:02,868 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-01 12:50:02,877 [INFO   ] root: Successfully retrieved structural metrics for 241 columns in schema 'tmp_rean_df2'.
-2025-07-01 12:50:02,881 [INFO   ] root: Successfully saved 'column_structure' results to TMP_REAN_DF2_column_structure.csv
-2025-07-01 12:50:02,881 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-01 12:50:02,881 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-01 12:50:02,907 [INFO   ] root: Successfully generated column profiles for 241 columns in schema 'tmp_rean_df2' using pg_stats.
-2025-07-01 12:50:02,910 [INFO   ] root: Successfully saved 'column_profiles' results to TMP_REAN_DF2_column_profiles.csv
-2025-07-01 12:50:02,910 [INFO   ] root: --> Running: Interoperability Metrics
-2025-07-01 12:50:02,919 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_rean_df2'.
-2025-07-01 12:50:02,919 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_REAN_DF2_interop_metrics.json
-2025-07-01 12:50:02,920 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-01 12:50:02,920 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-01 12:50:02,920 [WARNING] root: No specific queries found for database 'TMP_REAN_DF2', using legacy approach
-2025-07-01 12:50:02,920 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_REAN_DF2'.
-2025-07-01 12:50:02,920 [INFO   ] root: --- Finished processing TMP_REAN_DF2 ---
-2025-07-01 12:50:02,920 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,920 [INFO   ] root: Processing Database 5/6: tmp_benchmark_wide_numeric
-2025-07-01 12:50:02,920 [INFO   ] root: ================================================================================
-2025-07-01 12:50:02,920 [INFO   ] root: Target schema for 'tmp_benchmark_wide_numeric' is 'public'.
-2025-07-01 12:50:02,920 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-01 12:50:02,981 [INFO   ] root: Successfully retrieved basic metrics for DB 'tmp_benchmark_wide_numeric'.
-2025-07-01 12:50:02,982 [INFO   ] root: Successfully saved 'basic_metrics' results to tmp_benchmark_wide_numeric_basic_metrics.json
-2025-07-01 12:50:02,982 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-01 12:50:02,993 [INFO   ] root: Successfully counted objects for schema 'public'.
-2025-07-01 12:50:02,994 [INFO   ] root: Successfully saved 'schema_counts' results to tmp_benchmark_wide_numeric_schema_counts.json
-2025-07-01 12:50:02,994 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-01 12:50:03,012 [INFO   ] root: Successfully calculated table-level metrics for 1 tables in schema 'public'.
-2025-07-01 12:50:03,013 [INFO   ] root: Successfully saved 'table_metrics' results to tmp_benchmark_wide_numeric_table_metrics.csv
-2025-07-01 12:50:03,013 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-01 12:50:03,026 [INFO   ] root: Successfully retrieved structural metrics for 337 columns in schema 'public'.
-2025-07-01 12:50:03,031 [INFO   ] root: Successfully saved 'column_structure' results to tmp_benchmark_wide_numeric_column_structure.csv
-2025-07-01 12:50:03,031 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-01 12:50:03,031 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-01 12:50:03,055 [INFO   ] root: Successfully generated column profiles for 337 columns in schema 'public' using pg_stats.
-2025-07-01 12:50:03,060 [INFO   ] root: Successfully saved 'column_profiles' results to tmp_benchmark_wide_numeric_column_profiles.csv
-2025-07-01 12:50:03,060 [INFO   ] root: --> Skipping: Interoperability Metrics (not applicable to single-table schema).
-2025-07-01 12:50:03,060 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-01 12:50:03,060 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-01 12:50:03,060 [WARNING] root: No specific queries found for database 'tmp_benchmark_wide_numeric', using legacy approach
-2025-07-01 12:50:03,060 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'tmp_benchmark_wide_numeric'.
-2025-07-01 12:50:03,060 [INFO   ] root: --- Finished processing tmp_benchmark_wide_numeric ---
-2025-07-01 12:50:03,060 [INFO   ] root: ================================================================================
-2025-07-01 12:50:03,060 [INFO   ] root: Processing Database 6/6: tmp_benchmark_wide_text_nulls
-2025-07-01 12:50:03,061 [INFO   ] root: ================================================================================
-2025-07-01 12:50:03,062 [INFO   ] root: Target schema for 'tmp_benchmark_wide_text_nulls' is 'public'.
-2025-07-01 12:50:03,062 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-01 12:50:03,137 [INFO   ] root: Successfully retrieved basic metrics for DB 'tmp_benchmark_wide_text_nulls'.
-2025-07-01 12:50:03,138 [INFO   ] root: Successfully saved 'basic_metrics' results to tmp_benchmark_wide_text_nulls_basic_metrics.json
-2025-07-01 12:50:03,138 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-01 12:50:03,153 [INFO   ] root: Successfully counted objects for schema 'public'.
-2025-07-01 12:50:03,155 [INFO   ] root: Successfully saved 'schema_counts' results to tmp_benchmark_wide_text_nulls_schema_counts.json
-2025-07-01 12:50:03,155 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-01 12:50:03,186 [INFO   ] root: Successfully calculated table-level metrics for 1 tables in schema 'public'.
-2025-07-01 12:50:03,189 [INFO   ] root: Successfully saved 'table_metrics' results to tmp_benchmark_wide_text_nulls_table_metrics.csv
-2025-07-01 12:50:03,189 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-01 12:50:03,210 [INFO   ] root: Successfully retrieved structural metrics for 337 columns in schema 'public'.
-2025-07-01 12:50:03,215 [INFO   ] root: Successfully saved 'column_structure' results to tmp_benchmark_wide_text_nulls_column_structure.csv
-2025-07-01 12:50:03,215 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-01 12:50:03,215 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-01 12:50:03,246 [INFO   ] root: Successfully generated column profiles for 337 columns in schema 'public' using pg_stats.
-2025-07-01 12:50:03,250 [INFO   ] root: Successfully saved 'column_profiles' results to tmp_benchmark_wide_text_nulls_column_profiles.csv
-2025-07-01 12:50:03,250 [INFO   ] root: --> Skipping: Interoperability Metrics (not applicable to single-table schema).
-2025-07-01 12:50:03,250 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-01 12:50:03,250 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-01 12:50:03,251 [WARNING] root: No specific queries found for database 'tmp_benchmark_wide_text_nulls', using legacy approach
-2025-07-01 12:50:03,251 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'tmp_benchmark_wide_text_nulls'.
-2025-07-01 12:50:03,251 [INFO   ] root: --- Finished processing tmp_benchmark_wide_text_nulls ---
-2025-07-01 12:50:03,251 [INFO   ] root: ================================================================================
-2025-07-01 12:50:03,251 [INFO   ] root: --- Database Profiling Pipeline Finished ---
+2025-07-02 15:33:48,707 [INFO   ] root: --- Starting Database Profiling Pipeline ---
+2025-07-02 15:33:48,707 [INFO   ] root: Reading configuration from: phases\01_LegacyDB\src\config.ini
+2025-07-02 15:33:48,708 [INFO   ] root: ================================================================================
+2025-07-02 15:33:48,709 [INFO   ] root: Processing Database 1/6: TMP_DF8
+2025-07-02 15:33:48,709 [INFO   ] root: ================================================================================
+2025-07-02 15:33:48,785 [INFO   ] root: Target schema for 'TMP_DF8' is 'tmp_df8'.
+2025-07-02 15:33:48,786 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 15:33:48,940 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF8'.
+2025-07-02 15:33:48,942 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF8_basic_metrics.json
+2025-07-02 15:33:48,942 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 15:33:48,954 [INFO   ] root: Successfully counted objects for schema 'tmp_df8'.
+2025-07-02 15:33:48,956 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF8_schema_counts.json
+2025-07-02 15:33:48,956 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 15:33:49,034 [INFO   ] root: Successfully calculated table-level metrics for 27 tables in schema 'tmp_df8'.
+2025-07-02 15:33:49,059 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF8_table_metrics.csv
+2025-07-02 15:33:49,059 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 15:33:49,074 [INFO   ] root: Successfully retrieved structural metrics for 320 columns in schema 'tmp_df8'.
+2025-07-02 15:33:49,080 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF8_column_structure.csv
+2025-07-02 15:33:49,080 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 15:33:49,082 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 15:33:49,141 [ERROR  ] root: Failed to get column profiles for schema 'tmp_df8': 'table_name'
+2025-07-02 15:33:49,141 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_DF8'.
+2025-07-02 15:33:49,141 [INFO   ] root: --> Running: Interoperability Metrics
+2025-07-02 15:33:49,151 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df8'.
+2025-07-02 15:33:49,153 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF8_interop_metrics.json
+2025-07-02 15:33:49,153 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 15:33:49,154 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
+2025-07-02 15:33:49,154 [WARNING] root: No specific queries found for database 'TMP_DF8', using legacy approach
+2025-07-02 15:33:49,154 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_DF8'.
+2025-07-02 15:33:49,155 [INFO   ] root: --- Finished processing TMP_DF8 ---
+2025-07-02 15:33:49,155 [INFO   ] root: ================================================================================
+2025-07-02 15:33:49,155 [INFO   ] root: Processing Database 2/6: TMP_DF9
+2025-07-02 15:33:49,155 [INFO   ] root: ================================================================================
+2025-07-02 15:33:49,156 [INFO   ] root: Target schema for 'TMP_DF9' is 'tmp_df9'.
+2025-07-02 15:33:49,156 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 15:33:49,289 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF9'.
+2025-07-02 15:33:49,292 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF9_basic_metrics.json
+2025-07-02 15:33:49,292 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 15:33:49,304 [INFO   ] root: Successfully counted objects for schema 'tmp_df9'.
+2025-07-02 15:33:49,306 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF9_schema_counts.json
+2025-07-02 15:33:49,306 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 15:33:49,401 [INFO   ] root: Successfully calculated table-level metrics for 62 tables in schema 'tmp_df9'.
+2025-07-02 15:33:49,404 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF9_table_metrics.csv
+2025-07-02 15:33:49,404 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 15:33:49,418 [INFO   ] root: Successfully retrieved structural metrics for 393 columns in schema 'tmp_df9'.
+2025-07-02 15:33:49,422 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF9_column_structure.csv
+2025-07-02 15:33:49,423 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 15:33:49,423 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 15:33:49,486 [ERROR  ] root: Failed to get column profiles for schema 'tmp_df9': 'table_name'
+2025-07-02 15:33:49,486 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_DF9'.
+2025-07-02 15:33:49,486 [INFO   ] root: --> Running: Interoperability Metrics
+2025-07-02 15:33:49,493 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df9'.
+2025-07-02 15:33:49,494 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF9_interop_metrics.json
+2025-07-02 15:33:49,494 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 15:33:49,494 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
+2025-07-02 15:33:49,494 [WARNING] root: No specific queries found for database 'TMP_DF9', using legacy approach
+2025-07-02 15:33:49,496 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_DF9'.
+2025-07-02 15:33:49,496 [INFO   ] root: --- Finished processing TMP_DF9 ---
+2025-07-02 15:33:49,496 [INFO   ] root: ================================================================================
+2025-07-02 15:33:49,496 [INFO   ] root: Processing Database 3/6: TMP_DF10
+2025-07-02 15:33:49,496 [INFO   ] root: ================================================================================
+2025-07-02 15:33:49,497 [INFO   ] root: Target schema for 'TMP_DF10' is 'tmp_df10'.
+2025-07-02 15:33:49,497 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 15:33:49,624 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF10'.
+2025-07-02 15:33:49,625 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF10_basic_metrics.json
+2025-07-02 15:33:49,625 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 15:33:49,637 [INFO   ] root: Successfully counted objects for schema 'tmp_df10'.
+2025-07-02 15:33:49,639 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF10_schema_counts.json
+2025-07-02 15:33:49,639 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 15:33:49,663 [INFO   ] root: Successfully calculated table-level metrics for 9 tables in schema 'tmp_df10'.
+2025-07-02 15:33:49,666 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF10_table_metrics.csv
+2025-07-02 15:33:49,666 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 15:33:49,679 [INFO   ] root: Successfully retrieved structural metrics for 38 columns in schema 'tmp_df10'.
+2025-07-02 15:33:49,683 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF10_column_structure.csv
+2025-07-02 15:33:49,684 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 15:33:49,685 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 15:33:49,740 [ERROR  ] root: Failed to get column profiles for schema 'tmp_df10': 'table_name'
+2025-07-02 15:33:49,740 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_DF10'.
+2025-07-02 15:33:49,740 [INFO   ] root: --> Running: Interoperability Metrics
+2025-07-02 15:33:49,746 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df10'.
+2025-07-02 15:33:49,747 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF10_interop_metrics.json
+2025-07-02 15:33:49,750 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 15:33:49,751 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
+2025-07-02 15:33:49,751 [WARNING] root: No specific queries found for database 'TMP_DF10', using legacy approach
+2025-07-02 15:33:49,752 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_DF10'.
+2025-07-02 15:33:49,752 [INFO   ] root: --- Finished processing TMP_DF10 ---
+2025-07-02 15:33:49,752 [INFO   ] root: ================================================================================
+2025-07-02 15:33:49,752 [INFO   ] root: Processing Database 4/6: TMP_REAN_DF2
+2025-07-02 15:33:49,752 [INFO   ] root: ================================================================================
+2025-07-02 15:33:49,753 [INFO   ] root: Target schema for 'TMP_REAN_DF2' is 'tmp_rean_df2'.
+2025-07-02 15:33:49,753 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 15:33:49,860 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_REAN_DF2'.
+2025-07-02 15:33:49,861 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_REAN_DF2_basic_metrics.json
+2025-07-02 15:33:49,861 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 15:33:49,875 [INFO   ] root: Successfully counted objects for schema 'tmp_rean_df2'.
+2025-07-02 15:33:49,876 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_REAN_DF2_schema_counts.json
+2025-07-02 15:33:49,876 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 15:33:49,900 [INFO   ] root: Successfully calculated table-level metrics for 13 tables in schema 'tmp_rean_df2'.
+2025-07-02 15:33:49,904 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_REAN_DF2_table_metrics.csv
+2025-07-02 15:33:49,904 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 15:33:49,914 [INFO   ] root: Successfully retrieved structural metrics for 241 columns in schema 'tmp_rean_df2'.
+2025-07-02 15:33:49,918 [INFO   ] root: Successfully saved 'column_structure' results to TMP_REAN_DF2_column_structure.csv
+2025-07-02 15:33:49,918 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 15:33:49,918 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 15:33:49,955 [ERROR  ] root: Failed to get column profiles for schema 'tmp_rean_df2': 'table_name'
+2025-07-02 15:33:49,955 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_REAN_DF2'.
+2025-07-02 15:33:49,956 [INFO   ] root: --> Running: Interoperability Metrics
+2025-07-02 15:33:49,961 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_rean_df2'.
+2025-07-02 15:33:49,963 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_REAN_DF2_interop_metrics.json
+2025-07-02 15:33:49,964 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 15:33:49,964 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
+2025-07-02 15:33:49,965 [WARNING] root: No specific queries found for database 'TMP_REAN_DF2', using legacy approach
+2025-07-02 15:33:50,004 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_REAN_DF2'.
+2025-07-02 15:33:50,005 [INFO   ] root: --- Finished processing TMP_REAN_DF2 ---
+2025-07-02 15:33:50,009 [INFO   ] root: ================================================================================
+2025-07-02 15:33:50,017 [INFO   ] root: Processing Database 5/6: tmp_benchmark_wide_numeric
+2025-07-02 15:33:50,019 [INFO   ] root: ================================================================================
+2025-07-02 15:33:50,020 [INFO   ] root: Target schema for 'tmp_benchmark_wide_numeric' is 'public'.
+2025-07-02 15:33:50,020 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 15:33:50,166 [INFO   ] root: Successfully retrieved basic metrics for DB 'tmp_benchmark_wide_numeric'.
+2025-07-02 15:33:50,168 [INFO   ] root: Successfully saved 'basic_metrics' results to tmp_benchmark_wide_numeric_basic_metrics.json
+2025-07-02 15:33:50,168 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 15:33:50,178 [INFO   ] root: Successfully counted objects for schema 'public'.
+2025-07-02 15:33:50,179 [INFO   ] root: Successfully saved 'schema_counts' results to tmp_benchmark_wide_numeric_schema_counts.json
+2025-07-02 15:33:50,179 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 15:33:50,196 [INFO   ] root: Successfully calculated table-level metrics for 1 tables in schema 'public'.
+2025-07-02 15:33:50,200 [INFO   ] root: Successfully saved 'table_metrics' results to tmp_benchmark_wide_numeric_table_metrics.csv
+2025-07-02 15:33:50,201 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 15:33:50,211 [INFO   ] root: Successfully retrieved structural metrics for 337 columns in schema 'public'.
+2025-07-02 15:33:50,216 [INFO   ] root: Successfully saved 'column_structure' results to tmp_benchmark_wide_numeric_column_structure.csv
+2025-07-02 15:33:50,217 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 15:33:50,218 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 15:33:50,246 [ERROR  ] root: Failed to get column profiles for schema 'public': 'table_name'
+2025-07-02 15:33:50,246 [WARNING] root: No data to save for metric 'column_profiles' on db 'tmp_benchmark_wide_numeric'.
+2025-07-02 15:33:50,246 [INFO   ] root: --> Skipping: Interoperability Metrics (not applicable to single-table schema).
+2025-07-02 15:33:50,246 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 15:33:50,246 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
+2025-07-02 15:33:50,247 [WARNING] root: No specific queries found for database 'tmp_benchmark_wide_numeric', using legacy approach
+2025-07-02 15:33:50,247 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'tmp_benchmark_wide_numeric'.
+2025-07-02 15:33:50,247 [INFO   ] root: --- Finished processing tmp_benchmark_wide_numeric ---
+2025-07-02 15:33:50,248 [INFO   ] root: ================================================================================
+2025-07-02 15:33:50,248 [INFO   ] root: Processing Database 6/6: tmp_benchmark_wide_text_nulls
+2025-07-02 15:33:50,250 [INFO   ] root: ================================================================================
+2025-07-02 15:33:50,250 [INFO   ] root: Target schema for 'tmp_benchmark_wide_text_nulls' is 'public'.
+2025-07-02 15:33:50,250 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 15:33:50,336 [INFO   ] root: Successfully retrieved basic metrics for DB 'tmp_benchmark_wide_text_nulls'.
+2025-07-02 15:33:50,337 [INFO   ] root: Successfully saved 'basic_metrics' results to tmp_benchmark_wide_text_nulls_basic_metrics.json
+2025-07-02 15:33:50,338 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 15:33:50,347 [INFO   ] root: Successfully counted objects for schema 'public'.
+2025-07-02 15:33:50,350 [INFO   ] root: Successfully saved 'schema_counts' results to tmp_benchmark_wide_text_nulls_schema_counts.json
+2025-07-02 15:33:50,350 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 15:33:50,377 [INFO   ] root: Successfully calculated table-level metrics for 1 tables in schema 'public'.
+2025-07-02 15:33:50,380 [INFO   ] root: Successfully saved 'table_metrics' results to tmp_benchmark_wide_text_nulls_table_metrics.csv
+2025-07-02 15:33:50,380 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 15:33:50,402 [INFO   ] root: Successfully retrieved structural metrics for 337 columns in schema 'public'.
+2025-07-02 15:33:50,405 [INFO   ] root: Successfully saved 'column_structure' results to tmp_benchmark_wide_text_nulls_column_structure.csv
+2025-07-02 15:33:50,405 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 15:33:50,405 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 15:33:50,437 [ERROR  ] root: Failed to get column profiles for schema 'public': 'table_name'
+2025-07-02 15:33:50,437 [WARNING] root: No data to save for metric 'column_profiles' on db 'tmp_benchmark_wide_text_nulls'.
+2025-07-02 15:33:50,438 [INFO   ] root: --> Skipping: Interoperability Metrics (not applicable to single-table schema).
+2025-07-02 15:33:50,438 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 15:33:50,438 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
+2025-07-02 15:33:50,438 [WARNING] root: No specific queries found for database 'tmp_benchmark_wide_text_nulls', using legacy approach
+2025-07-02 15:33:50,439 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'tmp_benchmark_wide_text_nulls'.
+2025-07-02 15:33:50,439 [INFO   ] root: --- Finished processing tmp_benchmark_wide_text_nulls ---
+2025-07-02 15:33:50,439 [INFO   ] root: ================================================================================
+2025-07-02 15:33:50,439 [INFO   ] root: --- Database Profiling Pipeline Finished ---
