@@ -222,3 +222,73 @@ This pattern ensures that as long as the relative structure between the config f
 
 **Lesson:** Code formatting and linting are not just for aesthetics; they are integral to producing robust, maintainable code. Line-length violations, especially in complex logic or queries, can obscure bugs and make the code difficult to understand.
 **Application:** Treat linter errors (like those from `ruff`) as part of the development cycle, not as a final cleanup step. Proactively format code as you write it. For long, complex operations (in SQL or pandas), break them into smaller, more manageable lines or use intermediate variables. This leads to cleaner, more debuggable code.
+
+---
+
+## Effective Integration Testing Strategies for Python Modules
+
+- **Task ID:** `P1.W2.T3.2`
+- **Topic:** Integration Testing, Mocking, Python unittest.mock, pytest
+- **Date:** 2025-07-02
+
+### Insight
+
+Successful integration testing of complex Python modules with external dependencies requires careful attention to mocking strategies and test design. Our experience with the profiling pipeline orchestrator revealed several critical principles:
+
+1. **Precise Patch Targeting**: When using unittest.mock.patch, you must use the exact function names and import paths as they appear in the module under test. The import pattern (direct vs. module-level) impacts how patching should be implemented.
+
+2. **Configuration Structure Matching**: Mock configurations must perfectly mirror the expected structure in production code. Every key, nested dictionary, and section that the code might access must be present in the mock.
+
+3. **Path Object Handling**: Platform-specific path objects (like WindowsPath) require special handling in mocks, particularly conversion to strings before string operations are attempted.
+
+4. **High-Level Mocking Strategy**: Patching should occur at the highest meaningful level of abstraction, reducing complexity and improving test reliability.
+
+5. **Realistic Mock Return Values**: Mock functions should return data structures that precisely match what the code expects, including all fields and proper types.
+
+6. **Debug-Friendly Mock Design**: Include print statements in mock functions to track calls, arguments, and execution flow during test debugging.
+
+### Recommendation
+
+When implementing integration tests with extensive mocking:
+
+- **For Patching Functions**:
+  ```python
+  # First, understand how the function is imported in the module under test
+  # If imported directly: from profiling_modules.metrics_profile import get_all_column_profiles
+  # Then patch exactly that path:
+  with patch("profiling_modules.metrics_profile.get_all_column_profiles", mock_function):
+      # Test code here
+  ```
+
+- **For Configuration Mocking**:
+  ```python
+  # Ensure ALL expected config sections and keys are present
+  mock_config = MagicMock()
+  mock_config.__getitem__.side_effect = lambda x: {
+      "section1": {"key1": "value1"},
+      "section2": {"key2": "value2"},
+      "paths": {"required_path": "/some/path"}
+  }.get(x, {})
+  ```
+
+- **For Path Object Handling**:
+  ```python
+  # Always convert Path objects to strings for operations
+  def mock_open_file(file_path, mode='r', *args, **kwargs):
+      if isinstance(file_path, Path):
+          file_path = str(file_path)
+      # Rest of mock implementation
+  ```
+
+- **For Complex Return Values**:
+  ```python
+  # Create realistic return values matching expected structure
+  def mock_function(*args, **kwargs):
+      return {
+          "required_key1": "value1",
+          "required_key2": 123,
+          "nested": {"key": "value"}
+      }
+  ```
+
+Implementing these practices significantly improves the reliability and value of integration tests, especially for complex modules with multiple dependencies.
