@@ -1,168 +1,392 @@
-2025-07-02 15:33:48,707 [INFO   ] root: --- Starting Database Profiling Pipeline ---
-2025-07-02 15:33:48,707 [INFO   ] root: Reading configuration from: phases\01_LegacyDB\src\config.ini
-2025-07-02 15:33:48,708 [INFO   ] root: ================================================================================
-2025-07-02 15:33:48,709 [INFO   ] root: Processing Database 1/6: TMP_DF8
-2025-07-02 15:33:48,709 [INFO   ] root: ================================================================================
-2025-07-02 15:33:48,785 [INFO   ] root: Target schema for 'TMP_DF8' is 'tmp_df8'.
-2025-07-02 15:33:48,786 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-02 15:33:48,940 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF8'.
-2025-07-02 15:33:48,942 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF8_basic_metrics.json
-2025-07-02 15:33:48,942 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-02 15:33:48,954 [INFO   ] root: Successfully counted objects for schema 'tmp_df8'.
-2025-07-02 15:33:48,956 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF8_schema_counts.json
-2025-07-02 15:33:48,956 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-02 15:33:49,034 [INFO   ] root: Successfully calculated table-level metrics for 27 tables in schema 'tmp_df8'.
-2025-07-02 15:33:49,059 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF8_table_metrics.csv
-2025-07-02 15:33:49,059 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-02 15:33:49,074 [INFO   ] root: Successfully retrieved structural metrics for 320 columns in schema 'tmp_df8'.
-2025-07-02 15:33:49,080 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF8_column_structure.csv
-2025-07-02 15:33:49,080 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-02 15:33:49,082 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-02 15:33:49,141 [ERROR  ] root: Failed to get column profiles for schema 'tmp_df8': 'table_name'
-2025-07-02 15:33:49,141 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_DF8'.
-2025-07-02 15:33:49,141 [INFO   ] root: --> Running: Interoperability Metrics
-2025-07-02 15:33:49,151 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df8'.
-2025-07-02 15:33:49,153 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF8_interop_metrics.json
-2025-07-02 15:33:49,153 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-02 15:33:49,154 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-02 15:33:49,154 [WARNING] root: No specific queries found for database 'TMP_DF8', using legacy approach
-2025-07-02 15:33:49,154 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_DF8'.
-2025-07-02 15:33:49,155 [INFO   ] root: --- Finished processing TMP_DF8 ---
-2025-07-02 15:33:49,155 [INFO   ] root: ================================================================================
-2025-07-02 15:33:49,155 [INFO   ] root: Processing Database 2/6: TMP_DF9
-2025-07-02 15:33:49,155 [INFO   ] root: ================================================================================
-2025-07-02 15:33:49,156 [INFO   ] root: Target schema for 'TMP_DF9' is 'tmp_df9'.
-2025-07-02 15:33:49,156 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-02 15:33:49,289 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF9'.
-2025-07-02 15:33:49,292 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF9_basic_metrics.json
-2025-07-02 15:33:49,292 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-02 15:33:49,304 [INFO   ] root: Successfully counted objects for schema 'tmp_df9'.
-2025-07-02 15:33:49,306 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF9_schema_counts.json
-2025-07-02 15:33:49,306 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-02 15:33:49,401 [INFO   ] root: Successfully calculated table-level metrics for 62 tables in schema 'tmp_df9'.
-2025-07-02 15:33:49,404 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF9_table_metrics.csv
-2025-07-02 15:33:49,404 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-02 15:33:49,418 [INFO   ] root: Successfully retrieved structural metrics for 393 columns in schema 'tmp_df9'.
-2025-07-02 15:33:49,422 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF9_column_structure.csv
-2025-07-02 15:33:49,423 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-02 15:33:49,423 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-02 15:33:49,486 [ERROR  ] root: Failed to get column profiles for schema 'tmp_df9': 'table_name'
-2025-07-02 15:33:49,486 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_DF9'.
-2025-07-02 15:33:49,486 [INFO   ] root: --> Running: Interoperability Metrics
-2025-07-02 15:33:49,493 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df9'.
-2025-07-02 15:33:49,494 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF9_interop_metrics.json
-2025-07-02 15:33:49,494 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-02 15:33:49,494 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-02 15:33:49,494 [WARNING] root: No specific queries found for database 'TMP_DF9', using legacy approach
-2025-07-02 15:33:49,496 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_DF9'.
-2025-07-02 15:33:49,496 [INFO   ] root: --- Finished processing TMP_DF9 ---
-2025-07-02 15:33:49,496 [INFO   ] root: ================================================================================
-2025-07-02 15:33:49,496 [INFO   ] root: Processing Database 3/6: TMP_DF10
-2025-07-02 15:33:49,496 [INFO   ] root: ================================================================================
-2025-07-02 15:33:49,497 [INFO   ] root: Target schema for 'TMP_DF10' is 'tmp_df10'.
-2025-07-02 15:33:49,497 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-02 15:33:49,624 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF10'.
-2025-07-02 15:33:49,625 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF10_basic_metrics.json
-2025-07-02 15:33:49,625 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-02 15:33:49,637 [INFO   ] root: Successfully counted objects for schema 'tmp_df10'.
-2025-07-02 15:33:49,639 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF10_schema_counts.json
-2025-07-02 15:33:49,639 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-02 15:33:49,663 [INFO   ] root: Successfully calculated table-level metrics for 9 tables in schema 'tmp_df10'.
-2025-07-02 15:33:49,666 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF10_table_metrics.csv
-2025-07-02 15:33:49,666 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-02 15:33:49,679 [INFO   ] root: Successfully retrieved structural metrics for 38 columns in schema 'tmp_df10'.
-2025-07-02 15:33:49,683 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF10_column_structure.csv
-2025-07-02 15:33:49,684 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-02 15:33:49,685 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-02 15:33:49,740 [ERROR  ] root: Failed to get column profiles for schema 'tmp_df10': 'table_name'
-2025-07-02 15:33:49,740 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_DF10'.
-2025-07-02 15:33:49,740 [INFO   ] root: --> Running: Interoperability Metrics
-2025-07-02 15:33:49,746 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df10'.
-2025-07-02 15:33:49,747 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF10_interop_metrics.json
-2025-07-02 15:33:49,750 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-02 15:33:49,751 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-02 15:33:49,751 [WARNING] root: No specific queries found for database 'TMP_DF10', using legacy approach
-2025-07-02 15:33:49,752 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_DF10'.
-2025-07-02 15:33:49,752 [INFO   ] root: --- Finished processing TMP_DF10 ---
-2025-07-02 15:33:49,752 [INFO   ] root: ================================================================================
-2025-07-02 15:33:49,752 [INFO   ] root: Processing Database 4/6: TMP_REAN_DF2
-2025-07-02 15:33:49,752 [INFO   ] root: ================================================================================
-2025-07-02 15:33:49,753 [INFO   ] root: Target schema for 'TMP_REAN_DF2' is 'tmp_rean_df2'.
-2025-07-02 15:33:49,753 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-02 15:33:49,860 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_REAN_DF2'.
-2025-07-02 15:33:49,861 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_REAN_DF2_basic_metrics.json
-2025-07-02 15:33:49,861 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-02 15:33:49,875 [INFO   ] root: Successfully counted objects for schema 'tmp_rean_df2'.
-2025-07-02 15:33:49,876 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_REAN_DF2_schema_counts.json
-2025-07-02 15:33:49,876 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-02 15:33:49,900 [INFO   ] root: Successfully calculated table-level metrics for 13 tables in schema 'tmp_rean_df2'.
-2025-07-02 15:33:49,904 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_REAN_DF2_table_metrics.csv
-2025-07-02 15:33:49,904 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-02 15:33:49,914 [INFO   ] root: Successfully retrieved structural metrics for 241 columns in schema 'tmp_rean_df2'.
-2025-07-02 15:33:49,918 [INFO   ] root: Successfully saved 'column_structure' results to TMP_REAN_DF2_column_structure.csv
-2025-07-02 15:33:49,918 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-02 15:33:49,918 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-02 15:33:49,955 [ERROR  ] root: Failed to get column profiles for schema 'tmp_rean_df2': 'table_name'
-2025-07-02 15:33:49,955 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_REAN_DF2'.
-2025-07-02 15:33:49,956 [INFO   ] root: --> Running: Interoperability Metrics
-2025-07-02 15:33:49,961 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_rean_df2'.
-2025-07-02 15:33:49,963 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_REAN_DF2_interop_metrics.json
-2025-07-02 15:33:49,964 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-02 15:33:49,964 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-02 15:33:49,965 [WARNING] root: No specific queries found for database 'TMP_REAN_DF2', using legacy approach
-2025-07-02 15:33:50,004 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'TMP_REAN_DF2'.
-2025-07-02 15:33:50,005 [INFO   ] root: --- Finished processing TMP_REAN_DF2 ---
-2025-07-02 15:33:50,009 [INFO   ] root: ================================================================================
-2025-07-02 15:33:50,017 [INFO   ] root: Processing Database 5/6: tmp_benchmark_wide_numeric
-2025-07-02 15:33:50,019 [INFO   ] root: ================================================================================
-2025-07-02 15:33:50,020 [INFO   ] root: Target schema for 'tmp_benchmark_wide_numeric' is 'public'.
-2025-07-02 15:33:50,020 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-02 15:33:50,166 [INFO   ] root: Successfully retrieved basic metrics for DB 'tmp_benchmark_wide_numeric'.
-2025-07-02 15:33:50,168 [INFO   ] root: Successfully saved 'basic_metrics' results to tmp_benchmark_wide_numeric_basic_metrics.json
-2025-07-02 15:33:50,168 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-02 15:33:50,178 [INFO   ] root: Successfully counted objects for schema 'public'.
-2025-07-02 15:33:50,179 [INFO   ] root: Successfully saved 'schema_counts' results to tmp_benchmark_wide_numeric_schema_counts.json
-2025-07-02 15:33:50,179 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-02 15:33:50,196 [INFO   ] root: Successfully calculated table-level metrics for 1 tables in schema 'public'.
-2025-07-02 15:33:50,200 [INFO   ] root: Successfully saved 'table_metrics' results to tmp_benchmark_wide_numeric_table_metrics.csv
-2025-07-02 15:33:50,201 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-02 15:33:50,211 [INFO   ] root: Successfully retrieved structural metrics for 337 columns in schema 'public'.
-2025-07-02 15:33:50,216 [INFO   ] root: Successfully saved 'column_structure' results to tmp_benchmark_wide_numeric_column_structure.csv
-2025-07-02 15:33:50,217 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-02 15:33:50,218 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-02 15:33:50,246 [ERROR  ] root: Failed to get column profiles for schema 'public': 'table_name'
-2025-07-02 15:33:50,246 [WARNING] root: No data to save for metric 'column_profiles' on db 'tmp_benchmark_wide_numeric'.
-2025-07-02 15:33:50,246 [INFO   ] root: --> Skipping: Interoperability Metrics (not applicable to single-table schema).
-2025-07-02 15:33:50,246 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-02 15:33:50,246 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-02 15:33:50,247 [WARNING] root: No specific queries found for database 'tmp_benchmark_wide_numeric', using legacy approach
-2025-07-02 15:33:50,247 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'tmp_benchmark_wide_numeric'.
-2025-07-02 15:33:50,247 [INFO   ] root: --- Finished processing tmp_benchmark_wide_numeric ---
-2025-07-02 15:33:50,248 [INFO   ] root: ================================================================================
-2025-07-02 15:33:50,248 [INFO   ] root: Processing Database 6/6: tmp_benchmark_wide_text_nulls
-2025-07-02 15:33:50,250 [INFO   ] root: ================================================================================
-2025-07-02 15:33:50,250 [INFO   ] root: Target schema for 'tmp_benchmark_wide_text_nulls' is 'public'.
-2025-07-02 15:33:50,250 [INFO   ] root: --> Running: Basic DB Metrics
-2025-07-02 15:33:50,336 [INFO   ] root: Successfully retrieved basic metrics for DB 'tmp_benchmark_wide_text_nulls'.
-2025-07-02 15:33:50,337 [INFO   ] root: Successfully saved 'basic_metrics' results to tmp_benchmark_wide_text_nulls_basic_metrics.json
-2025-07-02 15:33:50,338 [INFO   ] root: --> Running: Schema Object Counts
-2025-07-02 15:33:50,347 [INFO   ] root: Successfully counted objects for schema 'public'.
-2025-07-02 15:33:50,350 [INFO   ] root: Successfully saved 'schema_counts' results to tmp_benchmark_wide_text_nulls_schema_counts.json
-2025-07-02 15:33:50,350 [INFO   ] root: --> Running: Table Level Metrics
-2025-07-02 15:33:50,377 [INFO   ] root: Successfully calculated table-level metrics for 1 tables in schema 'public'.
-2025-07-02 15:33:50,380 [INFO   ] root: Successfully saved 'table_metrics' results to tmp_benchmark_wide_text_nulls_table_metrics.csv
-2025-07-02 15:33:50,380 [INFO   ] root: --> Running: Column Structural Metrics
-2025-07-02 15:33:50,402 [INFO   ] root: Successfully retrieved structural metrics for 337 columns in schema 'public'.
-2025-07-02 15:33:50,405 [INFO   ] root: Successfully saved 'column_structure' results to tmp_benchmark_wide_text_nulls_column_structure.csv
-2025-07-02 15:33:50,405 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
-2025-07-02 15:33:50,405 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
-2025-07-02 15:33:50,437 [ERROR  ] root: Failed to get column profiles for schema 'public': 'table_name'
-2025-07-02 15:33:50,437 [WARNING] root: No data to save for metric 'column_profiles' on db 'tmp_benchmark_wide_text_nulls'.
-2025-07-02 15:33:50,438 [INFO   ] root: --> Skipping: Interoperability Metrics (not applicable to single-table schema).
-2025-07-02 15:33:50,438 [INFO   ] root: --> Running: Performance Benchmarks
-2025-07-02 15:33:50,438 [WARNING] root: Query metadata not found at C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\..\sql\canonical_queries\_categories.json
-2025-07-02 15:33:50,438 [WARNING] root: No specific queries found for database 'tmp_benchmark_wide_text_nulls', using legacy approach
-2025-07-02 15:33:50,439 [WARNING] root: No data to save for metric 'performance_benchmarks' on db 'tmp_benchmark_wide_text_nulls'.
-2025-07-02 15:33:50,439 [INFO   ] root: --- Finished processing tmp_benchmark_wide_text_nulls ---
-2025-07-02 15:33:50,439 [INFO   ] root: ================================================================================
-2025-07-02 15:33:50,439 [INFO   ] root: --- Database Profiling Pipeline Finished ---
+2025-07-02 16:31:24,844 [INFO   ] root: --- Starting Database Profiling Pipeline ---
+2025-07-02 16:31:24,849 [INFO   ] root: Reading configuration from: c:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\phases\01_LegacyDB\src\config.ini
+2025-07-02 16:31:24,850 [INFO   ] root: ================================================================================
+2025-07-02 16:31:24,850 [INFO   ] root: Processing Database 1/6: TMP_DF8
+2025-07-02 16:31:24,850 [INFO   ] root: ================================================================================
+2025-07-02 16:31:24,898 [INFO   ] root: Target schema for 'TMP_DF8' is 'tmp_df8'.
+2025-07-02 16:31:24,899 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 16:31:24,973 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF8'.
+2025-07-02 16:31:24,974 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF8_basic_metrics.json
+2025-07-02 16:31:24,975 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 16:31:24,987 [INFO   ] root: Successfully counted objects for schema 'tmp_df8'.
+2025-07-02 16:31:24,989 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF8_schema_counts.json
+2025-07-02 16:31:24,989 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 16:31:25,038 [INFO   ] root: Successfully calculated table-level metrics for 27 tables in schema 'tmp_df8'.
+2025-07-02 16:31:25,046 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF8_table_metrics.csv
+2025-07-02 16:31:25,046 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 16:31:25,068 [INFO   ] root: Successfully retrieved structural metrics for 320 columns in schema 'tmp_df8'.
+2025-07-02 16:31:25,072 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF8_column_structure.csv
+2025-07-02 16:31:25,072 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 16:31:25,072 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 16:31:25,122 [ERROR  ] root: Failed to get column profiles for schema 'tmp_df8': 'table_name'
+2025-07-02 16:31:25,122 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_DF8'.
+2025-07-02 16:31:25,122 [INFO   ] root: --> Running: Interoperability Metrics
+2025-07-02 16:31:25,130 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df8'.
+2025-07-02 16:31:25,132 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF8_interop_metrics.json
+2025-07-02 16:31:25,132 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 16:31:25,132 [WARNING] root: No specific queries found for database 'TMP_DF8', using legacy approach
+2025-07-02 16:31:25,132 [INFO   ] root: Running 8 legacy benchmark queries...
+2025-07-02 16:31:25,136 [ERROR  ] root:   Benchmark query 'Query 1' failed: (psycopg2.errors.UndefinedTable) relation "{schema}.{table_ssn}" does not exist
+LINE 3: SELECT COUNT(*) FROM "{schema}"."{table_ssn}"
+                             ^
+
+[SQL: -- Query 1: Simple Count
+-- Tests basic table scan speed.
+SELECT COUNT(*) FROM "{schema}"."{table_ssn}"]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,136 [ERROR  ] root:   Benchmark query 'Query 2' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: -- Query 2: Join Core Tables
+-- Tests the performance of joining the primary site table with key data tables.
+SELECT COUNT(t1."SSN")
+FROM "{schema}"."{table_ssn}" AS t1
+LEFT JOIN "{schema}"."{table_arch}" AS t2 ON t1."SSN" = t2."SSN"
+LEFT JOIN "{schema}"."{table_cond}" AS t3 ON t1."SSN" = t3."SSN"]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,137 [ERROR  ] root:   Benchmark query 'Query 3' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: -- Query 3: Aggregation and Grouping
+-- Tests analytical performance by grouping data and calculating an aggregate.
+SELECT "{col_phase}", COUNT(*)
+FROM "{schema}"."{table_phase}"
+WHERE "{col_phase}" IS NOT NULL
+GROUP BY "{col_phase}"
+ORDER BY COUNT(*) DESC]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,137 [ERROR  ] root:   Benchmark query 'Query 4' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- NOTE: The script does not yet replace {schema}, {table_ssn}, etc.
+-- This is a simplification. The queries must be written to run
+-- on each database type. For now, write them targeting the benchmark DBs:
+-- e.g., SELECT COUNT(*) FROM public.wide_format_data]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,137 [ERROR  ] root:   Benchmark query 'Query 5' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- Or manually create versions for each legacy DB.
+-- For this task, a simple query like SELECT 1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,138 [ERROR  ] root:   Benchmark query 'Query 6' failed: (psycopg2.errors.SyntaxError) syntax error at or near "is"
+LINE 1: is sufficient to test the mechanism.
+        ^
+
+[SQL: is sufficient to test the mechanism.
+-- A better approach for a future version would be to make the queries templates.
+-- For now, let's use a simple universal query to test the pipeline.
+
+-- Final simplified content for initial run:
+SELECT 1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,140 [ERROR  ] root:   Benchmark query 'Query 7' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT pg_sleep(0.1)]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,140 [ERROR  ] root:   Benchmark query 'Query 8' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- Introduce a small, predictable delay]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,142 [INFO   ] root: Successfully saved 'performance_benchmarks' results to TMP_DF8_performance_benchmarks.csv
+2025-07-02 16:31:25,142 [INFO   ] root: --- Finished processing TMP_DF8 ---
+2025-07-02 16:31:25,143 [INFO   ] root: ================================================================================
+2025-07-02 16:31:25,143 [INFO   ] root: Processing Database 2/6: TMP_DF9
+2025-07-02 16:31:25,143 [INFO   ] root: ================================================================================
+2025-07-02 16:31:25,144 [INFO   ] root: Target schema for 'TMP_DF9' is 'tmp_df9'.
+2025-07-02 16:31:25,144 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 16:31:25,246 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF9'.
+2025-07-02 16:31:25,247 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF9_basic_metrics.json
+2025-07-02 16:31:25,247 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 16:31:25,263 [INFO   ] root: Successfully counted objects for schema 'tmp_df9'.
+2025-07-02 16:31:25,265 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF9_schema_counts.json
+2025-07-02 16:31:25,265 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 16:31:25,408 [INFO   ] root: Successfully calculated table-level metrics for 62 tables in schema 'tmp_df9'.
+2025-07-02 16:31:25,412 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF9_table_metrics.csv
+2025-07-02 16:31:25,412 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 16:31:25,429 [INFO   ] root: Successfully retrieved structural metrics for 393 columns in schema 'tmp_df9'.
+2025-07-02 16:31:25,435 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF9_column_structure.csv
+2025-07-02 16:31:25,435 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 16:31:25,436 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 16:31:25,503 [ERROR  ] root: Failed to get column profiles for schema 'tmp_df9': 'table_name'
+2025-07-02 16:31:25,503 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_DF9'.
+2025-07-02 16:31:25,503 [INFO   ] root: --> Running: Interoperability Metrics
+2025-07-02 16:31:25,513 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df9'.
+2025-07-02 16:31:25,513 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF9_interop_metrics.json
+2025-07-02 16:31:25,513 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 16:31:25,515 [WARNING] root: No specific queries found for database 'TMP_DF9', using legacy approach
+2025-07-02 16:31:25,515 [INFO   ] root: Running 8 legacy benchmark queries...
+2025-07-02 16:31:25,516 [ERROR  ] root:   Benchmark query 'Query 1' failed: (psycopg2.errors.UndefinedTable) relation "{schema}.{table_ssn}" does not exist
+LINE 3: SELECT COUNT(*) FROM "{schema}"."{table_ssn}"
+                             ^
+
+[SQL: -- Query 1: Simple Count
+-- Tests basic table scan speed.
+SELECT COUNT(*) FROM "{schema}"."{table_ssn}"]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,517 [ERROR  ] root:   Benchmark query 'Query 2' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: -- Query 2: Join Core Tables
+-- Tests the performance of joining the primary site table with key data tables.
+SELECT COUNT(t1."SSN")
+FROM "{schema}"."{table_ssn}" AS t1
+LEFT JOIN "{schema}"."{table_arch}" AS t2 ON t1."SSN" = t2."SSN"
+LEFT JOIN "{schema}"."{table_cond}" AS t3 ON t1."SSN" = t3."SSN"]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,517 [ERROR  ] root:   Benchmark query 'Query 3' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: -- Query 3: Aggregation and Grouping
+-- Tests analytical performance by grouping data and calculating an aggregate.
+SELECT "{col_phase}", COUNT(*)
+FROM "{schema}"."{table_phase}"
+WHERE "{col_phase}" IS NOT NULL
+GROUP BY "{col_phase}"
+ORDER BY COUNT(*) DESC]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,517 [ERROR  ] root:   Benchmark query 'Query 4' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- NOTE: The script does not yet replace {schema}, {table_ssn}, etc.
+-- This is a simplification. The queries must be written to run
+-- on each database type. For now, write them targeting the benchmark DBs:
+-- e.g., SELECT COUNT(*) FROM public.wide_format_data]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,518 [ERROR  ] root:   Benchmark query 'Query 5' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- Or manually create versions for each legacy DB.
+-- For this task, a simple query like SELECT 1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,518 [ERROR  ] root:   Benchmark query 'Query 6' failed: (psycopg2.errors.SyntaxError) syntax error at or near "is"
+LINE 1: is sufficient to test the mechanism.
+        ^
+
+[SQL: is sufficient to test the mechanism.
+-- A better approach for a future version would be to make the queries templates.
+-- For now, let's use a simple universal query to test the pipeline.
+
+-- Final simplified content for initial run:
+SELECT 1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,518 [ERROR  ] root:   Benchmark query 'Query 7' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT pg_sleep(0.1)]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,518 [ERROR  ] root:   Benchmark query 'Query 8' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- Introduce a small, predictable delay]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,520 [INFO   ] root: Successfully saved 'performance_benchmarks' results to TMP_DF9_performance_benchmarks.csv
+2025-07-02 16:31:25,520 [INFO   ] root: --- Finished processing TMP_DF9 ---
+2025-07-02 16:31:25,522 [INFO   ] root: ================================================================================
+2025-07-02 16:31:25,522 [INFO   ] root: Processing Database 3/6: TMP_DF10
+2025-07-02 16:31:25,522 [INFO   ] root: ================================================================================
+2025-07-02 16:31:25,522 [INFO   ] root: Target schema for 'TMP_DF10' is 'tmp_df10'.
+2025-07-02 16:31:25,522 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 16:31:25,589 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_DF10'.
+2025-07-02 16:31:25,590 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_DF10_basic_metrics.json
+2025-07-02 16:31:25,590 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 16:31:25,604 [INFO   ] root: Successfully counted objects for schema 'tmp_df10'.
+2025-07-02 16:31:25,605 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_DF10_schema_counts.json
+2025-07-02 16:31:25,605 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 16:31:25,639 [INFO   ] root: Successfully calculated table-level metrics for 9 tables in schema 'tmp_df10'.
+2025-07-02 16:31:25,641 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_DF10_table_metrics.csv
+2025-07-02 16:31:25,643 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 16:31:25,651 [INFO   ] root: Successfully retrieved structural metrics for 38 columns in schema 'tmp_df10'.
+2025-07-02 16:31:25,653 [INFO   ] root: Successfully saved 'column_structure' results to TMP_DF10_column_structure.csv
+2025-07-02 16:31:25,653 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 16:31:25,653 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 16:31:25,703 [ERROR  ] root: Failed to get column profiles for schema 'tmp_df10': 'table_name'
+2025-07-02 16:31:25,703 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_DF10'.
+2025-07-02 16:31:25,703 [INFO   ] root: --> Running: Interoperability Metrics
+2025-07-02 16:31:25,713 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_df10'.
+2025-07-02 16:31:25,714 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_DF10_interop_metrics.json
+2025-07-02 16:31:25,714 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 16:31:25,714 [WARNING] root: No specific queries found for database 'TMP_DF10', using legacy approach
+2025-07-02 16:31:25,715 [INFO   ] root: Running 8 legacy benchmark queries...
+2025-07-02 16:31:25,716 [ERROR  ] root:   Benchmark query 'Query 1' failed: (psycopg2.errors.UndefinedTable) relation "{schema}.{table_ssn}" does not exist
+LINE 3: SELECT COUNT(*) FROM "{schema}"."{table_ssn}"
+                             ^
+
+[SQL: -- Query 1: Simple Count
+-- Tests basic table scan speed.
+SELECT COUNT(*) FROM "{schema}"."{table_ssn}"]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,716 [ERROR  ] root:   Benchmark query 'Query 2' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: -- Query 2: Join Core Tables
+-- Tests the performance of joining the primary site table with key data tables.
+SELECT COUNT(t1."SSN")
+FROM "{schema}"."{table_ssn}" AS t1
+LEFT JOIN "{schema}"."{table_arch}" AS t2 ON t1."SSN" = t2."SSN"
+LEFT JOIN "{schema}"."{table_cond}" AS t3 ON t1."SSN" = t3."SSN"]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,717 [ERROR  ] root:   Benchmark query 'Query 3' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: -- Query 3: Aggregation and Grouping
+-- Tests analytical performance by grouping data and calculating an aggregate.
+SELECT "{col_phase}", COUNT(*)
+FROM "{schema}"."{table_phase}"
+WHERE "{col_phase}" IS NOT NULL
+GROUP BY "{col_phase}"
+ORDER BY COUNT(*) DESC]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,717 [ERROR  ] root:   Benchmark query 'Query 4' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- NOTE: The script does not yet replace {schema}, {table_ssn}, etc.
+-- This is a simplification. The queries must be written to run
+-- on each database type. For now, write them targeting the benchmark DBs:
+-- e.g., SELECT COUNT(*) FROM public.wide_format_data]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,718 [ERROR  ] root:   Benchmark query 'Query 5' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- Or manually create versions for each legacy DB.
+-- For this task, a simple query like SELECT 1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,718 [ERROR  ] root:   Benchmark query 'Query 6' failed: (psycopg2.errors.SyntaxError) syntax error at or near "is"
+LINE 1: is sufficient to test the mechanism.
+        ^
+
+[SQL: is sufficient to test the mechanism.
+-- A better approach for a future version would be to make the queries templates.
+-- For now, let's use a simple universal query to test the pipeline.
+
+-- Final simplified content for initial run:
+SELECT 1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,718 [ERROR  ] root:   Benchmark query 'Query 7' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT pg_sleep(0.1)]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,718 [ERROR  ] root:   Benchmark query 'Query 8' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- Introduce a small, predictable delay]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,720 [INFO   ] root: Successfully saved 'performance_benchmarks' results to TMP_DF10_performance_benchmarks.csv
+2025-07-02 16:31:25,720 [INFO   ] root: --- Finished processing TMP_DF10 ---
+2025-07-02 16:31:25,720 [INFO   ] root: ================================================================================
+2025-07-02 16:31:25,720 [INFO   ] root: Processing Database 4/6: TMP_REAN_DF2
+2025-07-02 16:31:25,720 [INFO   ] root: ================================================================================
+2025-07-02 16:31:25,722 [INFO   ] root: Target schema for 'TMP_REAN_DF2' is 'tmp_rean_df2'.
+2025-07-02 16:31:25,722 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 16:31:25,796 [INFO   ] root: Successfully retrieved basic metrics for DB 'TMP_REAN_DF2'.
+2025-07-02 16:31:25,797 [INFO   ] root: Successfully saved 'basic_metrics' results to TMP_REAN_DF2_basic_metrics.json
+2025-07-02 16:31:25,797 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 16:31:25,807 [INFO   ] root: Successfully counted objects for schema 'tmp_rean_df2'.
+2025-07-02 16:31:25,809 [INFO   ] root: Successfully saved 'schema_counts' results to TMP_REAN_DF2_schema_counts.json
+2025-07-02 16:31:25,809 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 16:31:25,837 [INFO   ] root: Successfully calculated table-level metrics for 13 tables in schema 'tmp_rean_df2'.
+2025-07-02 16:31:25,839 [INFO   ] root: Successfully saved 'table_metrics' results to TMP_REAN_DF2_table_metrics.csv
+2025-07-02 16:31:25,840 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 16:31:25,858 [INFO   ] root: Successfully retrieved structural metrics for 241 columns in schema 'tmp_rean_df2'.
+2025-07-02 16:31:25,863 [INFO   ] root: Successfully saved 'column_structure' results to TMP_REAN_DF2_column_structure.csv
+2025-07-02 16:31:25,863 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 16:31:25,863 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 16:31:25,894 [ERROR  ] root: Failed to get column profiles for schema 'tmp_rean_df2': 'table_name'
+2025-07-02 16:31:25,895 [WARNING] root: No data to save for metric 'column_profiles' on db 'TMP_REAN_DF2'.
+2025-07-02 16:31:25,895 [INFO   ] root: --> Running: Interoperability Metrics
+2025-07-02 16:31:25,902 [INFO   ] root: Successfully calculated interoperability metrics for schema 'tmp_rean_df2'.
+2025-07-02 16:31:25,903 [INFO   ] root: Successfully saved 'interop_metrics' results to TMP_REAN_DF2_interop_metrics.json
+2025-07-02 16:31:25,903 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 16:31:25,905 [WARNING] root: No specific queries found for database 'TMP_REAN_DF2', using legacy approach
+2025-07-02 16:31:25,905 [INFO   ] root: Running 8 legacy benchmark queries...
+2025-07-02 16:31:25,906 [ERROR  ] root:   Benchmark query 'Query 1' failed: (psycopg2.errors.UndefinedTable) relation "{schema}.{table_ssn}" does not exist
+LINE 3: SELECT COUNT(*) FROM "{schema}"."{table_ssn}"
+                             ^
+
+[SQL: -- Query 1: Simple Count
+-- Tests basic table scan speed.
+SELECT COUNT(*) FROM "{schema}"."{table_ssn}"]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,906 [ERROR  ] root:   Benchmark query 'Query 2' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: -- Query 2: Join Core Tables
+-- Tests the performance of joining the primary site table with key data tables.
+SELECT COUNT(t1."SSN")
+FROM "{schema}"."{table_ssn}" AS t1
+LEFT JOIN "{schema}"."{table_arch}" AS t2 ON t1."SSN" = t2."SSN"
+LEFT JOIN "{schema}"."{table_cond}" AS t3 ON t1."SSN" = t3."SSN"]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,906 [ERROR  ] root:   Benchmark query 'Query 3' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: -- Query 3: Aggregation and Grouping
+-- Tests analytical performance by grouping data and calculating an aggregate.
+SELECT "{col_phase}", COUNT(*)
+FROM "{schema}"."{table_phase}"
+WHERE "{col_phase}" IS NOT NULL
+GROUP BY "{col_phase}"
+ORDER BY COUNT(*) DESC]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,906 [ERROR  ] root:   Benchmark query 'Query 4' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- NOTE: The script does not yet replace {schema}, {table_ssn}, etc.
+-- This is a simplification. The queries must be written to run
+-- on each database type. For now, write them targeting the benchmark DBs:
+-- e.g., SELECT COUNT(*) FROM public.wide_format_data]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,908 [ERROR  ] root:   Benchmark query 'Query 5' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- Or manually create versions for each legacy DB.
+-- For this task, a simple query like SELECT 1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,908 [ERROR  ] root:   Benchmark query 'Query 6' failed: (psycopg2.errors.SyntaxError) syntax error at or near "is"
+LINE 1: is sufficient to test the mechanism.
+        ^
+
+[SQL: is sufficient to test the mechanism.
+-- A better approach for a future version would be to make the queries templates.
+-- For now, let's use a simple universal query to test the pipeline.
+
+-- Final simplified content for initial run:
+SELECT 1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,908 [ERROR  ] root:   Benchmark query 'Query 7' failed: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT pg_sleep(0.1)]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+2025-07-02 16:31:25,909 [ERROR  ] root:   Benchmark query 'Query 8' failed: (psycopg2.ProgrammingError) can't execute an empty query
+[SQL: -- Introduce a small, predictable delay]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-02 16:31:25,912 [INFO   ] root: Successfully saved 'performance_benchmarks' results to TMP_REAN_DF2_performance_benchmarks.csv
+2025-07-02 16:31:25,912 [INFO   ] root: --- Finished processing TMP_REAN_DF2 ---
+2025-07-02 16:31:25,913 [INFO   ] root: ================================================================================
+2025-07-02 16:31:25,913 [INFO   ] root: Processing Database 5/6: tmp_benchmark_wide_numeric
+2025-07-02 16:31:25,913 [INFO   ] root: ================================================================================
+2025-07-02 16:31:25,913 [INFO   ] root: Target schema for 'tmp_benchmark_wide_numeric' is 'public'.
+2025-07-02 16:31:25,913 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 16:31:25,987 [INFO   ] root: Successfully retrieved basic metrics for DB 'tmp_benchmark_wide_numeric'.
+2025-07-02 16:31:25,989 [INFO   ] root: Successfully saved 'basic_metrics' results to tmp_benchmark_wide_numeric_basic_metrics.json
+2025-07-02 16:31:25,989 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 16:31:26,003 [INFO   ] root: Successfully counted objects for schema 'public'.
+2025-07-02 16:31:26,005 [INFO   ] root: Successfully saved 'schema_counts' results to tmp_benchmark_wide_numeric_schema_counts.json
+2025-07-02 16:31:26,005 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 16:31:26,028 [INFO   ] root: Successfully calculated table-level metrics for 1 tables in schema 'public'.
+2025-07-02 16:31:26,031 [INFO   ] root: Successfully saved 'table_metrics' results to tmp_benchmark_wide_numeric_table_metrics.csv
+2025-07-02 16:31:26,031 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 16:31:26,063 [INFO   ] root: Successfully retrieved structural metrics for 337 columns in schema 'public'.
+2025-07-02 16:31:26,069 [INFO   ] root: Successfully saved 'column_structure' results to tmp_benchmark_wide_numeric_column_structure.csv
+2025-07-02 16:31:26,069 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 16:31:26,069 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 16:31:26,105 [ERROR  ] root: Failed to get column profiles for schema 'public': 'table_name'
+2025-07-02 16:31:26,105 [WARNING] root: No data to save for metric 'column_profiles' on db 'tmp_benchmark_wide_numeric'.
+2025-07-02 16:31:26,106 [INFO   ] root: --> Skipping: Interoperability Metrics (not applicable to single-table schema).
+2025-07-02 16:31:26,106 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 16:31:26,107 [INFO   ] root: Running 3 benchmark queries for 'tmp_benchmark_wide_numeric' from 'canonical_queries_benchmark.sql'...
+2025-07-02 16:31:26,110 [INFO   ] root:   Baseline Performance - Query 1.1: 0.0 ms
+2025-07-02 16:31:26,164 [INFO   ] root:   Join Performance - Query 2.1: 47.0 ms
+2025-07-02 16:31:26,169 [INFO   ] root:   Complex Filtering & Aggregation - Query 3.1: 16.0 ms
+2025-07-02 16:31:26,172 [INFO   ] root: Successfully saved 'performance_benchmarks' results to tmp_benchmark_wide_numeric_performance_benchmarks.csv
+2025-07-02 16:31:26,172 [INFO   ] root: --- Finished processing tmp_benchmark_wide_numeric ---
+2025-07-02 16:31:26,173 [INFO   ] root: ================================================================================
+2025-07-02 16:31:26,173 [INFO   ] root: Processing Database 6/6: tmp_benchmark_wide_text_nulls
+2025-07-02 16:31:26,173 [INFO   ] root: ================================================================================
+2025-07-02 16:31:26,174 [INFO   ] root: Target schema for 'tmp_benchmark_wide_text_nulls' is 'public'.
+2025-07-02 16:31:26,174 [INFO   ] root: --> Running: Basic DB Metrics
+2025-07-02 16:31:26,288 [INFO   ] root: Successfully retrieved basic metrics for DB 'tmp_benchmark_wide_text_nulls'.
+2025-07-02 16:31:26,289 [INFO   ] root: Successfully saved 'basic_metrics' results to tmp_benchmark_wide_text_nulls_basic_metrics.json
+2025-07-02 16:31:26,289 [INFO   ] root: --> Running: Schema Object Counts
+2025-07-02 16:31:26,306 [INFO   ] root: Successfully counted objects for schema 'public'.
+2025-07-02 16:31:26,307 [INFO   ] root: Successfully saved 'schema_counts' results to tmp_benchmark_wide_text_nulls_schema_counts.json
+2025-07-02 16:31:26,308 [INFO   ] root: --> Running: Table Level Metrics
+2025-07-02 16:31:26,337 [INFO   ] root: Successfully calculated table-level metrics for 1 tables in schema 'public'.
+2025-07-02 16:31:26,342 [INFO   ] root: Successfully saved 'table_metrics' results to tmp_benchmark_wide_text_nulls_table_metrics.csv
+2025-07-02 16:31:26,342 [INFO   ] root: --> Running: Column Structural Metrics
+2025-07-02 16:31:26,363 [INFO   ] root: Successfully retrieved structural metrics for 337 columns in schema 'public'.
+2025-07-02 16:31:26,369 [INFO   ] root: Successfully saved 'column_structure' results to tmp_benchmark_wide_text_nulls_column_structure.csv
+2025-07-02 16:31:26,369 [INFO   ] root: --> Running: Column Data Profiles (pg_stats)
+2025-07-02 16:31:26,369 [WARNING] root: Initiating full column profile. This is a slow operation that queries each column individually.
+2025-07-02 16:31:26,397 [ERROR  ] root: Failed to get column profiles for schema 'public': 'table_name'
+2025-07-02 16:31:26,398 [WARNING] root: No data to save for metric 'column_profiles' on db 'tmp_benchmark_wide_text_nulls'.
+2025-07-02 16:31:26,398 [INFO   ] root: --> Skipping: Interoperability Metrics (not applicable to single-table schema).
+2025-07-02 16:31:26,398 [INFO   ] root: --> Running: Performance Benchmarks
+2025-07-02 16:31:26,399 [INFO   ] root: Running 3 benchmark queries for 'tmp_benchmark_wide_text_nulls' from 'canonical_queries_benchmark.sql'...
+2025-07-02 16:31:26,400 [INFO   ] root:   Baseline Performance - Query 1.1: 0.0 ms
+2025-07-02 16:31:26,443 [INFO   ] root:   Join Performance - Query 2.1: 32.0 ms
+2025-07-02 16:31:26,448 [INFO   ] root:   Complex Filtering & Aggregation - Query 3.1: 15.0 ms
+2025-07-02 16:31:26,452 [INFO   ] root: Successfully saved 'performance_benchmarks' results to tmp_benchmark_wide_text_nulls_performance_benchmarks.csv
+2025-07-02 16:31:26,452 [INFO   ] root: --- Finished processing tmp_benchmark_wide_text_nulls ---
+2025-07-02 16:31:26,452 [INFO   ] root: ================================================================================
+2025-07-02 16:31:26,453 [INFO   ] root: --- Database Profiling Pipeline Finished ---
