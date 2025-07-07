@@ -1,0 +1,65 @@
+---
+description: Implement this rule whenever reviewing project code; Globs include *.py, *.ipynb, *.sql, *.R, *.Rmd
+alwaysApply: false
+---
+# CODE REVIEW RULES
+
+## MANDATORY GUIDELINES & PROTOCOLS REVIEW
+- You MUST ALWAYS review and implement the guidelines & protocols from `.windsurf/instructions/guide-code-review.md`, which is the PRIMARY SOURCE OF TRUTH for all code review tasks.
+
+## OBJECTIVE
+Your objective is to function as a Principal QA Engineer. You will perform a rigorous, multi-faceted review of the provided code. Your analysis must be systematic and your feedback concrete.
+
+## REVIEW PROTOCOL CHECKLIST
+You MUST follow this protocol sequentially.
+
+### STEP 1: STRATEGIC & FUNCTIONAL ALIGNMENT
+- Review the original `plan` file for the task. Verify that every action in the checklist has been implemented. Flag any deviations or incomplete items.
+- Cross-reference the implementation against the high-level goals and architectural patterns defined in `PLANNING.md` and `architecture.md`. Flag any code that contradicts the established architecture.
+- Ensure the code meets all explicit acceptance criteria defined in the corresponding `TASKS.md` entry.
+
+### STEP 2: CODE QUALITY & MAINTAINABILITY AUDIT
+- Validate the code against the rules defined in the relevant `execute-*.md` mode(s). This includes formatting, naming conventions, and language-specific best practices.
+- Identify any logic that is overly complex, non-idiomatic, or difficult to read. Propose specific refactoring to improve clarity and maintainability.
+- Scan for common code smells, such as "dead" or unreachable code, long methods, large classes, or excessive nesting.
+- Verify that function docstrings and inline comments accurately reflect the code's current implementation, parameters, and return values. Flag any "documentation debt" where the code and comments have diverged.
+
+### STEP 3: PERFORMANCE & SCALABILITY AUDIT
+- Scan the code for common performance anti-patterns.
+  - For database interactions, identify potential N+1 query problems.
+  - For data processing, identify loops that could be vectorized using `pandas` or `numpy`.
+- Assess if the implemented solution will scale with the data volumes described in `PLANNING.md`. Flag any in-memory processing of potentially large datasets or hardcoded limits that would fail at scale.
+
+### STEP 4: SECURITY AUDIT
+- Review all functions, methods, and API endpoints that accept user or external input. Verify that inputs are rigorously sanitized and validated to prevent common vulnerabilities (e.g., SQL injection, path traversal).
+- Flag any hardcoded credentials, API keys, or other secrets. These MUST be externalized to environment variables.
+- Assess if the code operates with the principle of least privilege. Flag any overly broad permissions, especially in file system or database interactions.
+
+## ARCHAEOLOGICAL DATA QUALITY REVIEW
+- Verify that coordinate reference systems are properly defined and documented for all geospatial operations.
+- Check that spatial data validation includes geometry validity checks using appropriate tools (e.g., `ST_IsValid` for PostGIS, `is_valid` for GeoPandas).
+- Ensure that data provenance is maintained throughout transformation workflows, with clear documentation of source data and processing steps.
+- Validate that known TMP data quality issues (e.g., "Total Counts Problem") are properly handled with appropriate checks and documentation.
+
+## REPRODUCIBILITY & DOCUMENTATION REVIEW
+- Verify that all data transformation steps are fully documented and reproducible.
+- Check that any random or probabilistic operations use fixed seeds for reproducibility.
+- Ensure that all external dependencies are properly versioned and documented.
+- Validate that error handling preserves data integrity and provides meaningful diagnostic information.
+
+## TESTING & VALIDATION REVIEW
+- Verify that the implemented code can be tested and that tests have been provided.
+- Check that all external service calls (databases, APIs) are mocked in tests.
+- Ensure that test coverage is adequate, particularly for critical data transformation and spatial processing functions.
+- Validate that integration tests properly handle the project's specific data formats and coordinate systems.
+
+## REPORTING
+- Provide feedback in a structured Markdown list, grouped by the categories above (e.g., "Architectural Alignment," "Security Audit").
+- For each point, you MUST cite the specific file and line number(s).
+- Propose concrete, actionable suggestions for improvement. You MUST NOT implement changes in this mode unless explicitly requested.
+
+## SPECIALIZED REVIEW CONSIDERATIONS
+- For geospatial code, verify that spatial indexing is properly implemented and that coordinate transformations maintain appropriate accuracy.
+- For database-related code, check that transactions are properly managed and that spatial data types are used correctly.
+- For archival and dissemination code, verify compliance with relevant standards (tDAR, Dublin Core) and format specifications.
+- For ETL processes, ensure that data lineage is tracked and that validation checkpoints are strategically placed throughout the pipeline.
