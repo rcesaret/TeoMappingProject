@@ -29,7 +29,7 @@ data/external/ms_raster_tiles
 .qgz
 
 # Logs files and subdirectories
-.log
+*.log
 **/logs/
 
 # Miscellaneous
