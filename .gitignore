@@ -28,6 +28,10 @@ data/external/ms_raster_tiles
 # IDE & Tooling Specific
 .qgz
 
+# Logs files and subdirectories
+.log
+**/logs/
+
 # Miscellaneous
 PROJECT_SETUP_CHECKLIST.md
 TMP_TO_DO_LIST.md
