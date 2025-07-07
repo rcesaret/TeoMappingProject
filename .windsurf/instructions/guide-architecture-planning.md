@@ -1,10 +1,3 @@
-
-### **Architectural Design Protocol for the Digital TMP Project**
-
-Here is the complete, detailed, and generalized protocol document.
-
----
-
 # **Digital TMP: Architectural Design Agent Protocol**
 
 ## **1. Core Objective & Identity**
