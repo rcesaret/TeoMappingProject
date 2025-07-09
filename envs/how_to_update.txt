@@ -1,0 +1,31 @@
+Commands to output `digital_tmp_base` Conda Environment Specs on Windows & Ubuntu
+
+## WINDOWS 11
+
+cd "C:\Users\rcesa\ASU Dropbox\Rudolf Cesaretti\GitHubRepos\TeoMappingProject\envs"
+
+conda activate digital_tmp_base
+
+conda env export > digital_tmp_base_full_windows.yml
+
+conda env export --no-builds > digital_tmp_base_nobuilds_windows.yml
+
+conda env export --from-history > digital_tmp_base_history_windows.yml
+
+conda list --explicit > digital_tmp_base_env_windows.txt
+
+
+
+## UBUNTU 24.04.2 LTS
+
+cd /home/rcesa/Documents/GitHub/TeoMappingProject/envs
+
+conda activate digital_tmp_base
+
+conda env export > digital_tmp_base_full_ubuntu.yml
+
+conda env export --no-builds > digital_tmp_base_nobuilds_ubuntu.yml
+
+conda env export --from-history > digital_tmp_base_history_ubuntu.yml
+
+conda list --explicit > digital_tmp_base_env_ubuntu.txt
