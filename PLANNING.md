@@ -48,7 +48,7 @@
 **Version:** v4.2
 ---
 
-**ATTENTION CASCADE AGENT: This document is your primary operational guide.** You MUST read, parse, and adhere to the instructions, protocols, and constraints defined herein at the start of every session and before executing any task. This document serves as the master context for the Digital TMP project. Your adherence to these protocols is not optional; it is the basis for your successful operation within this complex development environment.
+**ATTENTION AI AGENT: This document is your primary operational guide.** You MUST read, parse, and adhere to the instructions, protocols, and constraints defined herein at the start of every session and before executing any task. This document serves as the master context for the Digital TMP project. Your adherence to these protocols is not optional; it is the basis for your successful operation within this complex development environment.
 
 ## 1. Foundational Context and Project Mandate
 
